@@ -10,4 +10,4 @@ export default [
       // "astro/no-set-html-directive": "error"
     },
   },
-]
+
