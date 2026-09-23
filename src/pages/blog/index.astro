@@ -1,17 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort(
+    (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+        b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
-
 <!doctype html>
 <html lang="en">
 	<head>
@@ -107,6 +107,11 @@ const posts = (await getCollection('blog')).sort(
 						))
 					}
 				</ul>
+				<div>
+    
+					<iframe src="https://js-dos.com/DOOM/" width="640" height="400" allowfullscreen></iframe>
+				
+				</div>
 			</section>
 		</main>
 		<Footer />
