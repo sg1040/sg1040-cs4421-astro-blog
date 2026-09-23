@@ -29,34 +29,35 @@ import myProfileImage from '../assets/profile.jpg';
 	</div>
 </footer>
 <style>
-	
-	
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.profile-circle{
-		display: flex
-		gap: 1em;
-		margin-top: 1em;
-		width: 75px;
-    	height: 75px;
-    	border-radius: 50%;
-    	object-fit: cover; /* Keeps aspect ratio without distortion */
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
+    footer {
+        padding: 2em 1em 4em;
+        background: var(--header-bg);
+        color: var(--header-text);
+        text-align: center;
+    }
+
+    .profile-circle {
+        display: block;
+        width: 75px;
+        height: 75px;
+        margin: 0 auto 1em;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1em;
+        margin-top: 1em;
+    }
+
+    .social-links a {
+        color: var(--header-text);
+        text-decoration: none;
+    }
+
+    .social-links a:hover {
+        color: var(--accent);
+    }
 </style>
