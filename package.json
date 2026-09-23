@@ -10,13 +10,16 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint .",
+    "test:unit": "vitest"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.1",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.2",
+    "jiti": "^2.7.0",
     "sharp": "^0.35.0"
   },
   "allowScripts": {
@@ -24,6 +27,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "typescript": "^6.0.3"
+    "eslint": "^10.11.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1"
   }
 }
