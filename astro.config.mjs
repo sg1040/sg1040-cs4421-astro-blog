@@ -37,7 +37,7 @@ export default defineConfig({
             options: {
                 variants: [
                     {
-                        src: ['./src/assets/fonts/DistantGalaxy.woff2'],
+                        src: ['./src/assets/fonts/VCR_OSD_MONO.woff2'],
                         weight: 400,
                         style: 'normal',
                         display: 'swap',
