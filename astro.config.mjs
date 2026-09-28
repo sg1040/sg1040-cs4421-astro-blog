@@ -30,20 +30,18 @@ export default defineConfig({
                 ],
             },
         },
+        
         {
-            provider: fontProviders.local(),
-            name: 'VCR OSD Mono',
-            cssVariable: '--font-vcr-osd',
-            options: {
-                variants: [
-                    {
-                        src: ['./src/assets/fonts/DistantGalaxy.woff2'],
-                        weight: 400,
-                        style: 'normal',
-                        display: 'swap',
-                    },
-                ],
-            },
-        },
+            provider: fontProviders.google(),
+            name: 'Jacquard 24',
+            cssVariable: '--font-jacquard24',
+            
+          },
+          {
+            provider: fontProviders.google(),
+            name: 'DotGothic16',
+            cssVariable: '--font-dotgothic16',
+            
+          },
     ],
 });

@@ -31,11 +31,12 @@ import ThemeIcon from './ThemeIcon.astro';
 
 <style>
 	header {
+		font-family: var(--font-display);
 		margin: 0;
-		padding: 0 1em;
+		padding: 0em;
 		background: var(--header-bg);
 		color: var(--header-text);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+		
 	}
 	h2 {
 		margin: 0;
@@ -52,9 +53,9 @@ import ThemeIcon from './ThemeIcon.astro';
 		justify-content: space-between;
 	}
 	nav a {
-		padding: 1em 0.5em;
+		padding: 0.2em;
 		color: var(--header-text);
-		border-bottom: 4px solid transparent;
+		border-bottom: 1px solid transparent;
 		text-decoration: none;
 	}
 	nav a.active {
@@ -71,9 +72,10 @@ import ThemeIcon from './ThemeIcon.astro';
 			display: none;
 		}
 	}
-	div {
-		display:flex;
-		justify-content: space-between;
 
+	.internal-links a {
+		font-size: 1rem;
+		font-family: var(--font-ui);
 	}
+	
 </style>
