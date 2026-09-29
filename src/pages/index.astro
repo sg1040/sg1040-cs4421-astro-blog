@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import DoomPlayer from "../components/DoomPlayer.astro";
 ---
 
 <!doctype html>
@@ -37,24 +38,70 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 				</div>
 
-				
-
 			</div>
 			
-			<div>
-				class
+			<div class = "doom-outer-box">
 
-				<iframe
-					src="https://js-dos.com/DOOM/"
-					width="640"
-					height="400"
-					allow="autoplay; fullscreen; keyboard"
-					sandbox="allow-scripts allow-same-origin"
-				>
-				</iframe>
+				<div class = "doom-box">
+
+					<style type="text/css">
+						
+						
+					  </style>
+					
+				
+				<div id="dosbox">
+
+				</div>
+
+				<br/>
+
+				<button onclick="dosbox.requestFullScreen();">
+					Make fullscreen
+				</button>
+				
+				</div>
+				
 			</div>
+
+			<div class = "blog-outer-box">
+
+				<div class = "blog-header">
+
+					<h1>Blog</h1>
+					
+					<h2>Featured Entries</h2>	
+
+				</div>
+
+				<div class = "blog-left">
+
+					<h2>Left Blog</h2>
+
+					<div class = "blog-left-img">
+
+						<img src="https://avatars.githubusercontent.com/u/326147470?v=4" height = 100px>
+
+					</div>
+
+				</div>
+
+				<div class = "blog-right">
+
+					<h2>Right Blog</h2>
+
+					<div class = "blog-right-img">
+
+						<img src="https://avatars.githubusercontent.com/u/326147470?v=4" height = 100px>
+
+					</div>
+					
+				</div>
+
+			</div>
+
 		</main>
-		<Footer />
+		<Footer/>
 	</body>
 </html>
 
@@ -82,7 +129,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 		grid-area: welcome;
 		text-align: center;
 		background: lightblue;
-		padding: 2em;
+		padding: 0.5em;
 	}
 
 	.intro-left {
@@ -96,4 +143,83 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 		background: lightblue;
 		padding: 2em;
 	}
+
+	.doom-outer-box {
+		width: 80%;
+		box-sizing: border-box;
+		margin: 2em auto;
+		padding: 2em;
+		background: black;
+		border: 10px;
+		border-color: greenyellow;
+	}
+
+	.doom-box {
+		height: 400px;
+		overflow: hidden;
+		position: relative;
+		background: black;
+		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.dosbox-container {
+		 width: 320px;
+		  height: 200px; 
+	}
+	
+
+	.blog-outer-box {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-areas:
+			"blog blog"
+			"left-blog right-blog";
+		gap: 2rem;
+		margin: 2em;
+		padding: 2em;
+		background: darkblue;
+	}
+
+	.blog-header {
+		grid-area: blog;
+		background: lightblue;
+		padding: 0.5em;
+		text-align:center;
+	}
+
+	.blog-left {
+		background: lightblue;
+		padding: 0.5em;
+		grid-area: left-blog;
+		text-align:center;
+	}
+
+
+	.blog-right {
+		background: lightblue;
+		padding: 0.5em;
+		grid-area: right-blog;
+		text-align:center;
+		
+	}
+
 </style>
+
+<script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"></script>
+
+				<script type="text/javascript">
+
+						var dosbox = new Dosbox({
+							  id: "dosbox",
+							  onload: function (dosbox) {
+								dosbox.run("games/DOOM-evilution.zip", "./DOOM/DOOM.EXE");
+							  },
+						  onrun: function (dosbox, app) {
+								console.log("App '" + app + "' is runned");
+							  }
+						});
+						
+				</script>
