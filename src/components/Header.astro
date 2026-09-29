@@ -33,27 +33,32 @@ import ThemeIcon from './ThemeIcon.astro';
 	header {
 		font-family: var(--font-display);
 		margin: 0;
-		padding: 0em;
+		padding: 0.5em;
 		background: var(--header-bg);
 		color: var(--header-text);
 		
 	}
+
+	
 	h2 {
+		padding: 0.5em;
 		margin: 0;
 		font-size: 1em;
 	}
 
 	h2 a,
 	h2 a.active {
+		font-family: var(--font-display);
 		text-decoration: none;
+		font-size: 2rem;
 	}
 	nav {
-		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		display: flex;
+		justify-content: flex-start;
 	}
 	nav a {
-		padding: 0.2em;
+		padding: 0.5em;
 		color: var(--header-text);
 		border-bottom: 1px solid transparent;
 		text-decoration: none;
@@ -64,18 +69,25 @@ import ThemeIcon from './ThemeIcon.astro';
 	}
 	.social-links,
 	.social-links a {
+		align-items: center;
 		display: flex;
-		justify-content: space-between;
+		/*justify-content: space-between;*/
 	}
 	@media (max-width: 720px) {
 		.social-links {
+			align-items: center;
 			display: none;
 		}
 	}
 
 	.internal-links a {
-		font-size: 1rem;
+		align-items: center;
+		font-size: 1.5rem;
 		font-family: var(--font-ui);
+	}
+
+	.svg {
+		padding: 0.5em;
 	}
 	
 </style>
