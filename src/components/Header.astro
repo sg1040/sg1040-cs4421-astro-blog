@@ -22,6 +22,7 @@ import HeaderLink from './HeaderLink.astro';
 					></path></svg
 				>
 			</a>
+			<span class="header-bars" aria-hidden="true"></span>
 		</div>
 		<div>
 		<!--/ThemeIcon -->
@@ -36,6 +37,7 @@ import HeaderLink from './HeaderLink.astro';
 		padding: 0.5em;
 		background: var(--header-bg);
 		color: var(--header-text);
+		border: 2px solid var(--header-text);
 		
 	}
 
@@ -44,6 +46,7 @@ import HeaderLink from './HeaderLink.astro';
 		padding: 0.5em;
 		margin: 0;
 		font-size: 1em;
+		color: var(--text-color);
 	}
 
 	h2 a,
@@ -51,6 +54,7 @@ import HeaderLink from './HeaderLink.astro';
 		font-family: var(--font-display);
 		text-decoration: none;
 		font-size: 2rem;
+		color: var(--text-color);
 	}
 	nav {
 		align-items: center;
@@ -59,15 +63,25 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	nav a {
 		padding: 0.5em;
-		color: var(--header-text);
 		border-bottom: 1px solid transparent;
 		text-decoration: none;
+
+	nav h2 a{
+		color: var(--text-color);
+	}
+		
 	}
 	nav a.active {
 		text-decoration: none;
-		border-bottom-color: var(--accent);
+		border-bottom-color: var(--header-text);
 	}
-	.social-links,
+	.social-links {
+		flex: 1;
+		min-width: 0;
+		align-items: center;
+		display: flex;
+		/*justify-content: space-between;*/
+	}
 	.social-links a {
 		align-items: center;
 		display: flex;
@@ -90,4 +104,15 @@ import HeaderLink from './HeaderLink.astro';
 		padding: 0.5em;
 	}
 	
+	.header-bars {
+		flex: 1;
+		min-width: 0;
+		height: 1em;
+		background: repeating-linear-gradient(
+			to right,
+			transparent 0 8px,
+			var(--header-text) 8px 10px,
+			transparent 10px 16px
+		);
+	}
 </style>

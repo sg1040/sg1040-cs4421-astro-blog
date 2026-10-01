@@ -48,23 +48,23 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort(
 			}
 			ul li img {
 				margin-bottom: 0.5rem;
-				border-radius: 12px;
+				border-radius: 0px;
 			}
 			ul li a {
 				display: block;
 			}
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
+				color: var(--text-color);
 				line-height: 1;
 			}
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: var(--text-color);
 			}
 			ul li a:hover h4,
 			ul li a:hover .date {
-				color: rgb(var(--accent));
+							color: var(--header-text);
 			}
 			ul a:hover img {
 				box-shadow: var(--box-shadow);

@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import myProfileImage from '../assets/profile.jpg';
+import myProfileImage from '../assets/profile-dithered.jpeg';
 ---
 
 <footer>
@@ -32,8 +32,10 @@ import myProfileImage from '../assets/profile.jpg';
     footer {
         padding: 2em 1em 4em;
         background: var(--header-bg);
-        color: var(--header-text);
         text-align: center;
+        color: var(--text-color);
+        border: 2px solid var(--header-text);
+        border-bottom: transparent;
     }
 
     .profile-circle {
@@ -58,6 +60,6 @@ import myProfileImage from '../assets/profile.jpg';
     }
 
     .social-links a:hover {
-        color: var(--accent);
+        color: var(--header-text);
     }
 </style>

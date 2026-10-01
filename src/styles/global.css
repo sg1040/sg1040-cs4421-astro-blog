@@ -16,10 +16,10 @@ License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
 --font-display: "Jacquard 24", serif;
 --font-ui: "DotGothic16", sans-serif;
 
---page-bg: #ffffff;
---text-color: #000000;
---header-bg: #949494;
---header-text: #000000;
+--page-bg: #121212;
+--text-color: #ffffff;
+--header-bg: #121212;
+--header-text: #4AF626;
 
 
 }
@@ -44,6 +44,9 @@ font-size: 20px;
 
 line-height: 1.7;
 
+background-color: var(--page-bg);
+color: var(--text-color);
+
 }
 
 main {
@@ -55,6 +58,8 @@ max-width: calc(100% - 2em);
 margin: auto;
 
 padding: 3em 1em;
+
+background-color: var(--page-bg);
 
 }
 
@@ -74,7 +79,7 @@ font-family: var(--font-ui);
 
 margin: 0 0 0.5rem 0;
 
-color: #000;
+color: var(--text-color);
 
 line-height: 1.2;
 
@@ -120,13 +125,13 @@ font-weight: 700;
 
 a {
 
-color: var(--accent);
+color: var(--header-text);
 
 }
 
 a:hover {
 
-color: var(--accent);
+color: var(--header-text);
 
 }
 
@@ -168,7 +173,7 @@ max-width: 100%;
 
 height: auto;
 
-border-radius: 8px;
+border-radius: 0px;
 
 }
 
@@ -176,9 +181,9 @@ code {
 
 padding: 2px 5px;
 
-background-color: rgb(var(--gray-light));
+background-color: var(--page-bg);
 
-border-radius: 2px;
+border-radius: 0px;
 
 }
 
@@ -198,7 +203,7 @@ all: unset;
 
 blockquote {
 
-border-left: 4px solid var(--accent);
+border-left: 4px solid var(--header-text);
 
 padding: 0 0 0 20px;
 
@@ -212,7 +217,7 @@ hr {
 
 border: none;
 
-border-top: 1px solid rgb(var(--gray-light));
+border-top: 1px solid var(--header-text);
 
 }
 
@@ -262,9 +267,9 @@ white-space: nowrap;
 
 html.dark {
 
-background-color: #0d0950;
+background-color: var(--page-bg);
 
-color: #fff
+color: var(--text-color)
 
 }
 
@@ -272,9 +277,9 @@ color: #fff
 
 .dark .menu {
 
-background-color: #fff;
+background-color: var(--header-bg);
 
-color: #000
+color: var(--text-color)
 
 }
 
@@ -284,7 +289,7 @@ color: #000
 
 .dark .nav-links a:focus {
 
-color: #fff
+color: var(--header-text)
 
 }
 
@@ -292,6 +297,6 @@ color: #fff
 
 .dark a {
 
-color: #ff9776;
+color: var(--header-text);
 
 }
