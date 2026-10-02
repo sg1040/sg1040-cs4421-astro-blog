@@ -16,10 +16,10 @@ License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
 --font-display: "Jacquard 24", serif;
 --font-ui: "DotGothic16", sans-serif;
 
---page-bg: #121212;
+--page-bg: #0e0e0e;
 --text-color: #ffffff;
---header-bg: #121212;
---header-text: #4AF626;
+--header-bg: #0e0e0e;
+--header-text: #4EEE85;
 
 
 }
@@ -45,7 +45,16 @@ font-size: 20px;
 line-height: 1.7;
 
 background-color: var(--page-bg);
+
 color: var(--text-color);
+
+}
+
+*,
+*::before,
+*::after {
+
+cursor: url('https://cdn.cursors-4u.net/previews/my-custom-cursor-afc4a894-32.webp') 0 0, auto !important;
 
 }
 

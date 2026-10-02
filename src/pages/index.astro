@@ -22,6 +22,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 				</div>
 
 				<div class = "intro-left"> 
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 
 					<p>
 						This is my blog that I made with <a href="https://astro.build/">Astro</a>
@@ -30,6 +34,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 				</div>
 
 				<div class = "intro-right"> 
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 
 					<p>
 						This is what I'll put on the right side
@@ -53,6 +61,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 				<br/>
 
 				<button onclick="dosbox.requestFullScreen();">
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 					Make fullscreen
 				</button>
 				
@@ -71,6 +83,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 				</div>
 
 				<div class = "blog-left">
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 
 					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Left Blog</a></h2>
 
@@ -83,6 +99,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 				</div>
 
 				<div class = "blog-right">
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 
 					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Right Blog</a></h2>
 
@@ -113,6 +133,21 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 		color: var(--text-color);
 	}
 
+	img {
+		filter: grayscale(1) sepia(1) hue-rotate(103deg) saturate(2.5) contrast(1.0);
+	}
+
+	button {
+		position: relative;
+		font-family: var(--font-ui);
+		font-size: 1.5rem;
+		color: var(--text-color);
+		background-color: var(--page-bg);
+		padding: 10px;
+		border: 1px dashed var(--header-text);
+
+	}
+
 	.intro {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -136,17 +171,48 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 	.intro-left {
 		grid-area: left;
+		position: relative;
 		background: var(--page-bg);
 		padding: 2em;
-		border: 2px solid var(--header-text);
+		border: 1px dashed var(--header-text);
 		
 	}
 
 	.intro-right {
 		grid-area: right;
+		position: relative;
 		background: var(--page-bg);
 		padding: 2em;
-		border: 2px solid var(--header-text);
+		border: 1px dashed var(--header-text);
+	}
+
+	.ascii-corner {
+		position: absolute;
+		padding: 0 0.15em;
+		background: var(--page-bg);
+		color: var(--header-text);
+		font-family: monospace;
+		line-height: 1;
+	}
+
+	.ascii-corner.top-left {
+		top: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.top-right {
+		top: -0.45em;
+		right: -0.35em;
+	}
+
+	.ascii-corner.bottom-left {
+		bottom: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.bottom-right {
+		bottom: -0.45em;
+		right: -0.35em;
 	}
 
 	.doom-outer-box {
@@ -168,7 +234,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		border: 2px solid var(--header-text);
+		/*border: 2px solid var(--header-text);*/
 	}
 
 	
@@ -199,19 +265,22 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 	}
 
 	.blog-left {
+		position: relative;
 		background: var(--page-bg);
 		padding: 0.5em;
 		grid-area: left-blog;
 		text-align:center;
-		border: 2px solid var(--header-text);	}
+		border: 1px dashed var(--header-text);
+	}
 
 
 	.blog-right {
+		position: relative;
 		background: var(--page-bg);
 		padding: 0.5em;
 		grid-area: right-blog;
 		text-align:center;
-		border: 2px solid var(--header-text);
+		border: 1px dashed var(--header-text);
 		
 	}
 
@@ -224,7 +293,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 :global(#dosbox .dosbox-overlay) {
 	width: 640px;
   	height: 400px;
-  	filter: grayscale(1) sepia(1) hue-rotate(65deg) saturate(5) contrast(1.15);
+  	filter: grayscale(1) sepia(1) hue-rotate(103deg) saturate(2.5) contrast(1.0);
 }
 
 </style>

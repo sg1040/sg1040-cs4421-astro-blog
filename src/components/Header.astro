@@ -5,8 +5,11 @@ import HeaderLink from './HeaderLink.astro';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+	<nav> 
+		<div class="title">
+			<h2> <a href="/"> {SITE_TITLE} </a> </h2>
+		</div>
+		
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
@@ -31,6 +34,8 @@ import HeaderLink from './HeaderLink.astro';
 </header>
 
 <style>
+	
+
 	header {
 		font-family: var(--font-display);
 		margin: 0;
@@ -38,7 +43,6 @@ import HeaderLink from './HeaderLink.astro';
 		background: var(--header-bg);
 		color: var(--header-text);
 		border: 2px solid var(--header-text);
-		
 	}
 
 	
@@ -67,9 +71,9 @@ import HeaderLink from './HeaderLink.astro';
 		text-decoration: none;
 
 	nav h2 a{
-		color: var(--text-color);
+		color: var(--text-color);	
 	}
-		
+
 	}
 	nav a.active {
 		text-decoration: none;
@@ -98,6 +102,7 @@ import HeaderLink from './HeaderLink.astro';
 		align-items: center;
 		font-size: 1.5rem;
 		font-family: var(--font-ui);
+		
 	}
 
 	.svg {
