@@ -1,0 +1,100 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+type Props = {
+  tag: string;
+  posts: CollectionEntry<'blog'>[];
+};
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: allPosts
+        .filter((post) => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+<BaseLayout pageTitle={`Posts tagged: ${tag}`}>
+  <ul>
+    {posts.map((post) => (
+      <li class="blog-entry">
+        <span class="ascii-corner top-left" aria-hidden="true">+</span>
+        <span class="ascii-corner top-right" aria-hidden="true">+</span>
+        <span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+        <span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+        <a href={`/blog/${post.id}/`}>
+          <h4 class="title">{post.data.title}</h4>
+        </a>
+        <p class="date"><FormattedDate date={post.data.pubDate} /></p>
+      </li>
+    ))}
+  </ul>
+
+  
+</BaseLayout>
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .blog-entry {
+    position: relative;
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px dashed var(--header-text);
+  }
+
+  .blog-entry > a {
+    display: block;
+  }
+
+  .title {
+    margin: 0;
+  }
+
+  .date {
+    margin: 0.5em 0 0;
+  }
+
+  .ascii-corner {
+    position: absolute;
+    padding: 0 0.15em;
+    background: var(--page-bg);
+    color: var(--header-text);
+    font-family: monospace;
+    line-height: 1;
+  }
+
+  .ascii-corner.top-left {
+    top: -0.45em;
+    left: -0.35em;
+  }
+
+  .ascii-corner.top-right {
+    top: -0.45em;
+    right: -0.35em;
+  }
+
+  .ascii-corner.bottom-left {
+    bottom: -0.45em;
+    left: -0.35em;
+  }
+
+  .ascii-corner.bottom-right {
+    bottom: -0.45em;
+    right: -0.35em;
+  }
+</style>

@@ -55,36 +55,84 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+			.blog-header {
+				border-bottom: 2px solid var(--header-text);
+			}
 		</style>
 	</head>
 
 	<body>
 		<Header />
 		<main>
+			
 			<article>
 				<!--div class="hero-image">
 				{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
 			</div> -->
 				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
+
+					<div class="blog-header">
+
+						
+	
 						<h1>{title}</h1>
-						<hr />
+	
+						<div class="title">
+	
+							<div class="date">
+	
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<div class="last-updated-on">
+											Last updated on <FormattedDate date={updatedDate} />
+										</div>
+									)
+								}
+							</div>
+
+							<div class="back-to-blogs">
+								<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/">Back</a></h2>
+							</div>
+
 					</div>
+
+					
+
+					</div>
+
 					<slot />
+					<Author />
 				</div>
 			</article>
 		</main>
-	<Author/>
+	
 <Footer />
 </body>
 </html>
+
+<style>
+	h1 {
+		font-family: var(--font-display);
+	}
+
+	hr {}
+	.back-to-blogs h2 a {
+		font-size: 1.5rem;
+	}
+
+	.blog-header {
+		border-bottom: 2px solid var(--header-text);
+	}
+</style>
+
+<style is:global>
+	.prose img:not(.profile-circle) {
+	  max-width: 100%;
+	  height: auto;
+	  box-sizing: border-box;
+	  border: 5px solid var(--header-text);
+	  padding: 5px;
+	  background-color: transparent;
+	}
+  </style>

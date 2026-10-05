@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -11,7 +10,10 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort(
     (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
         b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+	const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 ---
+
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -24,19 +26,29 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section>
+				<nav aria-label="Filter blog posts by tag">
+					<a href="/blog/">All posts</a>
+					{tags.map((tag) => (
+						<a href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a>
+					))}
+					
+				</nav>
 				<ul>
 					{
 						posts.map((post) => (
-							<li>
+							<li class="blog-entry">
+								<span class="ascii-corner top-left" aria-hidden="true">+</span>
+								<span class="ascii-corner top-right" aria-hidden="true">+</span>
+								<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+								<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
+									
 									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+									
 								</a>
+								<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+								</p>
 							</li>
 						))
 					}
@@ -47,3 +59,74 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort(
 		<Footer />
 	</body>
 </html>
+
+<style>
+
+nav {
+		align-items: center;
+		display: flex;
+		justify-content: flex-start;
+		border: 2px solid var(--header-text);
+	}
+	nav a {
+		padding: 0.5em;
+		border-bottom: 1px solid transparent;
+		text-decoration: none;
+
+	nav h2 a{
+		color: var(--text-color);	
+	}
+
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--header-text);
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	.blog-entry {
+		position: relative;
+		margin: 1em 0;
+		padding: 1em;
+		border: 1px dashed var(--header-text);
+	}
+
+	.blog-entry > a {
+		display: block;
+	}
+
+	.ascii-corner {
+		position: absolute;
+		padding: 0 0.15em;
+		background: var(--page-bg);
+		color: var(--header-text);
+		font-family: monospace;
+		line-height: 1;
+	}
+
+	.ascii-corner.top-left {
+		top: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.top-right {
+		top: -0.45em;
+		right: -0.35em;
+	}
+
+	.ascii-corner.bottom-left {
+		bottom: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.bottom-right {
+		bottom: -0.45em;
+		right: -0.35em;
+	}
+
+	
+</style>
