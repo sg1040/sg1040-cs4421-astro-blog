@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "npm run build && npm --prefix cdk/cdk/cdk run deploy",
     "check": "astro check",
     "astro": "astro",
     "lint": "eslint .",

@@ -51,8 +51,14 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run deploy`          | Build the site and deploy it to AWS via CDK      |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+`npm run preview` only serves the local build; it does not update the live site.
+To deploy the current site, configure AWS credentials and run `npm run deploy`.
+The command builds Astro first, then runs CDK from its app directory and
+invalidates CloudFront as part of the deployment.
 
 ## 👀 Want to learn more?
 
