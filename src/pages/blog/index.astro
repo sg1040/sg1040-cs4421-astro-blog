@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -11,109 +10,123 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort(
     (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
         b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+	const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 ---
+
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
+			
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section>
+				<nav aria-label="Filter blog posts by tag">
+					<a href="/blog/">All posts</a>
+					{tags.map((tag) => (
+						<a href={`/tags/${encodeURIComponent(tag)}/`}>{tag}</a>
+					))}
+					
+				</nav>
 				<ul>
 					{
 						posts.map((post) => (
-							<li>
+							<li class="blog-entry">
+								<span class="ascii-corner top-left" aria-hidden="true">+</span>
+								<span class="ascii-corner top-right" aria-hidden="true">+</span>
+								<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+								<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
+									
 									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+									
 								</a>
+								<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+								</p>
 							</li>
 						))
 					}
 				</ul>
-				<div>
-    
-					<iframe src="https://js-dos.com/DOOM/" width="640" height="400" allowfullscreen></iframe>
 				
-				</div>
 			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+
+nav {
+		align-items: center;
+		display: flex;
+		justify-content: flex-start;
+		border: 2px solid var(--header-text);
+	}
+	nav a {
+		padding: 0.5em;
+		border-bottom: 1px solid transparent;
+		text-decoration: none;
+
+	nav h2 a{
+		color: var(--text-color);	
+	}
+
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--header-text);
+	}
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	.blog-entry {
+		position: relative;
+		margin: 1em 0;
+		padding: 1em;
+		border: 1px dashed var(--header-text);
+	}
+
+	.blog-entry > a {
+		display: block;
+	}
+
+	.ascii-corner {
+		position: absolute;
+		padding: 0 0.15em;
+		background: var(--page-bg);
+		color: var(--header-text);
+		font-family: monospace;
+		line-height: 1;
+	}
+
+	.ascii-corner.top-left {
+		top: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.top-right {
+		top: -0.45em;
+		right: -0.35em;
+	}
+
+	.ascii-corner.bottom-left {
+		bottom: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.bottom-right {
+		bottom: -0.45em;
+		right: -0.35em;
+	}
+
+	
+</style>

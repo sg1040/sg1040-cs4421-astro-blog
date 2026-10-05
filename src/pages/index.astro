@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 ---
 
 <!doctype html>
@@ -13,13 +13,304 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>Welcome!</h1>
-			<p>
-				This is my blog that I made with <a href="https://astro.build/">Astro</a>
+			<div class = "intro">
 
-				<img src="https://i.pinimg.com/736x/ea/23/c9/ea23c90e541673933ab5c46f146f81a0.jpg">
-			</p>	
+				<div class = "intro-welcome">
+
+					<h1>Welcome!</h1>
+
+				</div>
+
+				<div class = "intro-left"> 
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+
+					<p>
+						This is my blog that I made with <a href="https://astro.build/">Astro</a>
+					</p>
+
+				</div>
+
+				<div class = "intro-right"> 
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+
+					<p>
+						This is what I'll put on the right side
+					</p>
+
+				</div>
+
+			</div>
+			
+			<div class = "doom-outer-box">
+
+				<div class = "doom-box">
+
+					
+					
+				
+				<div id="dosbox">
+
+				</div>
+
+				<br/>
+
+				<button onclick="dosbox.requestFullScreen();">
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+					Fullscreen!!
+				</button>
+				
+				</div>
+				
+			</div>
+
+			<div class = "blog-outer-box">
+
+				<div class = "blog-header">
+
+					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Blog</a></h2>
+					
+					<h2>Featured Entries</h2>	
+
+				</div>
+
+				<div class = "blog-left">
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+
+					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Left Blog</a></h2>
+
+					<div class = "blog-left-img">
+
+						<img src="https://file.garden/akY52Mebcxapr9RG/misc/dithered-image.jpeg" height = 100px>
+
+					</div>
+
+				</div>
+
+				<div class = "blog-right">
+					<span class="ascii-corner top-left" aria-hidden="true">+</span>
+					<span class="ascii-corner top-right" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
+					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+
+					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Right Blog</a></h2>
+
+					<div class = "blog-right-img">
+
+						<img src="https://file.garden/akY52Mebcxapr9RG/misc/dithered-image.jpeg" height = 100px>
+
+					</div>
+					
+				</div>
+
+			</div>
+
 		</main>
-		<Footer />
+		<Footer/>
 	</body>
 </html>
+
+<style>
+
+	h1 {
+		font-family: var(--font-display);
+		font-size: 10rem;
+		color: var(--text-color);
+	}
+
+	p {
+		color: var(--text-color);
+	}
+
+	img {
+		filter: grayscale(1) sepia(1) hue-rotate(103deg) saturate(2.5) contrast(1.0);
+	}
+
+	button {
+		position: relative;
+		font-family: var(--font-ui);
+		font-size: 1.5rem;
+		color: var(--text-color);
+		background-color: var(--page-bg);
+		padding: 10px;
+		margin: 15px;
+		border: 1px dashed var(--header-text);
+
+	}
+
+	.intro {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-areas:
+			"welcome welcome"
+			"left right";
+		gap: 2rem;
+		margin: 2em;
+		padding: 2em;
+		background: var(--page-bg);
+		border: 2px solid var(--header-text);
+	}
+	
+	.intro-welcome {
+		
+		grid-area: welcome;
+		text-align: center;
+		background: var(--page-bg);
+		padding: 0.5em;
+	}
+
+	.intro-left {
+		grid-area: left;
+		position: relative;
+		background: var(--page-bg);
+		padding: 2em;
+		border: 1px dashed var(--header-text);
+		
+	}
+
+	.intro-right {
+		grid-area: right;
+		position: relative;
+		background: var(--page-bg);
+		padding: 2em;
+		border: 1px dashed var(--header-text);
+	}
+
+	.ascii-corner {
+		position: absolute;
+		padding: 0 0.15em;
+		background: var(--page-bg);
+		color: var(--header-text);
+		font-family: monospace;
+		line-height: 1;
+	}
+
+	.ascii-corner.top-left {
+		top: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.top-right {
+		top: -0.45em;
+		right: -0.35em;
+	}
+
+	.ascii-corner.bottom-left {
+		bottom: -0.45em;
+		left: -0.35em;
+	}
+
+	.ascii-corner.bottom-right {
+		bottom: -0.45em;
+		right: -0.35em;
+	}
+
+	.doom-outer-box {
+		width: 80%;
+		box-sizing: border-box;
+		margin: 2em auto;
+		padding: 2em;
+		background: var(--page-bg);
+		border: 2px solid var(--header-text);
+		
+	}
+
+	.doom-box {
+		height: auto;
+		overflow: visible;
+		position: relative;
+		background: var(--page-bg);
+		padding: 0.5em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		/*border: 2px solid var(--header-text);*/
+	}
+
+	
+
+    :global(.dosbox-container .dosbox-overlay) {
+  		background: url("/games/doom-start.png") center / auto no-repeat;
+	}
+	
+
+	.blog-outer-box {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-areas:
+			"blog blog"
+			"left-blog right-blog";
+		gap: 2rem;
+		margin: 2em;
+		padding: 2em;
+		background: var(--page-bg);
+		border: 2px solid var(--header-text);
+	}
+
+	.blog-header {
+		grid-area: blog;
+		background: var(--page-bg);
+		padding: 0.5em;
+		text-align:center;
+	}
+
+	.blog-left {
+		position: relative;
+		background: var(--page-bg);
+		padding: 0.5em;
+		grid-area: left-blog;
+		text-align:center;
+		border: 1px dashed var(--header-text);
+	}
+
+
+	.blog-right {
+		position: relative;
+		background: var(--page-bg);
+		padding: 0.5em;
+		grid-area: right-blog;
+		text-align:center;
+		border: 1px dashed var(--header-text);
+		
+	}
+
+	#dosbox {
+  width: 640px;
+  height: 400px;
+}
+
+:global(#dosbox canvas),
+:global(#dosbox .dosbox-overlay) {
+	width: 640px;
+  	height: 400px;
+  	filter: grayscale(1) sepia(1) hue-rotate(103deg) saturate(2.5) contrast(1.0);
+}
+
+</style>
+
+<script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"></script>
+
+				<script type="text/javascript">
+
+						var dosbox = new Dosbox({
+							  id: "dosbox",
+							  onload: function (dosbox) {
+								dosbox.run("games/DOOM-evilution.zip", "./DOOM/DOOM.EXE");
+							  },
+						  onrun: function (dosbox, app) {
+								console.log("App '" + app + "' is runned");
+							  }
+						});
+						
+				</script>

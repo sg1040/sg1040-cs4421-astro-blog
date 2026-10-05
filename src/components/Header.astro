@@ -1,12 +1,15 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
-import ThemeIcon from './ThemeIcon.astro';
+/*import ThemeIcon from './ThemeIcon.astro';*/
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+	<nav> 
+		<div class="title">
+			<h2> <a href="/"> {SITE_TITLE} </a> </h2>
+		</div>
+		
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
@@ -22,58 +25,99 @@ import ThemeIcon from './ThemeIcon.astro';
 					></path></svg
 				>
 			</a>
+			<span class="header-bars" aria-hidden="true"></span>
 		</div>
 		<div>
-			<ThemeIcon/>
+		<!--/ThemeIcon -->
 		</div>
 	</nav>
 </header>
 
 <style>
+	
+
 	header {
+		font-family: var(--font-display);
 		margin: 0;
-		padding: 0 1em;
+		padding: 0.5em;
 		background: var(--header-bg);
 		color: var(--header-text);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+		border: 2px solid var(--header-text);
 	}
+
+	
 	h2 {
+		padding: 0.5em;
 		margin: 0;
 		font-size: 1em;
+		color: var(--text-color);
 	}
 
 	h2 a,
 	h2 a.active {
+		font-family: var(--font-display);
 		text-decoration: none;
+		font-size: 2rem;
+		color: var(--text-color);
 	}
 	nav {
-		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		display: flex;
+		justify-content: flex-start;
 	}
 	nav a {
-		padding: 1em 0.5em;
-		color: var(--header-text);
-		border-bottom: 4px solid transparent;
+		padding: 0.5em;
+		border-bottom: 1px solid transparent;
 		text-decoration: none;
+
+	nav h2 a{
+		color: var(--text-color);	
+	}
+
 	}
 	nav a.active {
 		text-decoration: none;
-		border-bottom-color: var(--accent);
+		border-bottom-color: var(--header-text);
 	}
-	.social-links,
-	.social-links a {
+	.social-links {
+		flex: 1;
+		min-width: 0;
+		align-items: center;
 		display: flex;
-		justify-content: space-between;
+		/*justify-content: space-between;*/
+	}
+	.social-links a {
+		align-items: center;
+		display: flex;
+		/*justify-content: space-between;*/
 	}
 	@media (max-width: 720px) {
 		.social-links {
+			align-items: center;
 			display: none;
 		}
 	}
-	div {
-		display:flex;
-		justify-content: space-between;
 
+	.internal-links a {
+		align-items: center;
+		font-size: 1.5rem;
+		font-family: var(--font-ui);
+		
+	}
+
+	.svg {
+		padding: 0.5em;
+	}
+	
+	.header-bars {
+		flex: 1;
+		min-width: 0;
+		height: 1em;
+		background: repeating-linear-gradient(
+			to right,
+			transparent 0 8px,
+			var(--header-text) 8px 10px,
+			transparent 10px 16px
+		);
 	}
 </style>
