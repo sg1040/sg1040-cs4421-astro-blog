@@ -1,28 +1,28 @@
 {
   "version": "54.0.0",
   "artifacts": {
-    "CdkStack.assets": {
+    "AstroImageStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "CdkStack.assets.json",
+        "file": "AstroImageStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "CdkStack": {
+    "AstroImageStack": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://182313261325/eu-west-1",
       "properties": {
-        "templateFile": "CdkStack.template.json",
+        "templateFile": "AstroImageStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-deploy-role-182313261325-eu-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-cfn-exec-role-182313261325-eu-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-182313261325-eu-west-1/f4eb4b4d4597aa8c2f5b62e80423c9df8cd6a3d3a420788b0cf0700bbfd804f4.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-182313261325-eu-west-1/a8abc5f543f2b2869f1f4ed35d4d6c4db0376456c691a0195fc207a843bc2905.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "CdkStack.assets"
+          "AstroImageStack.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-lookup-role-182313261325-eu-west-1",
@@ -31,10 +31,46 @@
         }
       },
       "dependencies": [
-        "CdkStack.assets"
+        "AstroImageStack.assets"
       ],
-      "additionalMetadataFile": "CdkStack.metadata.json",
-      "displayName": "CdkStack"
+      "additionalMetadataFile": "AstroImageStack.metadata.json",
+      "displayName": "AstroImageStack"
+    },
+    "AstroServiceStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AstroServiceStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AstroServiceStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://182313261325/eu-west-1",
+      "properties": {
+        "templateFile": "AstroServiceStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-deploy-role-182313261325-eu-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-cfn-exec-role-182313261325-eu-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-182313261325-eu-west-1/dfe47aa7f4c62545c114e67129b269e9a3d9b46d4615a01c8793a375e15b0501.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AstroServiceStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-lookup-role-182313261325-eu-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "AstroImageStack",
+        "AstroServiceStack.assets"
+      ],
+      "additionalMetadataFile": "AstroServiceStack.metadata.json",
+      "displayName": "AstroServiceStack"
     },
     "Tree": {
       "type": "cdk:tree",
