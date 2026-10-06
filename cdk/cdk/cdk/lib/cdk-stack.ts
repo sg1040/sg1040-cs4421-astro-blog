@@ -38,10 +38,21 @@ function handler(event) {
       },
     );
 
+    const originAccessControl = new cloudfront.S3OriginAccessControl(
+      this,
+      'SiteOriginAccessControl',
+      {
+        originAccessControlName: 'astro-blog-static-site-oac',
+        signing: cloudfront.Signing.SIGV4_ALWAYS,
+      },
+    );
+
     const distribution = new cloudfront.Distribution(this, 'SiteDistribution', {
       defaultRootObject: 'index.html',
       defaultBehavior: {
-        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket),
+        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket, {
+          originAccessControl,
+        }),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         functionAssociations: [
           {
