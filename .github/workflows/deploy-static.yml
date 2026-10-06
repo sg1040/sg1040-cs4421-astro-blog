@@ -1,0 +1,63 @@
+name: Deploy Astro SSR to AWS App Runner
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            cdk/cdk/cdk/package-lock.json
+
+      - name: Install Astro dependencies
+        run: npm ci
+
+      - name: Build Astro server
+        run: npm run build
+
+      - name: Install CDK dependencies
+        run: npm ci
+        working-directory: cdk/cdk/cdk
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Create ECR repository
+        run: npx cdk deploy AstroImageStack --require-approval never
+        working-directory: cdk/cdk/cdk
+
+      - name: Build and push application image
+        env:
+          AWS_REGION: us-east-1
+          IMAGE_TAG: ${{ github.sha }}-${{ github.run_attempt }}
+        run: |
+          repository_uri="$(aws cloudformation describe-stacks \
+            --stack-name AstroImageStack \
+            --query "Stacks[0].Outputs[?OutputKey=='RepositoryUri'].OutputValue" \
+            --output text)"
+          registry="${repository_uri%%/*}"
+          aws ecr get-login-password --region "$AWS_REGION" \
+            | docker login --username AWS --password-stdin "$registry"
+          docker build --file Dockerfile --tag "$repository_uri:$IMAGE_TAG" .
+          docker push "$repository_uri:$IMAGE_TAG"
+
+      - name: Deploy App Runner service
+        env:
+          IMAGE_TAG: ${{ github.sha }}-${{ github.run_attempt }}
+        run: npx cdk deploy AstroServiceStack --require-approval never
+        working-directory: cdk/cdk/cdk

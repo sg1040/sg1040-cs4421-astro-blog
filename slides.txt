@@ -1,0 +1,1091 @@
+CS4421: DevOps
+Week 4: Cloud Providers, Infrastructure as Code (IaC) & Edge Release
+Instructor: Robert Bordianu
+Module: CS4421 - DevOps (8-Week Curriculum)
+Primary Stack: Astro (SSG), AWS S3, AWS CloudFront, AWS CDK (TypeScript), GitHub Actions
+CS4421: DevOps — Week 4
+University of Limerick | ISE 1
+Today's Agenda (3 x 2-Hour Blocks)
+Block 1 (Quiz + Cloud Architectures):
+Quiz 3 (First 15 mins — Locked Single Tab): Covers Week 3
+Cloud Computing Models & Providers Landscape: AWS vs. GCP vs. Azure vs. Vercel/Cloudflare
+Static Site Generation (SSG) Architecture & Immutable Build Artifacts ( dist/ )
+Object Storage (S3) vs. Edge CDNs (CloudFront)
+Block 2 (Tooling & Architecture):
+Infrastructure as Code (IaC): Why ClickOps Fails; Declarative vs. Imperative
+IaC Tooling Comparison: Terraform vs. CloudFormation vs. AWS CDK vs. Pulumi
+AWS CDK in TypeScript: Declaring S3, CloudFront & Auto-Invalidation
+Sample Pipeline: deploy-static.yml with AWS CDK
+Edge Caching, Invalidation & The git revert Rollback Protocol
+Block 3 (Hands-on Lab):
+Automated S3 + CloudFront Deployment via AWS CDK in GitHub Actions
+Hands-on Rollback Drill 1: Fast Recovery via git revert
+CS4421: DevOps — Week 4
+University of Limerick | ISE 2
+BLOCK 1: Quiz 3 & Theory
+Cloud Architectures, Provider Landscape & Edge Distribution
+CS4421: DevOps — Week 4
+University of Limerick | ISE 3
+Quiz 3 Guidelines (15 Minutes)
+Scope: Week 3 QA, Testing Pyramid, Shift-Left Security, CI Tooling (GitHub vs. Jenkins), Actions YAML.
+Integrity Rules:
+Strict single-tab lockdown mode via Brightspace.
+No external tabs, no terminal access, no AI tools.
+Question Format:
+10 Questions (5 options each, 1 pt each), embedded YAML workflow failure logs, Vitest assertion
+traces, and multiple-select questions.
+When the timer expires, the quiz automatically submits.
+CS4421: DevOps — Week 4
+University of Limerick | ISE 4
+Cloud Providers & Hosting Landscape
+Category Platforms Key Characteristics Best Suited For
+Hyperscalers
+(IaaS/PaaS)
+AWS, Google Cloud (GCP),
+Microsoft Azure
+Complete infrastructure catalog
+(compute, storage, IAM, networks)
+Enterprise apps, containers,
+scalable cloud backends
+Developer Edge
+Platforms (PaaS)
+Vercel, Netlify, Cloudflare
+Pages
+Git-integrated zero-config deployments,
+edge functions
+Fast static frontend & Jamstack
+deployments
+Bare Metal / VPS DigitalOcean, Hetzner,
+Linode Low cost, straightforward virtual servers Simple apps, self-hosted
+databases
+Our Strategy: We use AWS to master foundational cloud primitives (S3, CloudFront, ECR, IAM) that
+transfer across all cloud providers.
+CS4421: DevOps — Week 4
+University of Limerick | ISE 5
+Source Code vs. Build Artifacts
+Source Repository Immutable Build Artifact
+┌─────────────────────────┐ ┌─────────────────────────┐
+│ src/pages/index.astro │ astro build │ dist/index.html │
+│ src/components/Card.tsx │ ─────────────> │ dist/_astro/style.css │
+│ src/utils/date.ts │ (Compilation) │ dist/_astro/client.js │
+│ package.json │ │ dist/favicon.svg │
+└─────────────────────────┘ └─────────────────────────┘
+Deterministic Builds: The exact same commit hash must produce the exact same byte-for-byte output in
+dist/ .
+Security & Performance: HTML/CSS/JS files contain zero server dependencies, zero open database
+ports, and lightning-fast delivery.
+CS4421: DevOps — Week 4
+University of Limerick | ISE 6
+Cloud Infrastructure: S3 vs. CloudFront
+User Browser ──> HTTPS ──> AWS CloudFront CDN Edge ──> Origin Fetch ──> Amazon S3 Bucket
+(Worldwide) (Cached HTML/CSS/JS) (Object Storage)
+▲
+│ aws-cdk-lib/aws-s3-deployment
+GitHub Actions CD
+1. Amazon S3 (Object Storage)
+Highly durable ( ).
+Stores files (blobs), not computation.
+Holds canonical static build artifacts.
+2. AWS CloudFront (CDN)
+400+ Points of Presence (PoPs) globally.
+Low latency ( ) edge caching.
+Free automated SSL/TLS certificates.
+CS4421: DevOps — Week 4
+University of Limerick | ISE 7
+BLOCK 2: Tooling & Architecture
+Infrastructure as Code (IaC) & AWS CDK
+CS4421: DevOps — Week 4
+University of Limerick | ISE 8
+Infrastructure as Code (IaC): Why ClickOps Fails
+The Anti-Pattern: ClickOps: Manually clicking buttons in the AWS web console.
+✘ Non-reproducible (cannot recreate staging or disaster recovery environments).
+✘ Configuration Drift: Dev, Staging, and Prod slowly become out of sync.
+✘ Zero version control, audit trail, or automated review for infrastructure.
+ClickOps (Manual Web UI) Infrastructure as Code (Declarative Files)
+┌─────────────────────────┐ ┌─────────────────────────┐
+│ • Click "Create Bucket" │ │ const bucket = │
+│ • Click "Allow Public" │ VS. │ new s3.Bucket(...); │ ──> Version Controlled,
+│ • Hope nobody misclicks │ │ │ Audited & Reusable
+└─────────────────────────┘ └─────────────────────────┘
+CS4421: DevOps — Week 4
+University of Limerick | ISE 9
+Infrastructure as Code (IaC) Tooling Landscape
+Tool Paradigm Language Best Suited For
+Terraform /
+OpenTofu Declarative HCL (HashiCorp Config
+Language)
+Multi-cloud infrastructure orchestration (Industry
+Standard)
+AWS
+CloudFormation Declarative JSON / YAML Native AWS stack templates and automated
+provisioning
+AWS CDK Imperative / Object-
+Oriented TypeScript, Python, Go Defining AWS cloud resources using real
+programming languages
+Pulumi Imperative / Declarative TypeScript, Python, Go, C# Multi-cloud infrastructure defined via modern
+programming stacks
+Key Takeaway: In modern DevOps, infrastructure is written, peer-reviewed, and deployed just like
+software!
+CS4421: DevOps — Week 4
+University of Limerick | ISE 10
+AWS CDK in Action: Declaring S3 + CloudFront
+With AWS Cloud Development Kit (CDK) in TypeScript, our infrastructure is code in cdk/lib/static-site-
+stack.ts :
+import * as cdk from 'aws-cdk-lib';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+export class StaticSiteStack extends cdk.Stack {
+constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+super(scope, id, props);
+const siteBucket = new s3.Bucket(this, 'SiteBucket', {
+removalPolicy: cdk.RemovalPolicy.DESTROY,
+autoDeleteObjects: true,
+});
+const distribution = new cloudfront.Distribution(this, 'SiteDistribution', {
+defaultBehavior: { origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket) },
+defaultRootObject: 'index.html',
+});
+new s3deploy.BucketDeployment(this, 'DeploySite', {
+sources: [s3deploy.Source.asset('./dist')],
+destinationBucket: siteBucket,
+distribution,
+distributionPaths: ['/*'], // Automatic CloudFront CDN cache invalidation!
+});
+}
+CS4421: DevOps — Week 4
+University of Limerick | ISE 11
+Sample Pipeline: deploy-static.yml (AWS CDK)
+name: Deploy Static Site via AWS CDK
+on:
+push:
+branches: [main]
+jobs:
+deploy:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout Source Code
+uses: actions/checkout@v4
+- name: Setup Node.js Runtime
+uses: actions/setup-node@v4
+with:
+node-version: 24
+cache: 'npm'
+- name: Install Project & CDK Dependencies
+run: npm ci
+- name: Build Astro Static Site
+run: npm run build
+- name: Configure AWS Credentials
+uses: aws-actions/configure-aws-credentials@v4
+with:
+aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+aws-region: us-east-1
+- name: Deploy Infrastructure & Assets with AWS CDK
+run: npx cdk deploy --require-approval never
+CS4421: DevOps — Week 4
+University of Limerick | ISE 12
+The Problem of Stale Assets: Cache Invalidation
+When CloudFront caches index.html at the edge, it serves that copy for 24 hours by default.
+If you push a bug fix to S3, users will still see the broken version until the edge cache is invalidated.
+Manual CLI Invalidation:
+aws cloudfront create-invalidation \
+--distribution-id $DIST_ID \
+--paths "/*"
+Automated via AWS CDK:
+new s3deploy.BucketDeployment(this, 'DeploySite', {
+sources: [s3deploy.Source.asset('./dist')],
+destinationBucket: siteBucket,
+distribution,
+distributionPaths: ['/*'], // Purges edge globally!
+});
+CloudFront purges old edge copies worldwide in seconds.
+CS4421: DevOps — Week 4
+University of Limerick | ISE 13
+Emergency Rollback Under Branch Protection Rules
+When main has Branch Protection Rules enabled (Require a pull request before merging):
+You cannot run git push origin main directly (GitHub blocks the push with error GH006 ).
+Option A: GitHub UI (Fastest)
+1. Open the merged broken PR on GitHub.
+2. Click the "Revert" button.
+3. GitHub automatically creates a revert-12-
+feat branch and opens a Revert PR.
+4. Approve & merge into main .
+Option B: Terminal Git Flow
+# 1. Create emergency rollback branch
+git checkout -b revert/fix-outage
+# 2. Invert the bad commit
+git revert HEAD --no-edit
+# 3. Push and open Revert PR
+git push -u origin revert/fix-outage
+# Merge PR into main -> CI deploys!
+Bad PR Merged ──> Open Revert PR ──> Merge into main ──> Automated CDK Deploy & Edge Invalidation (< 2 mins)
+CS4421: DevOps — Week 4
+University of Limerick | ISE 14
+BLOCK 3: Hands-on Practical Lab
+Automated S3/CloudFront Deployment via AWS CDK
+CS4421: DevOps — Week 4
+University of Limerick | ISE 15
+Lab 4 Objectives (Individual Repos)
+1. Scaffold an AWS CDK TypeScript app inside your repository ( mkdir cdk && cd cdk && npx cdk init
+app --language typescript ).
+2. Declare your Amazon S3 bucket, AWS CloudFront distribution, and BucketDeployment in
+cdk/lib/static-site-stack.ts .
+3. Configure encrypted AWS credentials in GitHub Repository Secrets ( AWS_ACCESS_KEY_ID ,
+AWS_SECRET_ACCESS_KEY ).
+4. Author .github/workflows/deploy-static.yml to build Astro and run npx cdk deploy --require-
+approval never on push to main .
+5. Execute Hands-on Rollback Drill 1 (Under Branch Protection):
+Open a feature PR with an intentional breaking UI bug and merge to main .
+Observe live broken production at your CloudFront URL.
+Open and merge an Emergency Revert PR; watch automated CDK recovery and CDN cache purge in
+minutes.
+CS4421: DevOps — Week 4
+University of Limerick | ISE 16
+Step-by-Step Lab Commands
+# 1. Build Astro static site locally & synthesize CDK CloudFormation template
+npm run build # Generates dist/
+cd cdk && npx cdk synth && cd ..
+# 2. Add deploy-static.yml to .github/workflows/ and push on a feature branch
+git checkout -b feat/add-cdk-pipeline
+git add .github/workflows/deploy-static.yml cdk/
+git commit -m "feat(cd): configure automated S3 and CloudFront deployment via AWS CDK"
+git push -u origin feat/add-cdk-pipeline
+# 3. Open PR -> Review -> Merge into main -> Watch GitHub Actions CDK deploy!
+# 4. Open your live CloudFront HTTPS domain in the browser!
+# 5. ROLLBACK DRILL: Merge a broken PR -> open Revert PR -> Merge -> Verify recovery!
+CS4421: DevOps — Week 4
+University of Limerick | ISE 17
+Week 4 Deliverables & Checkpoint
+[ ] Live, publicly accessible HTTPS URL on AWS CloudFront.
+[ ] AWS CDK stack ( cdk/lib/static-site-stack.ts ) committed to repository.
+[ ] .github/workflows/deploy-static.yml automatically deploying every merge to main via npx
+cdk deploy .
+[ ] Automated CloudFront cache invalidation working through BucketDeployment .
+[ ] Rollback Drill 1 completed under Branch Protection: Revert PR merged and verified in minutes.
+Reminder for Next Week:
+Quiz 4 takes place in the first 15 minutes of Week 5 Block 1 (Locked Single Tab).
+Covers Week 4 Cloud Providers, IaC Fundamentals, AWS CDK, S3, CloudFront, Caching, and Protected
+Branch Rollbacks.
+CS4421: DevOps — Week 4
+University of Limerick | ISE 18
+
+Web Rendering Paradigms Compared
+
+Paradigm
+ 
+How it Works
+ 
+Pros
+ 
+Cons
+ 
+Best For
+
+SSG (Static)
+ 
+Pre-renders all HTML at
+build time
+
+Cheap, fast edge CDN
+caching, ultra-secure
+
+Rebuild needed for
+content changes
+
+Blogs, docs,
+marketing sites
+
+SSR (Server-
+Rendered)
+
+Renders HTML on-
+demand per request
+
+Live database access, real-
+time user auth
+
+Requires running server
+compute
+
+Dashboards, social
+feeds
+
+Jamstack / Hybrid
+ 
+Static shell + client API
+hydration
+
+Fast initial paint + dynamic
+widgets
+ 
+Multiple moving parts
+ 
+Modern web
+platforms
+
+Serverless
+(Functions)
+
+Ephemeral functions (AWS
+Lambda)
+
+Pay per millisecond, auto-
+scaling
+
+Cold start latency,
+execution limits
+
+Event-driven
+microservices
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 5
+Documenting Decisions: What is an ADR?
+
+An
+ 
+Architecture Decision Record (ADR)
+ 
+is a lightweight markdown document capturing an important
+architectural choice:
+
+#
+ 
+ADR-001:
+ 
+Transition
+ 
+from
+ 
+Static
+ 
+Site
+ 
+to
+ 
+Containerized
+ 
+SSR
+ 
+Runtime
+
+##
+ 
+Status:
+ 
+Accepted
+ 
+(Date:
+ 
+2026-09-28)
+
+##
+ 
+Context
+
+Our
+ 
+platform
+ 
+requires
+ 
+dynamic
+ 
+API
+ 
+endpoints
+ 
+(/api/health,
+ 
+/api/feedback).
+Static
+ 
+hosting
+ 
+on
+ 
+S3
+ 
+cannot
+ 
+execute
+ 
+server-side
+ 
+Node.js
+ 
+code.
+
+##
+ 
+Decision
+
+We
+ 
+will
+ 
+configure
+ 
+Astro
+ 
+with
+ 
+the
+ 
+`@astrojs/node`
+ 
+adapter
+ 
+in
+ 
+standalone
+ 
+mode
+and
+ 
+package
+ 
+the
+ 
+application
+ 
+as
+ 
+a
+ 
+Docker
+ 
+container.
+
+##
+ 
+Consequences
+
+-
+ 
+Positive:
+ 
+Enables
+ 
+live
+ 
+API
+ 
+routes,
+ 
+dynamic
+ 
+rendering,
+ 
+and
+ 
+operational
+ 
+health
+ 
+checks.
+
+-
+ 
+Negative:
+ 
+Increases
+ 
+operational
+ 
+complexity;
+ 
+requires
+ 
+container
+ 
+compute
+ 
+runtime.
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 6
+BLOCK 2: Tooling & Architecture
+
+Dynamic Endpoints, Health Probes & Structured Logging
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 7
+Configuring Astro for Server Mode
+
+By default, Astro outputs static HTML. We install the official Node adapter to convert it to a live HTTP server:
+
+npx
+ 
+astro
+ 
+add
+ 
+node
+
+In
+ 
+astro.config.mjs
+ 
+:
+
+import
+ 
+{
+ 
+defineConfig
+ 
+}
+ 
+from
+ 
+'astro/config'
+;
+
+import
+ 
+node
+ 
+from
+ 
+'@astrojs/node'
+;
+
+export
+ 
+default
+ 
+defineConfig
+({
+
+output
+:
+ 
+'server'
+,
+ 
+//
+ 
+Enables
+ 
+on-demand
+ 
+server
+ 
+rendering
+
+adapter
+:
+ 
+node
+({
+
+mode
+:
+ 
+'standalone'
+,
+ 
+//
+ 
+Self-contained
+ 
+HTTP
+ 
+server
+ 
+listening
+ 
+on
+ 
+a
+ 
+port
+
+}),
+});
+
+Running
+ 
+npm
+ 
+run
+ 
+build
+ 
+now creates
+ 
+dist/server/entry.mjs
+ 
+instead of
+ 
+dist/index.html
+ 
+.
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 8
+Application Observability: Health Probes
+
+Production container orchestrators (like AWS App Runner) need automated ways to check if an app is healthy:
+
+┌──────────────────────┐
+│
+ 
+AWS
+ 
+Cloud
+ 
+Platform
+ 
+│
+└──────────────────────┘
+│
+ 
+▲
+HTTP
+ 
+GET
+ 
+/api/health
+ 
+(Every
+ 
+10s)│
+ 
+HTTP
+ 
+200
+ 
+OK
+ 
+{
+ 
+status:
+ 
+'healthy'
+ 
+}
+▼
+ 
+│
+┌──────────────────────┐
+│
+ 
+Astro
+ 
+Node
+ 
+Server
+ 
+│
+└──────────────────────┘
+
+Liveness Probe:
+ 
+Is the Node.js process running, or is it deadlocked/crashed?
+
+Readiness Probe:
+ 
+Has the app finished initializing and ready to take user traffic?
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 9
+Structured JSON Logging vs.
+ 
+console.log
+
+In production, human-readable strings like
+ 
+console.log("user
+ 
+logged
+ 
+in")
+ 
+are impossible to query across
+millions of log lines.
+
+Professional DevOps Practice: Structured JSON
+
+{
+
+"timestamp"
+:
+ 
+"2026-09-28T14:32:01.120Z"
+,
+
+"level"
+:
+ 
+"INFO"
+,
+
+"route"
+:
+ 
+"/api/feedback"
+,
+
+"method"
+:
+ 
+"POST"
+,
+
+"statusCode"
+:
+ 
+200
+,
+
+"latencyMs"
+:
+ 
+42
+
+}
+
+Centralized logging tools (Amazon CloudWatch) can query, filter, and alarm on JSON keys instantly (e.g.,
+
+filter
+ 
+statusCode
+ 
+>=
+ 
+500
+ 
+).
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 10
+BLOCK 3: Hands-on Practical Lab
+
+Authoring ADR-001 & Building Dynamic Endpoints
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 11
+Lab 5 Objectives (Individual Repos)
+
+1.
+ 
+Document the Architecture Shift:
+
+Create
+ 
+docs/adr/ADR-001-transition-to-ssr-and-containers.md
+ 
+.
+
+2.
+ 
+Install & Configure the Node.js Adapter:
+
+Configure
+ 
+astro.config.mjs
+ 
+for
+ 
+output:
+ 
+'server'
+ 
+.
+
+3.
+ 
+Build the Operational Health Check Endpoint:
+
+Create
+ 
+src/pages/api/health.ts
+ 
+returning JSON system status:
+
+{
+ 
+status:
+ 
+'ok',
+ 
+uptime:
+ 
+process.uptime(),
+ 
+timestamp:
+ 
+new
+ 
+Date()
+ 
+}
+ 
+.
+
+4.
+ 
+Implement Structured JSON Logging:
+
+Create middleware or endpoint logger emitting structured log objects.
+
+5.
+ 
+Run the Standalone Server Locally:
+
+Build with
+ 
+npm
+ 
+run
+ 
+build
+ 
+and execute
+ 
+node
+ 
+./dist/server/entry.mjs
+ 
+.
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 12
+Step-by-Step Lab Commands
+
+#
+ 
+1.
+ 
+Install
+ 
+official
+ 
+Astro
+ 
+Node
+ 
+adapter
+
+npx
+ 
+astro
+ 
+add
+ 
+node
+
+#
+ 
+2.
+ 
+Author
+ 
+src/pages/api/health.ts
+
+#
+ 
+export
+ 
+const
+ 
+GET:
+ 
+APIRoute
+ 
+=
+ 
+async
+ 
+()
+ 
+=>
+ 
+{
+
+#
+ 
+return
+ 
+new
+ 
+Response(JSON.stringify({
+
+#
+ 
+status:
+ 
+'ok',
+
+#
+ 
+uptime:
+ 
+process.uptime(),
+
+#
+ 
+timestamp:
+ 
+new
+ 
+Date().toISOString()
+
+#
+ 
+}),
+ 
+{
+ 
+status:
+ 
+200,
+ 
+headers:
+ 
+{
+ 
+'Content-Type':
+ 
+'application/json'
+ 
+}
+ 
+});
+
+#
+ 
+}
+
+#
+ 
+3.
+ 
+Compile
+ 
+standalone
+ 
+server
+ 
+build
+
+npm
+ 
+run
+ 
+build
+
+#
+ 
+4.
+ 
+Run
+ 
+the
+ 
+compiled
+ 
+Node.js
+ 
+server
+
+HOST=0.0.0.0
+ 
+PORT=4321
+ 
+node
+ 
+./dist/server/entry.mjs
+
+#
+ 
+5.
+ 
+In
+ 
+a
+ 
+second
+ 
+terminal,
+ 
+verify
+ 
+with
+ 
+curl:
+
+curl
+ 
+-i
+ 
+http://localhost:4321/api/health
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 13
+Week 5 Deliverables & Checkpoint
+
+[ ]
+ 
+docs/adr/ADR-001-transition-to-ssr-and-containers.md
+ 
+committed.
+
+[ ] Astro configured in
+ 
+output:
+ 
+'server'
+ 
+mode with
+ 
+@astrojs/node
+ 
+.
+
+[ ] Dynamic
+ 
+/api/health
+ 
+endpoint responding with HTTP 200 and JSON status.
+
+[ ] Structured JSON logging visible in terminal during incoming requests.
+
+Reminder for Next Week:
+
+Quiz 5
+ 
+takes place in the
+ 
+first 15 minutes of Week 6 Block 1
+ 
+(Locked Single Tab).
+
+Covers Week 5 Rendering Paradigms, ADRs, Dynamic Endpoints, Health Probes, and Structured Logging.
+
+CS4421: DevOps — Week 5
+
+University of Limerick | ISE
+ 14
