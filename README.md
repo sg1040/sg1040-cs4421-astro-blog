@@ -49,18 +49,14 @@ All commands are run from the root of the project, from a terminal:
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build the SSR app to `./dist/`                   |
-| `npm start`               | Start the built Node server                      |
+| `npm run build`           | Build the static site to `./dist/`               |
+| `npm run preview`         | Preview the production build locally             |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-To test the production server locally, run `npm run build`, then
-`HOST=0.0.0.0 PORT=4321 npm start`. Requests to `/api/health` return JSON, and
-the server prints a JSON log line for each request.
-
-The existing CDK stack only deploys static files to S3/CloudFront. It does not
-run this SSR server; container hosting must be configured before deploying the
-SSR app.
+The site is built as static files and deployed to a private S3 bucket behind
+CloudFront by the CDK stack. Pushes to `main` trigger the GitHub Actions
+workflow. Static hosting does not run server-side Astro API routes.
 
 ## 👀 Want to learn more?
 

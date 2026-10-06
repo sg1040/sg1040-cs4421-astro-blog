@@ -3,17 +3,26 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const tag = Astro.params.tag;
-
-const posts: CollectionEntry<'blog'>[] = tag
-  ? (await getCollection('blog'))
-      .filter((post) => post.data.tags.includes(tag))
-      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  : [];
-
-if (!tag || posts.length === 0) {
-  Astro.response.status = 404;
+interface Props {
+  posts: CollectionEntry<'blog'>[];
 }
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: allPosts
+        .filter((post) => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const tag = Astro.params.tag;
+const { posts } = Astro.props;
 ---
 <BaseLayout pageTitle={tag ? `Posts tagged: ${tag}` : 'Tag not found'}>
   {posts.length > 0 ? (

@@ -131,10 +131,10 @@
     "AutoPublish": true,
     "FunctionCode": "\nfunction handler(event) {\n  var request = event.request;\n  var uri = request.uri;\n\n  if (uri.endsWith('/')) {\n    request.uri += 'index.html';\n  } else if (!uri.split('/').pop().includes('.')) {\n    request.uri += '/index.html';\n  }\n\n  return request;\n}\n        ",
     "FunctionConfig": {
-     "Comment": "eu-west-1CdkStackDirectoryIndexFunctionF3513355",
+     "Comment": "us-east-1CdkStackDirectoryIndexFunctionF3513355",
      "Runtime": "cloudfront-js-2.0"
     },
-    "Name": "eu-west-1CdkStackDirectoryIndexFunctionF3513355"
+    "Name": "us-east-1CdkStackDirectoryIndexFunctionF3513355"
    },
    "Metadata": {
     "aws:cdk:path": "CdkStack/DirectoryIndexFunction/Resource"
@@ -209,7 +209,7 @@
    "Type": "AWS::Lambda::LayerVersion",
    "Properties": {
     "Content": {
-     "S3Bucket": "cdk-hnb659fds-assets-182313261325-eu-west-1",
+     "S3Bucket": "cdk-astroblog-assets-182313261325-us-east-1",
      "S3Key": "98f62bef9320f8c0a0a7be21d7c746f069131f196f51ffe3008a6bb730b368ec.zip"
     },
     "Description": "/opt/awscli/aws"
@@ -231,10 +231,10 @@
      ]
     },
     "SourceBucketNames": [
-     "cdk-hnb659fds-assets-182313261325-eu-west-1"
+     "cdk-astroblog-assets-182313261325-us-east-1"
     ],
     "SourceObjectKeys": [
-     "fde2e2009d94f7f6acb22e0b8fe1d19c82f957c3666c542b5014aa3671449ab8.zip"
+     "35bbdbeb6b843e4163b9b5d419f198ee151fa0ac217ec44ceb6fbfc1c7289d02.zip"
     ],
     "DestinationBucketName": {
      "Ref": "SiteBucket397A1860"
@@ -302,8 +302,8 @@
        ],
        "Effect": "Allow",
        "Resource": [
-        "arn:aws:s3:::cdk-hnb659fds-assets-182313261325-eu-west-1",
-        "arn:aws:s3:::cdk-hnb659fds-assets-182313261325-eu-west-1/*"
+        "arn:aws:s3:::cdk-astroblog-assets-182313261325-us-east-1",
+        "arn:aws:s3:::cdk-astroblog-assets-182313261325-us-east-1/*"
        ]
       },
       {
@@ -372,7 +372,7 @@
      "arm64"
     ],
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-182313261325-eu-west-1",
+     "S3Bucket": "cdk-astroblog-assets-182313261325-us-east-1",
      "S3Key": "35328da138f26fbd9160297abc9a2522d93dbf75878cd5114a9c050419fc1ce0.zip"
     },
     "Environment": {
@@ -460,7 +460,7 @@
  "Parameters": {
   "BootstrapVersion": {
    "Type": "AWS::SSM::Parameter::Value<String>",
-   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Default": "/cdk-bootstrap/astroblog/version",
    "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
   }
  },

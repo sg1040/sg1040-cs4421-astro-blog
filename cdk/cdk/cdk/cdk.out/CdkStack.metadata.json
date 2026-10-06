@@ -3,8 +3,8 @@
     {
       "type": "aws:cdk:creationStack",
       "data": [
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)",
         "...node internals, tsx..."
       ]
     }
@@ -104,8 +104,8 @@
       "type": "aws:cdk:creationStack",
       "data": [
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:66:5)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)",
         "...node internals, tsx..."
       ]
     }
@@ -146,8 +146,8 @@
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:13:24)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)",
         "...node internals, tsx..."
       ]
     }
@@ -170,8 +170,8 @@
       "data": [
         "...new Function2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:20:36)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)",
         "...node internals, tsx..."
       ]
     }
@@ -186,8 +186,8 @@
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:41:26)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)",
         "...node internals, tsx..."
       ]
     }
@@ -314,7 +314,7 @@
       "data": [
         "...new BucketDeployment2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:55:5)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)"
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)"
       ]
     }
   ],
@@ -349,7 +349,7 @@
       "data": [
         "...new Bucket2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:13:24)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)"
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)"
       ]
     }
   ],
@@ -369,8 +369,8 @@
       "data": [
         "...new BucketDeployment2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:55:5)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)",
         "...node internals..."
       ]
     }
@@ -391,8 +391,8 @@
       "data": [
         "...new BucketDeployment2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:55:5)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)",
         "...node internals, tsx..."
       ]
     }
@@ -485,8 +485,8 @@
       "data": [
         "...new Distribution2 in aws-cdk-lib...",
         "new CdkStack (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/lib/cdk-stack.ts:41:26)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:6:1)",
-        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:24:2)"
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:1)",
+        "<anonymous> (/home/susie/Documents/Code/DevOps/sg1040-cs4421-astro-blog/cdk/cdk/cdk/bin/cdk.ts:10:38)"
       ]
     }
   ],

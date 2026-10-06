@@ -8,11 +8,11 @@
         "packaging": "file"
       },
       "destinations": {
-        "182313261325-eu-west-1-c9792f52": {
-          "bucketName": "cdk-hnb659fds-assets-182313261325-eu-west-1",
+        "182313261325-us-east-1-b01faae1": {
+          "bucketName": "cdk-astroblog-assets-182313261325-us-east-1",
           "objectKey": "98f62bef9320f8c0a0a7be21d7c746f069131f196f51ffe3008a6bb730b368ec.zip",
-          "region": "eu-west-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-file-publishing-role-182313261325-eu-west-1"
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-astroblog-file-publishing-role-182313261325-us-east-1"
         }
       }
     },
@@ -23,41 +23,41 @@
         "packaging": "zip"
       },
       "destinations": {
-        "182313261325-eu-west-1-c9cf737f": {
-          "bucketName": "cdk-hnb659fds-assets-182313261325-eu-west-1",
+        "182313261325-us-east-1-dc7d9441": {
+          "bucketName": "cdk-astroblog-assets-182313261325-us-east-1",
           "objectKey": "35328da138f26fbd9160297abc9a2522d93dbf75878cd5114a9c050419fc1ce0.zip",
-          "region": "eu-west-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-file-publishing-role-182313261325-eu-west-1"
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-astroblog-file-publishing-role-182313261325-us-east-1"
         }
       }
     },
-    "fde2e2009d94f7f6acb22e0b8fe1d19c82f957c3666c542b5014aa3671449ab8": {
+    "35bbdbeb6b843e4163b9b5d419f198ee151fa0ac217ec44ceb6fbfc1c7289d02": {
       "displayName": "DeployAstroSite/Asset1",
       "source": {
-        "path": "asset.fde2e2009d94f7f6acb22e0b8fe1d19c82f957c3666c542b5014aa3671449ab8",
+        "path": "asset.35bbdbeb6b843e4163b9b5d419f198ee151fa0ac217ec44ceb6fbfc1c7289d02",
         "packaging": "zip"
       },
       "destinations": {
-        "182313261325-eu-west-1-d8690074": {
-          "bucketName": "cdk-hnb659fds-assets-182313261325-eu-west-1",
-          "objectKey": "fde2e2009d94f7f6acb22e0b8fe1d19c82f957c3666c542b5014aa3671449ab8.zip",
-          "region": "eu-west-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-file-publishing-role-182313261325-eu-west-1"
+        "182313261325-us-east-1-5378cd45": {
+          "bucketName": "cdk-astroblog-assets-182313261325-us-east-1",
+          "objectKey": "35bbdbeb6b843e4163b9b5d419f198ee151fa0ac217ec44ceb6fbfc1c7289d02.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-astroblog-file-publishing-role-182313261325-us-east-1"
         }
       }
     },
-    "f4eb4b4d4597aa8c2f5b62e80423c9df8cd6a3d3a420788b0cf0700bbfd804f4": {
+    "638a7f29e750d41929c79d73e140bb65b9d75f1df307915f9d92b3f8ecd6b921": {
       "displayName": "CdkStack Template",
       "source": {
         "path": "CdkStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "182313261325-eu-west-1-62d5825e": {
-          "bucketName": "cdk-hnb659fds-assets-182313261325-eu-west-1",
-          "objectKey": "f4eb4b4d4597aa8c2f5b62e80423c9df8cd6a3d3a420788b0cf0700bbfd804f4.json",
-          "region": "eu-west-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-hnb659fds-file-publishing-role-182313261325-eu-west-1"
+        "182313261325-us-east-1-39b951cb": {
+          "bucketName": "cdk-astroblog-assets-182313261325-us-east-1",
+          "objectKey": "638a7f29e750d41929c79d73e140bb65b9d75f1df307915f9d92b3f8ecd6b921.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::182313261325:role/cdk-astroblog-file-publishing-role-182313261325-us-east-1"
         }
       }
     }
