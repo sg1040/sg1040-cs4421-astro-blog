@@ -34,7 +34,7 @@ const { posts } = Astro.props;
           <span class="ascii-corner bottom-left" aria-hidden="true">+</span>
           <span class="ascii-corner bottom-right" aria-hidden="true">+</span>
           <a href={`/blog/${post.id}/`}>
-            <h4 class="title">{post.data.title}</h4>
+            <h2 class="title">{post.data.title}</h2>
           </a>
           <p class="date"><FormattedDate date={post.data.pubDate} /></p>
         </li>
@@ -50,6 +50,10 @@ const { posts } = Astro.props;
   ul {
     list-style: none;
     padding: 0;
+  }
+
+  ul h2 {
+    font-family: var(--font-display);
   }
 
   .blog-entry {
