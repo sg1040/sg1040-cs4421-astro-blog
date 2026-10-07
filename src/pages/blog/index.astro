@@ -43,7 +43,7 @@ const posts: CollectionEntry<'blog'>[] = (await getCollection('blog')).sort(
 								<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
 								<a href={`/blog/${post.id}/`}>
 									
-									<h4 class="title">{post.data.title}</h4>
+									<h2 class="title">{post.data.title}</h2>
 									
 								</a>
 								<p class="date">
@@ -86,6 +86,10 @@ nav {
 	ul {
 		list-style-type: none;
 		padding: 0;
+	}
+
+	ul h2 {
+		font-family: var(--font-display);
 	}
 
 	.blog-entry {
