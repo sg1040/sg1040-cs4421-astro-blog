@@ -9,20 +9,23 @@ License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
 
 */
 
-@import url("https://fonts.googleapis.com/css2?family=Jacquard+24&family=DotGothic16&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&family=Jacquard+24&family=VT323&display=swap");
 
 :root {
 
 --font-display: "Jacquard 24", serif;
 --font-ui: "DotGothic16", sans-serif;
+--font-ascii: "VT32", sans-serif;
 
 --page-bg: #0e0e0e;
 --text-color: #ffffff;
 --header-bg: #0e0e0e;
---header-text: #4EEE85;
+--header-text: #4AF262;
 
 
 }
+
+
 
 body {
 
@@ -318,4 +321,11 @@ color: var(--header-text)
 
 color: var(--header-text);
 
+}
+
+.ascii {
+    font-family: var(--font-ui);
+    font-size: 0.5rem;
+    white-space: pre;
+    text-align: center;
 }
