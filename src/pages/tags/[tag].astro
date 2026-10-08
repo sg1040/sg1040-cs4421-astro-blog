@@ -24,6 +24,7 @@ export async function getStaticPaths() {
 const tag = Astro.params.tag;
 const { posts } = Astro.props;
 ---
+
 <BaseLayout pageTitle={tag ? `Posts tagged: ${tag}` : 'Tag not found'}>
   {posts.length > 0 ? (
     <ul>
