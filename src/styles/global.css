@@ -17,9 +17,9 @@ License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
 --font-ui: "DotGothic16", sans-serif;
 --font-ascii: "VT32", sans-serif;
 
---page-bg: #0e0e0e;
+--page-bg: #000000;
 --text-color: #ffffff;
---header-bg: #0e0e0e;
+--header-bg: #000000;
 --header-text: #4AF262;
 
 
