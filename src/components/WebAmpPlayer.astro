@@ -1,0 +1,149 @@
+<div>
+  <button id="music-toggle">
+    🎵 WINAMP.EXE
+  </button>
+
+  <div id="webamp-container"></div>
+</div>
+
+<script>
+  let webamp;
+  let isOpen = false;
+
+  const button = document.getElementById("music-toggle");
+  const container = document.getElementById("webamp-container");
+
+  if (!button || !container) {
+    throw new Error("Webamp button or container is missing");
+  }
+
+  button.addEventListener("click", async () => {
+    if (!webamp) {
+      const { default: Webamp } = await import("webamp");
+
+      webamp = new Webamp({
+        initialTracks: [
+          {
+            metaData: {
+              artist: "DOOM - Bobby Prince (RIP)",
+              title: "E1M1 - At Doom's Gate",
+            },
+            url: "/music/E1M1 - At Doom's Gate.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "DOOM - Bobby Prince (RIP)",
+              title: "E1M4 - Kitchen Ace (And Taking Names)",
+            },
+            url: "/music/E1M4 - Kitchen Ace (And Taking Names).mp3",
+          },
+
+          {
+            metaData: {
+              artist: "DOOM - Bobby Prince (RIP)",
+              title: "E2M1 - I Sawed Te Demons",
+            },
+            url: "/music/E2M1 - I Sawed The Demons.mp3",
+          },
+
+
+          {
+            metaData: {
+              artist: "Dark Souls - Yuka Kitamura",
+              title: "Firelink Shrine",
+            },
+            url: "/music/Firelink Shrine.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "Disco Elysium - Sea Power",
+              title: "Instrument Of Surrender",
+            },
+            url: "/music/Instrument Of Surrender.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "Persona 3 - SHoji Meguro",
+              title: "Iwatodai Dorm -Reload-",
+            },
+            url: "/music/Iwatodai Dorm -Reload-.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "Nintedno 3DS - Kazumi Totaka",
+              title: "Mii Maker - Main Theme",
+            },
+            url: "/music/Mii Maker - Main Theme.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "Minecraft - C418",
+              title: "Moog City",
+            },
+            url: "/music/Moog City.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "Tweaker",
+              title: "Doom 3 Theme",
+            },
+            url: "/music/Music Credits.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "Sony",
+              title: "PS3 Startup",
+            },
+            url: "/music/PS3 Coldboot Multi.mp3",
+          },
+
+          {
+            metaData: {
+              artist: "Signalis - 1000 Eyes",
+              title: "Train Ride",
+            },
+            url: "/music/Train Ride.mp3",
+          },
+
+
+        ],
+
+        initialSkin: {
+          url: "/AMPBOY.wsz",
+        },
+
+      });
+
+      await webamp.renderWhenReady(container);
+      isOpen = true;
+      return;
+    }
+
+    container.style.display = isOpen ? "none" : "block";
+    isOpen = !isOpen;
+  });
+</script>
+
+<style>
+  #music-toggle {
+  background: transparent;
+  border: none;
+  color: white;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+  #webamp-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+  }
+</style>

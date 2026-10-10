@@ -1,8 +1,13 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
-/*import ThemeIcon from './ThemeIcon.astro';*/
+import WebAmpPlayer from './WebAmpPlayer.astro';
+
+
 ---
+
+
+
 
 <header>
 	<nav> 
@@ -14,6 +19,9 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
+
+			<WebAmpPlayer/>
+		
 		</div>
 		<div class="social-links">
 			<a href="https://github.com/sg1040" target="_blank">
@@ -120,4 +128,6 @@ import HeaderLink from './HeaderLink.astro';
 			transparent 10px 16px
 		);
 	}
+
+	
 </style>
