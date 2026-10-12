@@ -1,8 +1,6 @@
-<div>
-  <button id="music-toggle">
-    🎵 WINAMP.EXE
-  </button>
+<button id="music-toggle" type="button">WINAMP.EXE</button>
 
+<div id="webamp-overlay" hidden>
   <div id="webamp-container"></div>
 </div>
 
@@ -12,10 +10,13 @@
 
   const button = document.getElementById("music-toggle");
   const container = document.getElementById("webamp-container");
+  const overlay = document.getElementById("webamp-overlay");
 
-  if (!button || !container) {
+  if (!button || !container || !overlay) {
     throw new Error("Webamp button or container is missing");
   }
+
+  document.body.append(overlay);
 
   button.addEventListener("click", async () => {
     if (!webamp) {
@@ -25,7 +26,7 @@
         initialTracks: [
           {
             metaData: {
-              artist: "DOOM - Bobby Prince (RIP)",
+              artist: "DOOM - Bobby Prince",
               title: "E1M1 - At Doom's Gate",
             },
             url: "/music/E1M1 - At Doom's Gate.mp3",
@@ -33,7 +34,7 @@
 
           {
             metaData: {
-              artist: "DOOM - Bobby Prince (RIP)",
+              artist: "DOOM - Bobby Prince",
               title: "E1M4 - Kitchen Ace (And Taking Names)",
             },
             url: "/music/E1M4 - Kitchen Ace (And Taking Names).mp3",
@@ -41,7 +42,7 @@
 
           {
             metaData: {
-              artist: "DOOM - Bobby Prince (RIP)",
+              artist: "DOOM - Bobby Prince",
               title: "E2M1 - I Sawed Te Demons",
             },
             url: "/music/E2M1 - I Sawed The Demons.mp3",
@@ -116,18 +117,19 @@
         ],
 
         initialSkin: {
-          url: "/AMPBOY.wsz",
+          url: "/The_CATUBI.wsz",
         },
 
       });
 
-      await webamp.renderWhenReady(container);
+      overlay.hidden = false;
       isOpen = true;
+      await webamp.renderInto(container);
       return;
     }
 
-    container.style.display = isOpen ? "none" : "block";
     isOpen = !isOpen;
+    overlay.hidden = !isOpen;
   });
 </script>
 
@@ -141,9 +143,24 @@
 }
 
   #webamp-container {
+    position: relative;
+  }
+
+  #webamp-overlay {
     position: fixed;
-    top: 100px;
-    right: 20px;
-    z-index: 9999;
+    inset: 0;
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  #webamp-container {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<style is:global>
+  #webamp {
+    pointer-events: auto;
   }
 </style>
