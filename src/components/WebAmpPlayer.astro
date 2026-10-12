@@ -1,4 +1,4 @@
-<button id="music-toggle" type="button">WINAMP.EXE</button>
+<button id="music-toggle" type="button">winamp.exe</button>
 
 <div id="webamp-overlay" hidden>
   <div id="webamp-container"></div>
@@ -26,7 +26,7 @@
         initialTracks: [
           {
             metaData: {
-              artist: "DOOM - Bobby Prince",
+              artist: "DOOM - Bobby Prince (RIP)",
               title: "E1M1 - At Doom's Gate",
             },
             url: "/music/E1M1 - At Doom's Gate.mp3",
@@ -34,7 +34,7 @@
 
           {
             metaData: {
-              artist: "DOOM - Bobby Prince",
+              artist: "DOOM - Bobby Prince (RIP)",
               title: "E1M4 - Kitchen Ace (And Taking Names)",
             },
             url: "/music/E1M4 - Kitchen Ace (And Taking Names).mp3",
@@ -42,7 +42,7 @@
 
           {
             metaData: {
-              artist: "DOOM - Bobby Prince",
+              artist: "DOOM - Bobby Prince (RIP)",
               title: "E2M1 - I Sawed Te Demons",
             },
             url: "/music/E2M1 - I Sawed The Demons.mp3",
@@ -135,15 +135,28 @@
 
 <style>
   #music-toggle {
-  background: transparent;
-  border: none;
-  color: white;
-  font-family: monospace;
-  cursor: pointer;
-}
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5em;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    font-family: var(--font-ui);
+    color: var(--text-color);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  #music-toggle:hover {
+    background: var(--header-text);
+    color: var(--header-bg);
+  }
 
   #webamp-container {
     position: relative;
+    width: 100%;
+    height: 100%;
   }
 
   #webamp-overlay {
@@ -151,11 +164,6 @@
     inset: 0;
     z-index: 1000;
     pointer-events: none;
-  }
-
-  #webamp-container {
-    width: 100%;
-    height: 100%;
   }
 </style>
 

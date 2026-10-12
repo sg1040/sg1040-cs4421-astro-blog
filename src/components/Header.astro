@@ -20,8 +20,8 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 					File
 				</button>
 				<div class="dropdown-content" id="fileDropdown">
-					<a href="/">Home</a>
-					<a href="/blog">Blog</a>
+					<a href="/">home.html</a>
+					<a href="/blog">blog.html</a>
 				</div>
 			</div>
 
@@ -34,7 +34,7 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 					Disc
 				</button>
 				<div class="dropdown-content" id="discDropdown">
-					<p>Doom</p>
+					<p>doom.exe</p>
 					
 				</div>
 			</div>
@@ -100,41 +100,88 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 		font-size: 2rem;
 		color: var(--text-color);
 	}
+
 	nav {
 		align-items: center;
 		display: flex;
 		justify-content: flex-start;
 	}
+
 	nav a {
 		padding: 0.5em;
 		border-bottom: 1px solid transparent;
 		text-decoration: none;
-
-		nav h2 a {
-			color: var(--text-color);
-		}
+		color: var(--text-color);
 	}
+
 	nav a.active {
-		text-decoration: none;
 		border-bottom-color: var(--header-text);
 	}
-	.social-links {
-		flex: 1;
-		min-width: 0;
-		align-items: center;
+
+	.internal-links {
 		display: flex;
-		/*justify-content: space-between;*/
-	}
-	.social-links a {
 		align-items: center;
-		display: flex;
-		/*justify-content: space-between;*/
+		gap: 0.5rem;
 	}
-	@media (max-width: 720px) {
-		.social-links {
-			align-items: center;
-			display: none;
-		}
+
+	.dropdown {
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
+
+	.dropbtn {
+		background: none;
+		border: none;
+		padding: 0.5em;
+		font-size: 1.5rem;
+		font-family: var(--font-ui);
+		color: var(--text-color);
+		cursor: pointer;
+		border-bottom: 1px solid transparent;
+	}
+
+	.dropbtn:hover,
+	.dropbtn[aria-expanded="true"] {
+		border-bottom-color: var(--header-text);
+	}
+
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		top: calc(100% + 4px);
+		left: 0;
+		z-index: 100;
+		min-width: 12rem;
+		background: var(--header-bg);
+		border: 2px solid var(--header-text);
+	}
+
+	.dropdown-content.show {
+		display: block;
+	}
+
+	.dropdown-content a {
+		display: block;
+		padding: 0.5em;
+		font-size: 1.5rem;
+		font-family: var(--font-ui);
+		color: var(--text-color);
+		text-decoration: none;
+	}
+
+	.dropdown-content a:hover {
+		background: var(--header-text);
+		color: var(--header-bg);
+	}
+
+	.dropdown-content p {
+		display: block;
+		margin: 0;
+		padding: 0.5em;
+		font-size: 1.5rem;
+		font-family: var(--font-ui);
+		color: var(--text-color);
 	}
 
 	.internal-links a {
@@ -144,22 +191,16 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 		font-family: var(--font-ui);
 	}
 
-	.dropdown {
-		position: relative;
-		display: inline-block;
+	.social-links {
+		flex: 1;
+		min-width: 0;
+		align-items: center;
+		display: flex;
 	}
 
-	.dropdown-content {
-		display: none;
-		position: absolute;
-		top: 100%;
-		left: 0;
-		z-index: 1;
-		background: var(--header-bg);
-	}
-
-	.dropdown-content.show {
-		display: block;
+	.social-links a {
+		align-items: center;
+		display: flex;
 	}
 
 	.svg {
@@ -176,6 +217,12 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 			var(--header-text) 8px 10px,
 			transparent 10px 16px
 		);
+	}
+
+	@media (max-width: 720px) {
+		.social-links {
+			display: none;
+		}
 	}
 </style>
 
