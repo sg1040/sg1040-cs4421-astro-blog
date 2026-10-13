@@ -22,6 +22,9 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 				<div class="dropdown-content" id="fileDropdown">
 					<a href="/">home.html</a>
 					<a href="/blog">blog.html</a>
+					<a href="/gallery">gallery.html</a>
+
+
 				</div>
 			</div>
 
@@ -118,6 +121,8 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 		border-bottom-color: var(--header-text);
 	}
 
+	
+
 	.internal-links {
 		display: flex;
 		align-items: center;
@@ -131,25 +136,46 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 	}
 
 	.dropbtn {
-		background: none;
+		position: relative;
+		background-color: var(--page-bg);
 		border: none;
-		padding: 0.5em;
-		font-size: 1.5rem;
+		padding: 0.5em 1em;
+		font-size: 1rem;
 		font-family: var(--font-ui);
-		color: var(--text-color);
+		color: var(--header-text);
 		cursor: pointer;
 		border-bottom: 1px solid transparent;
 	}
 
-	.dropbtn:hover,
-	.dropbtn[aria-expanded="true"] {
-		border-bottom-color: var(--header-text);
+	.dropbtn::before,
+	.dropbtn::after {
+		position: absolute;
+		opacity: 0;
+	}
+
+	.dropbtn::before {
+		content: "[";
+		left: 0.3em;
+	}
+
+	.dropbtn::after {
+		content: "]";
+		right: 0.3em;
+	}
+
+	.dropbtn:hover::before,
+	.dropbtn:hover::after,
+	.dropbtn:focus-visible::before,
+	.dropbtn:focus-visible::after,
+	.dropbtn[aria-expanded="true"]::before,
+	.dropbtn[aria-expanded="true"]::after {
+		opacity: 1;
 	}
 
 	.dropdown-content {
 		display: none;
 		position: absolute;
-		top: calc(100% + 4px);
+		top: calc(100% + 1.15rem);
 		left: 0;
 		z-index: 100;
 		min-width: 12rem;
@@ -164,9 +190,9 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 	.dropdown-content a {
 		display: block;
 		padding: 0.5em;
-		font-size: 1.5rem;
+		font-size: 0.5rem;
 		font-family: var(--font-ui);
-		color: var(--text-color);
+		color: var(--header-text);
 		text-decoration: none;
 	}
 
@@ -179,15 +205,15 @@ import WebAmpPlayer from "./WebAmpPlayer.astro";
 		display: block;
 		margin: 0;
 		padding: 0.5em;
-		font-size: 1.5rem;
+		font-size: 1rem;
 		font-family: var(--font-ui);
-		color: var(--text-color);
+		color: var(--header-text);
 	}
 
 	.internal-links a {
 		position: relative;
 		align-items: center;
-		font-size: 1.5rem;
+		font-size: 1rem;
 		font-family: var(--font-ui);
 	}
 
