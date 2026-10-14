@@ -8,7 +8,10 @@ const photos = import.meta.glob<{ default: ImageMetadata }>(
 );
 ---
 
-<BaseLayout pageTitle="Gallery">
+<BaseLayout pageTitle="Gallery - A collection of my art and maybe photos">
+  <div class = "gallery-desc">
+    <p></p>
+  </div>
   <section class="justified-gallery">
     {
       Object.entries(photos).map(async ([, loadPhoto], index) => {
@@ -54,6 +57,7 @@ const photos = import.meta.glob<{ default: ImageMetadata }>(
     display: flex;
     flex-wrap: wrap;
     gap: var(--space);
+    border: 2px solid var(--header-text);
 
     a {
       flex-grow: calc(var(--width) * (100000 / var(--height)));
