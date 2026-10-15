@@ -22,7 +22,7 @@
     "@fontsource/jacquard-24": "^5.3.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "astro": "^7.3.5",
+    "astro": "^7.3.8",
     "jiti": "^2.7.0",
     "js-dos": "^8.5.1",
     "react": "^19.3.0",
