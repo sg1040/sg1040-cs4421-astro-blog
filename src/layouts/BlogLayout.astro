@@ -1,0 +1,152 @@
+---
+interface Props {
+    title: string;
+    date?: string;
+  category?: "blog" | "artlog";
+}
+const { title, date, category = "blog" } = Astro.props;
+---
+<div class = "crt-lines"></div>
+<article class="blog-file">
+  <div class="blog-header">
+    <span class="path">
+      C:\susie\{category}\{title.toLowerCase().replaceAll(" ", "-")}.txt
+    </span>
+  </div>
+
+  <div class="blog-content">
+    <p>{title}</p> {date && <div class="meta">{date}</div>}
+
+    <hr />
+
+    <slot />
+  </div>
+</article>
+
+<style>
+    .blog-file {
+  background: var(--grey-0);
+  color: var(--grey-900);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.blog-header {
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.path {
+  display: block;
+  color: var(--accent);
+}
+
+.meta {
+  color: var(--grey-700);
+  margin-bottom: 10px;
+}
+
+.blog-content {
+  color: var(--grey-900);
+}
+
+.blog-content h1 {
+  color: var(--accent);
+  font-size: 24px;
+  margin: 0 0 12px;
+  font-weight: normal;
+}
+
+.blog-content h2 {
+  color: var(--accent);
+  font-size: 20px;
+  margin: 20px 0 10px;
+  font-weight: normal;
+}
+
+.blog-content h3 {
+  color: var(--accent);
+  font-size: 18px;
+  margin: 16px 0 8px;
+  font-weight: normal;
+}
+
+.blog-content p {
+  margin: 0 0 16px;
+}
+
+.blog-content hr {
+  border: 0;
+  border-top: 1px solid var(--grey-450);
+  margin: 18px 0;
+}
+
+.blog-content a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.blog-content a:hover {
+  color: #ff8c00;
+}
+
+.blog-content ul,
+.blog-content ol {
+  padding-left: 20px;
+}
+
+.blog-content li {
+  margin-bottom: 4px;
+}
+
+.blog-content blockquote {
+  margin: 16px 0;
+  padding: 8px 12px;
+  background: var(--grey-150);
+  border-left: 4px solid var(--accent);
+}
+
+.blog-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 16px auto;
+
+  border-top: 5px solid var(--grey-50);
+  border-left: 5px solid var(--grey-50);
+  border-right: 5px solid var(--grey-400);
+  border-bottom: 5px solid var(--grey-400);
+}
+
+.blog-content figure {
+  margin: 20px 0;
+}
+
+.blog-content figcaption {
+  text-align: center;
+  color: var(--grey-700);
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.blog-content code {
+  background: var(--grey-150);
+  color: var(--accent);
+  padding: 2px 4px;
+}
+
+.blog-content pre {
+  padding: 12px;
+  overflow-x: auto;
+  background: var(--grey-0);
+
+  border-top: 5px solid var(--grey-50);
+  border-left: 5px solid var(--grey-50);
+  border-right: 5px solid var(--grey-400);
+  border-bottom: 5px solid var(--grey-400);
+
+  font-family: var(--font-ascii);
+  color: var(--grey-901);
+}
+</style>

@@ -1,0 +1,182 @@
+---
+import Head from "../components/Head.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Navigation from "../components/Navigation.astro";
+import Widgets from "../components/Widgets.astro";
+---
+
+<!doctype html>
+<html>
+    <div class = "crt-lines"></div>
+    <head>
+        <Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Navigation />
+
+        <div id="dynamic-content" class="container">
+            <div class="window">
+                <div class="window-content" style="padding:0;">
+                    <div
+                        class="popup"
+                        style="margin:0; border:none; border-top:1px solid #333636; border-left:1px solid #333636; border-right:1px solid #101212; border-bottom:1px solid #101212;"
+                    >
+                        <div class="popup-bar">localizer.exe</div>
+                        <div
+                            class="popup-content localizer-banner-layout"
+                        >
+                            <pre
+                                style="margin:0; font-size:8px; line-height:1.2; color:#c4c7c7; font-family:'Courier New',Courier,monospace; overflow-x:auto; max-width:100%;">                           
+    .oooooo.   ooooo   ooooo       .o.       ooooooooooooo ooooooooo.     .oooooo.     .oooooo.   ooo        ooooo 
+    d8P'  `Y8b  `888'   `888'      .888.      8'   888   `8 `888   `Y88.  d8P'  `Y8b   d8P'  `Y8b  `88.       .888' 
+   888           888     888      .8"888.          888       888   .d88' 888      888 888      888  888b     d'888  
+   888           888ooooo888     .8' `888.         888       888ooo88P'  888      888 888      888  8 Y88. .P  888  
+   888           888     888    .88ooo8888.        888       888`88b.    888      888 888      888  8  `888'   888  
+   `88b    ooo   888     888   .8'     `888.       888       888  `88b.  `88b    d88' `88b    d88'  8    Y     888  
+    `Y8bood8P'  o888o   o888o o88o     o8888o     o888o     o888o  o888o  `Y8bood8P'   `Y8bood8P'  o8o        o888o 
+  </pre>
+                            <img
+                                src="https://media.tenor.com/1vvAs34ZL8EAAAAi/toro-toro-inoue.gif"
+                                style="width:70px;height:70px; align-self:center; flex-shrink:0;"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticker">
+                <div class="ticker-track">
+                    <span class="ticker-text">
+                        <span style="color:var(--accent);">IN DEVELOPMENT -</span>
+                        https://d14nr7zoyjto77.cloudfront.net/
+                        <span style="color:var(--accent);">- IN DEVELOPMENT</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="window">
+                <div class="window-header">CHATROOM</div>
+                <div class="window-content" style="padding:10px;">
+
+                    <div class="window-chatroom-content">
+                        <img src ="https://submissions.buzzly.art/IMAGE/791cb26b-f366-452c-804c-f53cbfee3515_1a53245a-ab7d-4834-9cac-f36371b68976.gif" width = "400px">
+                    </div>
+                    
+                </div>
+            </div>
+
+            <style>
+                @keyframes hcur {
+                    0%,
+                    100% {
+                        opacity: 1;
+                    }
+                    50% {
+                        opacity: 0;
+                    }
+                }
+            </style>
+
+            <div class="ticker">
+                <div class="ticker-track">
+                    <img
+                        src="https://artwork.neocities.org/stamps/dccz9p2-542e2c6e-477f-4539-a8d6-2f9c1e2d2fba.gif"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/bw/tabletuser.png"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/bw/iheartphysicalmedia.png"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/bw/ilovemusic.gif"
+                    />
+                    <img
+                        src="https://media1.tenor.com/m/_4lk9kh8WIsAAAAd/signalis-game.gif"
+                    />
+                    <img
+                        src="https://favicons.neocities.org/images/boxes/radiodontid.png"
+                    />
+                    <img src="https://y2k.neocities.org/stamps/tumblr_inline_pbucbotQK61w0jw8b_1280.png" />
+                    <img
+                        src="https://file.garden/aC4o-8tWnhjJhdaO/j13.png"
+                    />
+                    <img src="https://y2k.neocities.org/stamps2/hill.png" />
+                    <img
+                        src="https://file.garden/Z79xk6Elunno9B45/stamps/stampeater.webp"
+                    />
+                    <img
+                        src="https://raining-starss.neocities.org/pastel%20(4).png"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/green/serialexperimentslain.gif"
+                    />
+                </div>
+            </div>
+
+            <div class="window">
+                <div class="window-header">
+                    <span style="margin:0 auto;">GET YAPPING</span>
+                </div>
+                <div class="window-chatroom-content">
+                    
+                        <img src = "https://media1.tenor.com/m/ZL7cozaJo1QAAAAd/stalker.gif" width="1250px">
+                    
+                        </div>
+                        </div>
+                        
+                    
+                
+            
+
+            <!--<div class="window">
+                <div class="window-header">
+                    <span style="margin:0 auto;">VISIT MY NEIGHBORS</span>
+                </div>
+                <div class="window-content">
+                    <div class="neighbours-box">
+                        <a href="https://bisq.neocities.org" target="_blank">
+                            <img
+                                src="https://bisq.neocities.org/images/sitebuttons/bisq.png"
+                                alt="bisq"
+                            />
+                        </a>
+                        <a
+                            href="https://houseofdollbones.neocities.org"
+                            target="_blank"
+                        >
+                            <img
+                                src="https://houseofdollbones.neocities.org/images/Icons/dollbonesbutton.png"
+                                alt="dollbones"
+                            />
+                        </a>
+                        <a href="https://n20mp.nekoweb.org" target="_blank">
+                            <img
+                                src="https://n20mp.nekoweb.org/imgs/d/button.gif"
+                                alt="n20mp"
+                            />
+                        </a>
+                        <a
+                            href="https://starzrqp.neocities.org"
+                            target="_blank"
+                        >
+                            <img
+                                src="https://starzrqp.neocities.org/assets/starzrqp.webp"
+                                alt="starzrqp"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="ticker">
+                <div class="ticker-track">
+                    <span class="ticker-text">
+                        © 2026 Susie Gurrie - insert cool message here
+                    </span>
+                </div>
+            </div>
+            </div>
+        <Widgets />
+    </body>
+</html>

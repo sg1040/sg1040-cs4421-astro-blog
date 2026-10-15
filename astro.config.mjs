@@ -33,18 +33,5 @@ export default defineConfig({
                 ],
             },
         },
-        
-        {
-            provider: fontProviders.google(),
-            name: 'Jacquard 24',
-            cssVariable: '--font-jacquard24',
-            
-          },
-          {
-            provider: fontProviders.google(),
-            name: 'DotGothic16',
-            cssVariable: '--font-dotgothic16',
-            
-          },
     ],
 });
