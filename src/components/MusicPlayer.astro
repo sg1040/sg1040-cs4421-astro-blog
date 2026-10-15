@@ -1,0 +1,305 @@
+---
+
+---
+
+<div class="music-player" data-music-player>
+  <div class="songtitle" aria-live="polite">
+    <span class="songtitle-text"></span>
+  </div>
+
+  <div class="controls" aria-label="Music player controls">
+    <button type="button" data-action="prev" aria-label="Previous track">|&lt;</button>
+    <button type="button" data-action="play" aria-label="Play">Play</button>
+    <button type="button" data-action="next" aria-label="Next track">&gt;|</button>
+  </div>
+
+  <div class="seeking">
+    <span class="current-time">0:00</span>
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value="0"
+      step="0.1"
+      class="seek-slider"
+      aria-label="Seek through track"
+    />
+    <span class="total-duration">0:00</span>
+  </div>
+
+  <audio preload="metadata"></audio>
+  <p class="player-error" role="alert" hidden></p>
+</div>
+
+<script>
+  const trackList = [
+    {
+      name: "PS3 Startup",
+      path: "/music/PS3 Coldboot Multi.mp3",
+    },
+    {
+      name: "Shin Megami Tensei 3 - Ikebukuro",
+      path: "public/music/Ikebukuro-SMT3.mp3",
+    },
+    {
+      name: "Resident Evil 4 - Serenity.",
+      path: "public/music/Resident Evil 4 Soundtrack Serenity.mp3",
+    },
+    {
+      name: "Pokemon Black/White - Driftveil City",
+      path: "/music/Driftveil City.mp3",
+    },
+    {
+      name: "Cavestory - Moonsong",
+      path: "public/music/Moonsong.mp3",
+    },
+    {
+      name: "Persona 3 - Iwatodai Dorm",
+      path: "/music/Iwatodai Dorm -Reload-.mp3",
+    },
+    {
+      name: "Half Life Electric Guitar Ambience",
+      path: "/music/Half-Life OST — Electric Guitar Ambience (Extended Mix).mp3",
+    },
+    {
+      name: "Dark Souls - Firelink Shrine",
+      path: "/music/Firelink Shrine.mp3",
+    },
+    {
+      name: "Doom - At Doom's Gate",
+      path: "/music/E1M1 - At Doom's Gate.mp3",
+    },
+    {
+      name: "Disco Elysium - Instrument Of Surrender",
+      path: "/music/Instrument Of Surrender.mp3",
+    },
+    {
+      name: "ULTRAKILL - Castle Vein",
+      path: "public/music/Castle Vein.mp3",
+    },
+    {
+      name: "Signalis - Train Ride",
+      path: "/music/Train Ride.mp3",
+    },
+    {
+      name: "Portal - Radio Tune",
+      path: "/music/Portal Radio Tune.mp3",
+    },
+    {
+      name: "Minecraft - Aria Math",
+      path: "/music/Aria Math.mp3",
+    },
+    {
+      name: "Mii Maker 3DS - Main Theme",
+      path: "/music/Mii Maker - Main Theme.mp3",
+    },
+    {
+      name: "Minecraft - Moog City",
+      path: "/music/Moog City.mp3",
+    },
+    {
+      name: "Tweaker - Doom 3 Theme",
+      path: "/music/Music Credits.mp3",
+    },
+    
+    
+  ];
+
+  document.querySelectorAll("[data-music-player]").forEach((player) => {
+    const audio = player.querySelector("audio");
+    const title = player.querySelector(".songtitle-text");
+    const playButton = player.querySelector('[data-action="play"]');
+    const seekSlider = player.querySelector(".seek-slider");
+    const currentTime = player.querySelector(".current-time");
+    const totalDuration = player.querySelector(".total-duration");
+    const errorMessage = player.querySelector(".player-error");
+
+    if (
+      !(audio instanceof HTMLAudioElement) ||
+      !(title instanceof HTMLElement) ||
+      !(playButton instanceof HTMLButtonElement) ||
+      !(seekSlider instanceof HTMLInputElement) ||
+      !(currentTime instanceof HTMLElement) ||
+      !(totalDuration instanceof HTMLElement) ||
+      !(errorMessage instanceof HTMLParagraphElement)
+    ) {
+      throw new Error("Music player markup is incomplete");
+    }
+
+    let trackIndex = 0;
+
+    const formatTime = (seconds) => {
+      if (!Number.isFinite(seconds)) return "0:00";
+      const minutes = Math.floor(seconds / 60);
+      const remainder = Math.floor(seconds % 60).toString().padStart(2, "0");
+      return `${minutes}:${remainder}`;
+    };
+
+    const loadTrack = (index) => {
+      trackIndex = (index + trackList.length) % trackList.length;
+      audio.src = trackList[trackIndex].path;
+      title.textContent = `${trackIndex + 1} of ${trackList.length}: ${trackList[trackIndex].name}`;
+      seekSlider.value = "0";
+      currentTime.textContent = "0:00";
+      totalDuration.textContent = "0:00";
+      errorMessage.hidden = true;
+      audio.load();
+    };
+
+    const playTrack = async () => {
+      try {
+        await audio.play();
+        errorMessage.hidden = true;
+      } catch (error) {
+        errorMessage.textContent = "This track could not be played. Check that the audio file is available.";
+        errorMessage.hidden = false;
+        console.error("Music track playback failed:", error);
+      }
+    };
+
+    const changeTrack = (offset) => {
+      loadTrack(trackIndex + offset);
+      void playTrack();
+    };
+
+    player.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest("button[data-action]");
+      if (!(button instanceof HTMLButtonElement)) return;
+
+      switch (button.dataset.action) {
+        case "play":
+          if (audio.paused) void playTrack();
+          else audio.pause();
+          break;
+        case "prev":
+          changeTrack(-1);
+          break;
+        case "next":
+          changeTrack(1);
+          break;
+      }
+    });
+
+    audio.addEventListener("play", () => {
+      playButton.textContent = "Pause";
+      playButton.setAttribute("aria-label", "Pause");
+    });
+
+    audio.addEventListener("pause", () => {
+      playButton.textContent = "Play";
+      playButton.setAttribute("aria-label", "Play");
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      if (Number.isFinite(audio.duration)) {
+        seekSlider.value = String((audio.currentTime / audio.duration) * 100);
+      }
+      currentTime.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener("loadedmetadata", () => {
+      totalDuration.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener("ended", () => changeTrack(1));
+
+    audio.addEventListener("error", () => {
+      errorMessage.textContent = "Could not load this track. Check that its audio file exists.";
+      errorMessage.hidden = false;
+    });
+
+    seekSlider.addEventListener("input", () => {
+      if (Number.isFinite(audio.duration)) {
+        audio.currentTime = audio.duration * (Number(seekSlider.value) / 100);
+      }
+    });
+
+    loadTrack(trackIndex);
+  });
+</script>
+
+<style>
+
+    
+
+
+  .music-player {
+    width: 200px;
+    border: 2px solid var(--grey-450);
+    background: var(--grey-0);
+    color: var(--grey-900);
+  }
+
+  .songtitle {
+  overflow: hidden;
+  padding: 5px;
+  border-bottom: 2px solid var(--accent);
+  white-space: nowrap;
+  position: relative;
+}
+
+.songtitle-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 8px 5px;
+    background: var(--grey-250);
+  }
+
+  .controls button {
+    border: 0;
+    padding: 2px 6px;
+    background: transparent;
+    color: var(--accent);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .controls button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .seeking {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 5px;
+    background: var(--grey-250);
+  }
+
+  .current-time,
+  .total-duration {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .seek-slider {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .player-error {
+    margin: 0;
+    padding: 5px;
+    color: var(--accent);
+    font-size: 0.85em;
+  }
+</style>

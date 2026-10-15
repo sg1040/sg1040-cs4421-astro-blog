@@ -1,0 +1,383 @@
+---
+import { Image } from "astro:assets";
+import Head from "../components/Head.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Navigation from "../components/Navigation.astro";
+import Widgets from "../components/Widgets.astro";
+
+const photos = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/gallery/*.{jpg,jpeg,png,webp}",
+);
+
+const photoDetails: Record<
+  string,
+  { title: string; alt: string; year?: string }
+> = {
+  "art-jillvalentine.png": {
+    title: "Jill Valentine portrait",
+    alt: "Digital artwork of Jill Valentine",
+  },
+  "art-soundofmetal.png": {
+    title: "Sound of Metal Study",
+    alt: "Digital artwork of Jill Valentine",
+  },
+  "art-lc-1.jpg": {
+    title: "First page of LC art project",
+    alt: "leon",
+  },
+  "art-lc-2.jpg": {
+    title: "Second page of LC art project",
+    alt: "leon",
+  },
+  "art-lc-3.jpg": {
+    title: "Third page of LC art project",
+    alt: "leon",
+  },
+  "art-leon.jpg": {
+    title: "Sketch of og re4 Leon",
+    alt: "leon",
+  },
+  "art-re-sketches.jpg": {
+    title: "Sketches of all the Leons (except re6) and Grace",
+    alt: "leon",
+  },
+  "art-horse-1.jpg": {
+    title: "Sketches of my rdr2 horse, the perlino andalasian",
+    alt: "leon",
+  },
+  "art-horse-2.jpg": {
+    title: "Realised that drawing horses is fun as hell",
+    alt: "leon",
+  },
+  "art-horse-3.jpg": {
+    title: "So many horsies",
+    alt: "leon",
+  },
+  "art-rostimir.png": {
+    title: "Rostimir - artfight attack",
+    alt: "leon",
+  },
+  "art-doom-sketch.png": {
+    title: "Old sketch of Doom Guy",
+    alt: "doom guy sketch",
+  },
+  "art-drow-fella.png": {
+    title: "DnD character portrait",
+    alt: "dnd char portrait",
+  },
+  "art-bg-fail.png": {
+    title: "Background attempt with DnD character",
+    alt: "leon",
+  },
+  "art-dnd-chars.png": {
+    title: "DnD character sketches",
+    alt: "dnd char sketches",
+  },
+};
+
+const galleryItems = (
+await Promise.all(
+  Object.entries(photoDetails).map(async ([filename, details], index) => {
+    const path = Object.keys(photos).find((p) => p.endsWith(filename));
+
+    if (!path) {
+      console.warn(`Missing gallery image: ${filename}`);
+      return null;
+    }
+
+    const { default: photo } = await photos[path]();
+
+    return {
+      photo,
+      details,
+      index,
+      filename,
+    };
+  }),
+)
+).filter(Boolean);
+---
+
+<!doctype html>
+<html>
+  <div class="crt-lines"></div>
+  <head>
+    <Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Navigation />
+
+    <div id="dynamic-content" class="container">
+      <div class="window">
+        <div class="window-content" style="padding:0;">
+          <div
+            class="popup"
+            style="margin:0; border:none; border-top:1px solid #333636; border-left:1px solid #333636; border-right:1px solid #101212; border-bottom:1px solid #101212;"
+          >
+            <div class="popup-bar">localizer.exe</div>
+            <div class="popup-content localizer-banner-layout">
+              <pre
+                style="margin:0; font-size:8px; line-height:1.2; color:#c4c7c7; font-family:'Courier New',Courier,monospace; overflow-x:auto; max-width:100%;">                          
+       .o.       ooooooooo.   ooooooooooooo        .oooooo.          .o.       ooooo        ooooo        oooooooooooo ooooooooo.   oooooo   oooo 
+      .888.      `888   `Y88. 8'   888   `8       d8P'  `Y8b        .888.      `888'        `888'        `888'     `8 `888   `Y88.  `888.   .8'  
+     .8"888.      888   .d88'      888           888               .8"888.      888          888          888          888   .d88'   `888. .8'   
+    .8' `888.     888ooo88P'       888           888              .8' `888.     888          888          888oooo8     888ooo88P'     `888.8'    
+   .88ooo8888.    888`88b.         888           888     ooooo   .88ooo8888.    888          888          888    "     888`88b.        `888'     
+  .8'     `888.   888  `88b.       888           `88.    .88'   .8'     `888.   888       o  888       o  888       o  888  `88b.       888      
+ o88o     o8888o o888o  o888o     o888o           `Y8bood8P'   o88o     o8888o o888ooooood8 o888ooooood8 o888ooooood8 o888o  o888o     o888o 
+</pre>
+              <img
+                src="https://99gifshop.neocities.org/items/2/nnr214.gif"
+                style="width:70px;height:70px; align-self:center; flex-shrink:0;"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ticker">
+        <div class="ticker-track">
+          <span class="ticker-text">
+            <span style="color:var(--accent);">IN DEVELOPMENT -</span>
+            https://d14nr7zoyjto77.cloudfront.net/
+            <span style="color:var(--accent);">- IN DEVELOPMENT</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="window">
+        <div class="window-header">
+          C:\susie\home\gallery\art
+          <div class="window-buttons" aria-hidden="true">
+            <div class="win-btn">_</div>
+            <div class="win-btn">▢</div>
+            <div class="win-btn">X</div>
+          </div>
+        </div>
+        <div class="window-content gallery-window-content">
+          <section class="justified-gallery">
+            {
+              galleryItems.map(({ photo, details, index }) => {
+                return (
+                  <button
+                    type="button"
+                    class="gallery-thumbnail"
+                    data-gallery-image
+                    data-full-src={photo.src}
+                    data-title={details.title}
+                    data-alt={details.alt}
+                    data-year={details.year}
+                    aria-label={`View ${details.title}`}
+                    style={`--width: ${photo.width}; --height: ${photo.height};`}
+                  >
+                    <Image
+                      src={photo}
+                      alt={details.alt}
+                      format="webp"
+                      height={400}
+                      loading={index < 20 ? "eager" : "lazy"}
+                    />
+                  </button>
+                );
+              })
+            }
+          </section>
+        </div>
+      </div>
+
+      <dialog
+        class="window gallery-lightbox"
+        id="gallery-lightbox"
+        aria-label="Image viewer"
+      >
+        <div class="window-header">
+          C:\susie\home\gallery\image-viewer
+          <div class="window-buttons">
+            <button
+              class="win-btn gallery-lightbox-close"
+              type="button"
+              aria-label="Close image viewer">X</button
+            >
+          </div>
+        </div>
+        <div class="gallery-lightbox-content">
+          <figure class="gallery-lightbox-figure">
+            <img class="gallery-lightbox-image" src="" alt="" />
+            <figcaption class="gallery-lightbox-caption">
+              <strong class="gallery-lightbox-title"></strong>
+              <span class="gallery-lightbox-year" hidden></span>
+            </figcaption>
+          </figure>
+        </div>
+      </dialog>
+
+      <style>
+        @keyframes hcur {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+        }
+      </style>
+
+      <div class="ticker">
+        <div class="ticker-track">
+          <span class="ticker-text">
+            © 2026 Susie Gurrie - insert cool message here
+          </span>
+        </div>
+      </div>
+    </div>
+    <Widgets />
+
+    <script>
+      const gallery = document.querySelector(".justified-gallery");
+      const lightbox =
+        document.querySelector<HTMLDialogElement>("#gallery-lightbox");
+
+      if (gallery && lightbox) {
+        const image = lightbox.querySelector<HTMLImageElement>(
+          ".gallery-lightbox-image",
+        );
+        const title = lightbox.querySelector<HTMLElement>(
+          ".gallery-lightbox-title",
+        );
+        const year = lightbox.querySelector<HTMLElement>(
+          ".gallery-lightbox-year",
+        );
+        const closeButton = lightbox.querySelector<HTMLButtonElement>(
+          ".gallery-lightbox-close",
+        );
+
+        gallery.addEventListener("click", (event) => {
+          const target = event.target;
+          if (!(target instanceof Element)) return;
+
+          const thumbnail = target.closest<HTMLButtonElement>(
+            "[data-gallery-image]",
+          );
+          if (!thumbnail || !image || !title || !year) return;
+
+          image.src = thumbnail.dataset.fullSrc ?? "";
+          image.alt = thumbnail.dataset.alt ?? "";
+          title.textContent = thumbnail.dataset.title ?? "";
+          year.textContent = thumbnail.dataset.year ?? "";
+          year.hidden = !thumbnail.dataset.year;
+          lightbox.showModal();
+        });
+
+        closeButton?.addEventListener("click", () => lightbox.close());
+        lightbox.addEventListener("click", (event) => {
+          if (event.target === lightbox) lightbox.close();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && lightbox.open) lightbox.close();
+        });
+      }
+    </script>
+
+    <style>
+      .justified-gallery {
+        --padding: 10px;
+        --space: 10px;
+        --min-height: clamp(200px, 20vw, 400px);
+
+        padding: var(--padding);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space);
+      }
+
+      .gallery-window-content {
+        background: var(--grey-0);
+      }
+
+      .gallery-thumbnail {
+        appearance: none;
+        flex-grow: calc(var(--width) * (100000 / var(--height)));
+        flex-basis: calc(var(--min-height) * (var(--width) / var(--height)));
+        aspect-ratio: var(--width) / var(--height);
+        min-width: 0;
+        overflow: hidden;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: zoom-in;
+      }
+
+      .gallery-thumbnail img {
+        display: block;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+
+      .gallery-thumbnail:focus-visible {
+        outline: 3px solid var(--outline);
+        outline-offset: 2px;
+        transform: scale(1.05);
+        z-index: 1;
+        border-radius: 2px;
+        box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .justified-gallery::after {
+        content: " ";
+        flex-grow: 1000000000;
+      }
+
+      .gallery-lightbox {
+        position: relative;
+        width: min(1000px, calc(100vw - 32px));
+        box-sizing: border-box;
+        max-width: none;
+        max-height: calc(100dvh - 32px);
+        padding: 0;
+        color: var(--grey-900);
+      }
+
+      .gallery-lightbox::backdrop {
+        background: rgba(0, 0, 0, 0.88);
+      }
+
+      .gallery-lightbox-close {
+        appearance: none;
+        padding: 0;
+        color: var(--grey-900);
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .gallery-lightbox-content {
+        padding: 14px;
+        background: var(--grey-0);
+      }
+
+      .gallery-lightbox-figure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin: 0;
+      }
+
+      .gallery-lightbox-image {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100dvh - 140px);
+        object-fit: contain;
+      }
+
+      .gallery-lightbox-caption {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        text-align: center;
+      }
+    </style>
+  </body>
+</html>
