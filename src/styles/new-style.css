@@ -41,7 +41,6 @@
     --black: var(--grey-0);
     --white: var(--grey-1000);
 
-
 }
 
 @font-face {
@@ -441,7 +440,7 @@ body>aside {
 
 .window-chatroom-content {
     text-align: center;
-    
+
 }
 
 .popup {
@@ -508,6 +507,10 @@ body>aside {
     box-sizing: border-box;
 }
 
+/* =========================
+   BASE TICKERS
+========================= */
+
 .ticker {
     background: var(--grey-0);
     overflow: hidden;
@@ -520,54 +523,97 @@ body>aside {
 }
 
 .ticker-track {
-    display: inline-flex;
-    align-items: center;
-    gap: 20px;
-    padding-left: 100%;
-    animation: ticker-move 18s linear infinite;
-}
-
-.ticker-track img {
-    width: 88px;
-    height: 31px;
-    image-rendering: pixelated;
+    display: flex;
+    width: max-content;
 }
 
 .ticker-text {
-    font-size: 18px;
-    font-weight: normal;
     white-space: nowrap;
-    line-height: 1;
 }
 
-.ticker-about .ticker-track {
-    align-items: center;
+/* =========================
+   FAST HORIZONTAL
+   (site link + footer)
+========================= */
+
+.fast-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: fastTickerScroll 10s linear infinite;
 }
 
-.ticker-about .ticker-track img {
+@keyframes fastTickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+}
+
+/* =========================
+   MEDIUM HORIZONTAL
+   (stamp ticker)
+========================= */
+
+.medium-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: mediumTickerScroll 25s linear infinite;
+}
+.medium-ticker-track img{
+    height: 62px;
     width: auto;
-    height: 30px;
+    padding-left: 2px;
     image-rendering: pixelated;
 }
 
-.ticker-about2 .ticker-track {
-    align-items: center;
+@keyframes mediumTickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
-.ticker-about2 .ticker-track img {
+/* =========================
+   NAV IMAGE TICKER
+========================= */
+
+.nav-ticker-track {
+    display: flex;
+    width: max-content;
+    animation: navTickerScroll 70s linear infinite;
+}
+
+.nav-ticker-track img {
+    height: 300px;
     width: auto;
-    height: auto;
-    max-height: 48px;
-    image-rendering: pixelated;
+    flex-shrink: 0;
 }
 
-@keyframes ticker-move {
+@keyframes navTickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* =========================
+   VERTICAL WIDGET TICKER
+========================= */
+
+.widget-ticker {
+    height: 370px;
+    overflow: hidden;
+    position: relative;
+}
+
+.widget-ticker-track {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    animation: widgetTickerScroll 20s linear infinite;
+}
+
+@keyframes widgetTickerScroll {
     from {
-        transform: translateX(0);
+        transform: translateY(0);
     }
 
     to {
-        transform: translateX(-100%);
+        transform: translateY(-50%);
     }
 }
 
@@ -1031,6 +1077,9 @@ body>aside {
         color: var(--grey-900);
 
         font-family: var(--font-ui);
+
+        
+
         font-size: 18px;
 
         padding: 6px 18px;
@@ -1048,9 +1097,8 @@ body>aside {
 
         min-width: 180px;
 
-        transition:
-            color 0.1s,
-            transform 0.1s;
+        transition: color 0.1s,
+        transform 0.1s;
 
         text-transform: uppercase;
     }
