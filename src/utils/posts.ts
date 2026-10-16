@@ -1,21 +1,27 @@
-type AstroPostComponent = typeof import("../posts/blog/doom-review.astro")["default"];
+type AstroPostModule = {
+  default: AstroComponentFactory;
+  title?: string;
+  date?: string;
+};
 
 export type PostCategory = "blog" | "artlog";
 
 export interface PostEntry {
   slug: string;
   title: string;
+  date?: string;
   href: string;
   component: AstroComponentFactory;
 }
 
-const blogModules = import.meta.glob<AstroPostComponent>(
+const blogModules = import.meta.glob<AstroPostModule>(
   "../posts/blog/*.astro",
-  { eager: true, import: "default" },
+  { eager: true },
 );
-const artlogModules = import.meta.glob<AstroPostComponent>(
+
+const artlogModules = import.meta.glob<AstroPostModule>(
   "../posts/artlog/*.astro",
-  { eager: true, import: "default" },
+  { eager: true },
 );
 
 export function getPosts(category: PostCategory): PostEntry[] {
@@ -23,14 +29,29 @@ export function getPosts(category: PostCategory): PostEntry[] {
   const route = category === "blog" ? "/blog" : "/art-log";
 
   return Object.entries(modules)
-    .map(([path, component]) => {
-      const slug = path.split("/").at(-1)?.replace(/\.astro$/, "") ?? "";
-      const title = slug
+    .map(([path, module]) => {
+      const slug =
+        path.split("/").at(-1)?.replace(/\.astro$/, "") ?? "";
+
+      const fallbackTitle = slug
         .split(/[-_]/)
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .map(
+          (word) =>
+            word.charAt(0).toUpperCase() + word.slice(1),
+        )
         .join(" ");
 
-      return { slug, title, href: `${route}/${slug}/`, component };
+      return {
+        slug,
+        title: module.title ?? fallbackTitle,
+        date: module.date,
+        href: `${route}/${slug}/`,
+        component: module.default,
+      };
     })
-    .sort((first, second) => first.title.localeCompare(second.title));
+    .sort(
+      (first, second) =>
+        new Date(second.date ?? 0).getTime() -
+        new Date(first.date ?? 0).getTime(),
+    );
 }

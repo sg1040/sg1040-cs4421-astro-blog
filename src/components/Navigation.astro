@@ -15,9 +15,10 @@ import { Image } from "astro:assets";
   <ul class="menu-list">
     <li class="submenu-title">── ✦ MAIN ✦ ──</li>
     <li><a href="/">HOME</a></li>
+    <li><a href="/chatroom/">CHATROOM</a></li>
+    <li class="submenu-title">── ✦ BLOGS ✦ ──</li>
     <li><a href="/blog/">BLOG</a></li>
     <li><a href="/art-log/">ARTLOG</a></li>
-    <li><a href="/chatroom/">CHATROOM</a></li>
     <li class="submenu-title">── ✦ GALLERIES ✦ ──</li>
     <li><a href="/art-gallery/">ART</a></li>
     <li><a href="/photo-gallery/">PHOTOS</a></li>
@@ -25,13 +26,13 @@ import { Image } from "astro:assets";
     <li><a href="/doom/">DOOM</a></li>
   </ul>
 
-  <br /><br />
+  
 
   <div class="widget-section">
     <div class="widget-section-title">IMAGES OF THE MONTH</div><br />
 
     <div class="ticker">
-      <div class="ticker-track">
+      <div class="ticker-track nav-ticker-track">
 
         <img 
         src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/niko-homophobic.jpg"
@@ -64,7 +65,60 @@ import { Image } from "astro:assets";
         src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/hiruki.png"
         >
         <img 
-        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/horse.jpg"
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/irrigation.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/l-word-fog.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/love.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/make-site.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/mongolia.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/mountain-guy.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/peace.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/wolf-stomp.jpg"
+        >
+<!--DUPES -->
+        
+<img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/niko-homophobic.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/3ds-ouch.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/aww.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/babel.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/be-bird-with-mama.png"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/big-seal.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/brother-calm.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/computah.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/death.jpg"
+        >
+        <img 
+        src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/hiruki.png"
         >
         <img 
         src = "https://file.garden/akY52Mebcxapr9RG/misc/images%20of%20month/irrigation.jpg"
@@ -96,69 +150,4 @@ import { Image } from "astro:assets";
   </div>
 </aside>
 
-<style>
-  
-.ticker {
-    background: var(--grey-0);
-    overflow: hidden;
-    padding: 4px 0;
-    margin: 4px 0;
-    border-top: 5px solid var(--grey-50);
-    border-left: 5px solid var(--grey-50);
-    border-right: 5px solid var(--grey-400);
-    border-bottom: 5px solid var(--grey-400);
-}
 
-.ticker-track {
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    padding-left: 100%;
-    animation: ticker-move 60s linear infinite;
-}
-
-.ticker-track img {
-    height: 300px;
-    width: auto;
-    image-rendering: pixelated;
-}
-
-.ticker-text {
-    font-size: 18px;
-    font-weight: normal;
-    white-space: nowrap;
-    line-height: 1;
-}
-
-.ticker-about .ticker-track {
-    align-items: center;
-}
-
-.ticker-about .ticker-track img {
-    width: auto;
-    height: 200px;
-    image-rendering: pixelated;
-}
-
-.ticker-about2 .ticker-track {
-    align-items: center;
-}
-
-.ticker-about2 .ticker-track img {
-    width: auto;
-    height: auto;
-    max-height: 200px;
-    image-rendering: pixelated;
-}
-
-@keyframes ticker-move {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-</style>

@@ -7,10 +7,16 @@
     <span class="songtitle-text"></span>
   </div>
 
-  <div class="controls" aria-label="Music player controls">
-    <button type="button" data-action="prev" aria-label="Previous track">|&lt;</button>
-    <button type="button" data-action="play" aria-label="Play">Play</button>
-    <button type="button" data-action="next" aria-label="Next track">&gt;|</button>
+  <div class="controls">
+    <button type="button" data-action="prev" aria-label="Previous track">
+      &lt;
+    </button>
+
+    <button type="button" data-action="play" aria-label="Play"> Play </button>
+
+    <button type="button" data-action="next" aria-label="Next track">
+      &gt;
+    </button>
   </div>
 
   <div class="seeking">
@@ -101,8 +107,6 @@
       name: "Tweaker - Doom 3 Theme",
       path: "/music/Music Credits.mp3",
     },
-    
-    
   ];
 
   document.querySelectorAll("[data-music-player]").forEach((player) => {
@@ -131,7 +135,9 @@
     const formatTime = (seconds) => {
       if (!Number.isFinite(seconds)) return "0:00";
       const minutes = Math.floor(seconds / 60);
-      const remainder = Math.floor(seconds % 60).toString().padStart(2, "0");
+      const remainder = Math.floor(seconds % 60)
+        .toString()
+        .padStart(2, "0");
       return `${minutes}:${remainder}`;
     };
 
@@ -151,7 +157,8 @@
         await audio.play();
         errorMessage.hidden = true;
       } catch (error) {
-        errorMessage.textContent = "This track could not be played. Check that the audio file is available.";
+        errorMessage.textContent =
+          "This track could not be played. Check that the audio file is available.";
         errorMessage.hidden = false;
         console.error("Music track playback failed:", error);
       }
@@ -205,7 +212,8 @@
     audio.addEventListener("ended", () => changeTrack(1));
 
     audio.addEventListener("error", () => {
-      errorMessage.textContent = "Could not load this track. Check that its audio file exists.";
+      errorMessage.textContent =
+        "Could not load this track. Check that its audio file exists.";
       errorMessage.hidden = false;
     });
 
@@ -220,10 +228,6 @@
 </script>
 
 <style>
-
-    
-
-
   .music-player {
     width: 200px;
     border: 2px solid var(--grey-450);
@@ -232,35 +236,33 @@
   }
 
   .songtitle {
-  overflow: hidden;
-  padding: 5px;
-  border-bottom: 2px solid var(--accent);
-  white-space: nowrap;
-  position: relative;
-}
-
-.songtitle-text {
-  display: inline-block;
-  padding-left: 100%;
-  animation: marquee 15s linear infinite;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
+    overflow: hidden;
+    padding: 5px;
+    border-bottom: 2px solid var(--accent);
+    white-space: nowrap;
+    position: relative;
   }
 
-  to {
-    transform: translateX(-100%);
+  .songtitle-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 5s linear infinite;
   }
-}
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
+  }
 
   .controls {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    padding: 8px 5px;
-    background: var(--grey-250);
+    gap: 5px;
   }
 
   .controls button {

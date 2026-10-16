@@ -1,12 +1,14 @@
 ---
+export const title = "Jill Valentine Portrait";
+export const date = "2026-09-12";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import { Image } from "astro:assets";
 import jillValentine from "../../assets/gallery/art-jillvalentine.png";
 ---
 
 <BlogLayout
-  title="Jill Valentine portrait"
-  date="October 2026"
+  title={title}
+  date={date}
 >
   <p>
     I drew this while trying to adjust to Krita. It's just different enough from Clip Studio to be a pain.

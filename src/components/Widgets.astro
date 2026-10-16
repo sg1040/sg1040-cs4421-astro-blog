@@ -2,64 +2,201 @@
 import { SITE_TITLE } from "../consts";
 import MusicPlayer from "./MusicPlayer.astro";
 ---
-<div class = "crt-lines"></div>
-<div class="widgets-panel">
-    <div class="window widget">
-      <div class="window-header">WIDGETS</div>
-      <div class="window-content widget-content" style="text-align:center;">
 
-        <div class="widget-section">
-            <div class="widget-section-title">GITHUB</div><br>
-            <a href="https://github.com/sg1040" target="_blank">
-                <svg
-					viewBox="0 0 16 16"
-					aria-hidden="true"
-					width="32"
-					height="32"
-                    style="image-rendering:pixelated;
+<div class="crt-lines"></div>
+<div class="widgets-panel">
+  <div class="window widget">
+    <div class="window-header">WIDGETS</div>
+    <div class="window-content widget-content" style="text-align:center;">
+      <div class="widget-section">
+        <div class="widget-section-title">GITHUB</div><br />
+        <a href="https://github.com/sg1040" target="_blank">
+          <svg
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+            width="32"
+            height="32"
+            style="image-rendering:pixelated;
                     display:block;
                     margin:0 auto;"
-                    
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg>
-              
-            </a><br>
+            ><path
+              fill="currentColor"
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            ></path></svg
+          >
+        </a><br />
+      </div>
+
+      <div class="widget-section">
+        <div class="widget-section-title">WEBSITE BUTTON</div><br />
+        <a href="https://d14nr7zoyjto77.cloudfront.net/" target="_blank">
+          <img
+            src="https://file.garden/akY52Mebcxapr9RG/misc/sg1040-button.png"
+            alt="Website Button"
+            style="width:88px; image-rendering:pixelated; display:block; margin:0 auto;"
+          />
+        </a><br />
+      </div>
+
+      <div class="widget-section">
+        <div class="widget-section-title">MUSIC PLAYER</div><br />
+
+        <div class="music-player">
+          <MusicPlayer />
+        </div>
+
+        <br />
+      </div>
+
+      <div class="widget-section">
+        <div class="widget-section-title">CHECK THESE OUT</div><br />
+
+        <div class="widget-ticker">
+          <div class="widget-ticker-track">
+            <a
+              href="https://rose-engine.org/signalis/"
+              target="_blank"
+              ><img
+                src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1262350/header.jpg?t=1773697315"
+                alt="Play Signalis"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://ankergames.net/game/disco-elysium-the-final-cut"
+              target="_blank"
+              ><img
+                src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000044922/df5237749af09dda942147e22f49a0118b98fa7b5081cf53b31e1bd6530e7a23"
+                alt="Play Disco Elysium"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://www.stalker-game.com/en"
+              target="_blank"
+              ><img
+                src="https://cdn.mobygames.com/promos/8567041-stalker-shadow-of-chernobyl-logo.jpg"
+                alt="Play S.T.A.L.K.E.R"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://www.half-life.com/en/halflife/25th"
+              target="_blank"
+              ><img
+                src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/70/capsule_616x353.jpg?t=1745368462"
+                alt="Play Half Life"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://www.wolfquest.org/"
+              target="_blank"
+              ><img
+                src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/926990/f96a837ec092654392bc0df4597dc3c7aef14413/capsule_616x353.jpg?t=1785170176"
+                alt="Play WolfQuest"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://bloodbornepc.wiki/"
+              target="_blank"
+              ><img
+                src="https://www.eggplante.com/wp-content/uploads/2014/09/Bloodborne-Promo-Art.png"
+                alt="Play WolfQuest"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://store.steampowered.com/app/254700/Resident_Evil_4_2005/"
+              target="_blank"
+              ><img
+                src="https://preview.redd.it/why-re4-og-is-so-replayable-what-are-your-opinions-v0-xwaijmcguirf1.jpeg?auto=webp&s=d3fa000cec683fa6ec145b3a33f210922540dbf7"
+                alt="Play WolfQuest"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <!--DUPES -->
+
+            <a
+              href="https://rose-engine.org/signalis/"
+              target="_blank"
+              ><img
+                src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1262350/header.jpg?t=1773697315"
+                alt="Play Signalis"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://ankergames.net/game/disco-elysium-the-final-cut"
+              target="_blank"
+              ><img
+                src="https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch/70010000044922/df5237749af09dda942147e22f49a0118b98fa7b5081cf53b31e1bd6530e7a23"
+                alt="Play Disco Elysium"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://www.stalker-game.com/en"
+              target="_blank"
+              ><img
+                src="https://cdn.mobygames.com/promos/8567041-stalker-shadow-of-chernobyl-logo.jpg"
+                alt="Play S.T.A.L.K.E.R"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://www.half-life.com/en/halflife/25th"
+              target="_blank"
+              ><img
+                src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/70/capsule_616x353.jpg?t=1745368462"
+                alt="Play S.T.A.L.K.E.R"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://www.wolfquest.org/"
+              target="_blank"
+              ><img
+                src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/926990/f96a837ec092654392bc0df4597dc3c7aef14413/capsule_616x353.jpg?t=1785170176"
+                alt="Play WolfQuest"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://bloodbornepc.wiki/"
+              target="_blank"
+              ><img
+                src="https://www.eggplante.com/wp-content/uploads/2014/09/Bloodborne-Promo-Art.png"
+                alt="Play WolfQuest"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
+            <a
+              href="https://store.steampowered.com/app/254700/Resident_Evil_4_2005/"
+              target="_blank"
+              ><img
+                src="https://preview.redd.it/why-re4-og-is-so-replayable-what-are-your-opinions-v0-xwaijmcguirf1.jpeg?auto=webp&s=d3fa000cec683fa6ec145b3a33f210922540dbf7"
+                alt="Play WolfQuest"
+                style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;"
+              />
+            </a>
+
           </div>
-
-        <div class="widget-section">
-          <div class="widget-section-title">WEBSITE BUTTON</div><br>
-          <a href="https://d14nr7zoyjto77.cloudfront.net/" target="_blank">
-            <img src="https://file.garden/akY52Mebcxapr9RG/misc/sg1040-button.png" alt="Website Button"
-              style="width:88px; image-rendering:pixelated; display:block; margin:0 auto;">
-          </a><br>
         </div>
-
-        <div class="widget-section">
-          <div class="widget-section-title">MUSIC PLAYER</div><br>
-
-          <div class="music-player">
-            <MusicPlayer />
-          </div>
-
-          <br>
-
-        </div>
-
-        <div class="widget-section">
-          <div class="widget-section-title">CHECK THIS OUT</div><br>
-          
-          <a href="https://store.steampowered.com/app/1262350/SIGNALIS/" target="_blank">
-          <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1262350/header.jpg?t=1773697315" alt="Play Signalis"
-            style="width:200px; image-rendering:pixelated; display:block; margin:0 auto;">
-        </a><br>
-          
-          
-          <br>
-
-        </div>
-
       </div>
 
       <style>
@@ -73,6 +210,8 @@ import MusicPlayer from "./MusicPlayer.astro";
           height: 360px;
           margin-left: -34px;
         }
+
       </style>
     </div>
   </div>
+</div>
