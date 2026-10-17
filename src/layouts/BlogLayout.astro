@@ -88,7 +88,7 @@ const { title, date, category = "blog" } = Astro.props;
 }
 
 .blog-content a:hover {
-  color: #ff8c00;
+  color: var(--accent);
 }
 
 .blog-content ul,
@@ -100,11 +100,23 @@ const { title, date, category = "blog" } = Astro.props;
   margin-bottom: 4px;
 }
 
+
+.blog-content :global(a:visited) {
+  color: var(--grey-901);
+  text-decoration: none;
+}
+
+.blog-content :global(a),
+.blog-content :global(a:hover),
+.blog-content :global(a:focus) {
+  color: var(--grey-900);
+}
+
 .blog-content blockquote {
   margin: 16px 0;
   padding: 8px 12px;
   background: var(--grey-150);
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--grey-900);
 }
 
 .blog-content img {

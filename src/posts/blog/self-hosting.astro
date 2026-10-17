@@ -4,17 +4,213 @@ export const date = "2026-10-15";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 ---
 
-<BlogLayout
-title={title}
-  date={date}
->
-  <p>
-    In this article I will be showcasing all the stuff I self host and how (kinda)!
-    I'm not super well versed in this area but I want to show that you don't need 
-    good hardware or smarts to be able to setup and run useful stuff. If I can do it,
-    you can! Also it's been months since I touched the config / setup side of anything
-    so there will be loads of mis(ing)info
-  </p>
+<BlogLayout title={title} date={date}>
 
- 
+
+  <h1>START SELFHOSTING NOW</h1>
+
+  <p>
+    In this entry I will be showcasing all the stuff I self host and how
+    (kinda)! I'm not super well versed in this area but I want to show that you
+    don't need good hardware or smarts to be able to setup and run useful stuff.
+    If I can do it, ou can! Also it's been months since I touched the config /
+    setup side of anything so please expect some misinfo.
+  
+
+    <br /><br />
+
+    <span style="color:#333636;">────────────────────────────</span>
+
+    <br />
+
+    <h3>HARDWARE</h3>
+
+    A 7 year old hp laptop with an i3 processor 4gb ram. Not a whole lot but it gets the job done.
+
+    <br /> <br />
+
+    <div class ="image">
+
+      <img src ="https://file.garden/akY52Mebcxapr9RG/misc/blog_artlog/blog-laptop.jpg"  height="500px">
+
+    </div>
+
+    <br />
+
+    If you are in any way serious about this I highly recommend actually buying
+    stuff but if you're like me and just want to mess around, you really don't
+    need much.
+
+    <br /><br />
+
+    <span style="color:#333636;">────────────────────────────</span>
+
+    <br />
+
+    <h3>SOFTWARE</h3>
+    
+    My server currently runs linux mint because I read the RAM usage wasn't too
+    crazy. If you are only familiar with windows I recommend it, it's very
+    similar and easy to use. Definitely look into other options though because
+    there's so many other distros and stuff like Proxmoxwhich is probably way
+    better. You can use windows or mac but as far as i know with docker anyway
+    linux just makes it easier.
+    <br /><br />
+
+    To run and deploy my apps I use docker. You kinda configure stuff in
+    dockerfile (you can copy paste nearly all of it) run a few commands and
+    you're set.
+    <br /><br />
+
+    I like to use a web gui (?) with it called Portainer. This way you can
+    compose and deploy stuff from your browser (on any device as long as you're
+    on same network/ vpnning / portforwarding) and also see the status of all
+    the containers you got running.
+    <br /><br />
+
+    <div class ="image">
+
+      <img src ="https://file.garden/akY52Mebcxapr9RG/misc/blog_artlog/blog-portainer.png" height="500px">
+
+    </div>
+
+    <br />
+
+    I like to use a VPN called Tailscale to be able to access my apps
+    (services?) from outside my home network. You create an account and login on
+    all your other devices and boom you got a Tailnet. There are other vpn stuff
+    or you could like open some ports on your router maybe (bad idea) but yeah
+    this is simple and it works. Also my mobile data on my phone won't work
+    unless I connect to it which is strange so god bless tailscale.
+    
+
+    <br /><br />
+
+    <span style="color:#333636;">────────────────────────────</span>
+
+    <br />
+
+    <h3>WHAT I RUN</h3>
+
+    <h4>Live Sync for Obsidian</h4>
+
+    This might be my most used (using it to draft this blog rn) because I love a notes app, and not
+    having to pay 7 euro a month is pretty neat. You have to set up a database with CouchDB or the other options, 
+    install an extension in obsidian and then go
+    through a setup thing. I had a few issues when I first started with stuff
+    going out of sync, but turns out you just need to set the syncing option to
+    LiveSync on all your devices and it's chill idk why it's not the default.
+    <br /><br />
+
+    <div class ="image">
+
+      <img src ="https://file.garden/akY52Mebcxapr9RG/misc/blog_artlog/blog-obsidian.png" height="500px" >
+
+    </div>
+
+
+    <h4>Jellyfin</h4>
+
+    This is a media streaming service. It's mainly for videos but it
+    works grand for music and I think they have ebook features as well? For the
+    video stuff you probably want halfway decent specs and wifi for it to be
+    worth using but if you have similar stuff to me, it still absolutely works.
+    And i've had zero issues with music. 
+    <br /><br />
+
+
+    <div class ="image">
+
+      <img src ="https://file.garden/akY52Mebcxapr9RG/misc/blog_artlog/blog-jellyfin.png" height="500px" >
+
+    </div>
+
+
+    <h4>Seafile </h4>
+
+    This is a file hosting thing like google drive. I actually recommend NextCloud instead but I think I had
+    some issues accessing it from my other devices so I switched to this. Works
+    grand but I have to use the website instead of a more convenient client on
+    mobile. Also haven't noticed any performance issues despite my laptop.
+
+    <h4>Qbittorent WebUI and Filebrowser</h4>
+
+    I use these together with Jellyfin to start downloading a show/movie/album, then move said download into Jellyfin's
+    media folder so I can start streaming. Makes it super easy to expand and
+    manage my library. 
+    <br /><br />
+
+    <div class ="image">
+
+      <img src ="https://file.garden/akY52Mebcxapr9RG/misc/blog_artlog/blog-qbittorent.png" height="500px" >
+
+    </div>
+
+
+    <br /><br />
+
+    <span style="color:#333636;">────────────────────────────</span>
+
+    <br />
+    
+    <h3>RESOURCES</h3>
+
+    This isn't a guide and is just self hosting
+    propaganda but if this sounds cool to you and you want to learn, check out
+    these actual resources! 
+    <br /><br />
+
+    <ul>
+
+      <li>
+        <a href ="https://wiki.futo.org/index.php/Introduction_to_a_Self_Managed_Life:_a_13_hour_&_28_minute_presentation_by_FUTO_software#Step_2:_Configuring_Mailcow_to_use_Postmark_as_SMTP_relay">
+          FUTO's intro to a self managed life - Super in-depth blog that's well worth a read
+          </a>
+      </li>
+      <br />
+      <li>
+        <a href ="https://www.youtube.com/watch?v=OTATnswthcA&pp=ygUdb2JzaWRpYW4gc2VsZiBob3N0ZWQgbGl2ZXN5bmPSBwkJRwwBhyohjO8%3D">
+        Guide to setup LiveSync for Obsidian
+        </a>
+      </li>
+      <br />
+      <li>
+        <a href ="https://docs.portainer.io/start/intro">
+          Portainer start guide
+          </a>
+      </li>
+      <br />
+      <li>
+        <a href="https://github.com/awesome-selfhosted/awesome-selfhosted">
+        Massive list of free self hostable apps
+        </a>
+      </li>
+      <br />
+      <li>
+        <a href ="https://www.youtube.com/watch?v=cMVcclMkp7g&pp=ygUTeW91dHViZSBob21lbGFiYmluZw%3D%3D">
+          First entry in a series of some guy's homelabbing experience. Pretty entertaining and he does some cool stuff
+          </a>
+      </li>
+     
+    </ul>
+   
+   </p>
+
+  
+
+
+  <style>
+
+    .image {
+      margin-left: 25px;
+    }
+
+    img {
+      align-content: center;
+     
+      
+    }
+
+  </style>
+  
 </BlogLayout>
