@@ -34,7 +34,7 @@
     --header-bg: var(--grey-0);
     --header-text: #4AF262;
 
-    --accent: #ff4400;
+    --accent: #f13527;
     --lightest-grey: var(--grey-900);
     --medium-grey: var(--grey-700);
     --darkest-grey: var(--grey-450);
@@ -568,7 +568,8 @@ body>aside {
     width: max-content;
     animation: mediumTickerScroll 25s linear infinite;
 }
-.medium-ticker-track img{
+
+.medium-ticker-track img {
     height: 62px;
     width: auto;
     padding-left: 2px;
@@ -576,8 +577,13 @@ body>aside {
 }
 
 @keyframes mediumTickerScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 }
 
 /* =========================
@@ -587,7 +593,7 @@ body>aside {
 .nav-ticker-track {
     display: flex;
     width: max-content;
-    animation: navTickerScroll 70s linear infinite;
+    animation: navTickerScroll 150s linear infinite;
 }
 
 .nav-ticker-track img {
@@ -597,8 +603,13 @@ body>aside {
 }
 
 @keyframes navTickerScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 }
 
 /* =========================
@@ -606,7 +617,7 @@ body>aside {
 ========================= */
 
 .widget-ticker {
-    height: 370px;
+    height: 375px;
     overflow: hidden;
     position: relative;
 }
@@ -615,87 +626,20 @@ body>aside {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    animation: widgetTickerScroll 20s linear infinite;
+    animation: widgetTickerScroll 40s linear infinite;
 }
 
 @keyframes widgetTickerScroll {
     from {
-        transform: translateY(0);
+        transform: translateY(-50%);
     }
 
     to {
-        transform: translateY(-50%);
+        transform: translateY(0);
     }
 }
 
-.win95-socials {
-    background: var(--grey-0);
-    padding: 6px;
-    display: flex;
-    gap: 6px;
-    border-top: 5px solid var(--grey-50);
-    border-left: 5px solid var(--grey-50);
-    border-right: 5px solid var(--grey-400);
-    border-bottom: 5px solid var(--grey-400);
-}
 
-.win95-socials a {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 4px;
-    box-sizing: border-box;
-    font-family: var(--font-ui);
-    font-size: 16px;
-    line-height: 1;
-    background: var(--grey-250);
-    text-decoration: none;
-    border-top: 3px solid var(--grey-450);
-    border-left: 3px solid var(--grey-450);
-    border-right: 3px solid var(--grey-100);
-    border-bottom: 3px solid var(--grey-100);
-}
-
-.win95-socials a:hover {
-    color: #ffe600;
-}
-
-.win95-socials a:active {
-    transform: translate(1px, 1px);
-    border-top: 2px solid var(--grey-100);
-    border-left: 2px solid var(--grey-100);
-    border-right: 2px solid var(--grey-450);
-    border-bottom: 2px solid var(--grey-450);
-}
-
-.win95-socials .yt {
-    color: #b56a6a;
-}
-
-.win95-socials .twitch {
-    color: #8a78b8;
-}
-
-.win95-socials .twitter {
-    color: #7a9fb2;
-}
-
-.win95-socials .insta {
-    color: #b28ca6;
-}
-
-.win95-socials .tiktok {
-    color: var(--grey-800);
-}
-
-.win95-socials .da {
-    color: #7fa882;
-}
-
-.win95-socials .nc {
-    color: #b07a3c;
-}
 
 .neighbours-box {
     background: var(--grey-0);
@@ -1083,13 +1027,14 @@ body>aside {
             var(--grey-overlay-black-15) 2px,
             var(--grey-overlay-black-15) 4px);
 
+
     .doom-fullscreen-btn {
         background: var(--grey-250);
         color: var(--grey-900);
 
         font-family: var(--font-ui);
 
-        
+
 
         font-size: 18px;
 
@@ -1109,7 +1054,7 @@ body>aside {
         min-width: 180px;
 
         transition: color 0.1s,
-        transform 0.1s;
+            transform 0.1s;
 
         text-transform: uppercase;
     }
@@ -1131,6 +1076,16 @@ body>aside {
 
     .doom-fullscreen-btn::before {
         content: "> ";
+        color: var(--accent);
+    }
+
+    .blog-content ul li a,
+    .blog-content ol li a {
+        color: var(--grey-900);
+    }
+
+    .blog-content ul li a:hover,
+    .blog-content ol li a:hover {
         color: var(--accent);
     }
 }
