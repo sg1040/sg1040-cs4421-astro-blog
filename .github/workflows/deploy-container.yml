@@ -18,7 +18,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install
+          npm ci && npm run test:unit
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
