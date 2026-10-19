@@ -12,13 +12,16 @@ jobs:
     env:
       AWS_REGION: eu-north-1
       ECR_REPOSITORY: susie/astro-blog
+      ECS_CLUSTER: default
+      ECS_SERVICE: astro-blog-00b8
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Dependencies
         run: |
-          npm ci && npm run test:unit
+          npm ci
+          npm run test:unit
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -37,4 +40,14 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+                     $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
+            --force-new-deployment
