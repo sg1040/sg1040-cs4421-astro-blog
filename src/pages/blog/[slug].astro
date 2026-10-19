@@ -1,0 +1,40 @@
+---
+import Head from "../../components/Head.astro";
+import Navigation from "../../components/Navigation.astro";
+import Widgets from "../../components/Widgets.astro";
+import { SITE_DESCRIPTION } from "../../consts";
+import { getPosts, type PostEntry } from "../../utils/posts";
+
+export function getStaticPaths() {
+  return getPosts("blog").map(({ slug, title, component }) => ({
+    params: { slug },
+    props: { title, component },
+  }));
+}
+
+interface Props {
+  title: string;
+  component: PostEntry["component"];
+}
+
+const { title, component: Post } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={`${title} | Blog`} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Navigation />
+    <main class="container">
+      <div class="window">
+        <div class="window-header">BLOG ENTRY</div>
+        <div class="window-content">
+          <Post />
+        </div>
+      </div>
+    </main>
+    <Widgets />
+  </body>
+</html>

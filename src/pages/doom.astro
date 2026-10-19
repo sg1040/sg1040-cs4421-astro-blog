@@ -1,0 +1,206 @@
+---
+import { Image } from "astro:assets";
+import Head from "../components/Head.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Navigation from "../components/Navigation.astro";
+import Widgets from "../components/Widgets.astro";
+---
+
+<!doctype html>
+<html>
+    <div class = "crt-lines"></div>
+    <head>
+        <Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Navigation />
+
+        <div id="dynamic-content" class="container">
+            <div class="window">
+                <div class="window-content" style="padding:0;">
+                    <div
+                        class="popup"
+                        style="margin:0; border:none; border-top:1px solid #333636; border-left:1px solid #333636; border-right:1px solid #101212; border-bottom:1px solid #101212;"
+                    >
+                        <div class="popup-bar">localizer.exe</div>
+                        <div
+                            class="popup-content localizer-banner-layout localizer-banner-gallery"
+                        >
+                            <pre
+                                style="margin:0; font-size:8px; line-height:1.2; color:#c4c7c7; font-family:'Courier New',Courier,monospace; overflow-x:auto; max-width:100%;"><br />
+oooooooooo.     .oooooo.     .oooooo.   ooo        ooooo    
+`888'   `Y8b   d8P'  `Y8b   d8P'  `Y8b  `88.       .888'    
+ 888      888 888      888 888      888  888b     d'888     
+ 888      888 888      888 888      888  8 Y88. .P  888     
+ 888      888 888      888 888      888  8  `888'   888     
+ 888     d88' `88b    d88' `88b    d88'  8    Y     888     
+o888bood8P'    `Y8bood8P'   `Y8bood8P'  o8o        o888o    
+  </pre>
+                            <img
+                                src="https://file.garden/akY52Mebcxapr9RG/misc/doom-spin.gif"
+                                style="width:70px;height:70px; align-self:center; flex-shrink:0;"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticker">
+                <div class="fast-ticker-track">
+                    <span class="ticker-text">
+                        <span style="color:var(--accent);">IN DEVELOPMENT - </span>
+                        https://d14nr7zoyjto77.cloudfront.net/
+                        <span style="color:var(--accent);"> - IN DEVELOPMENT</span>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="window">
+                <div class="window-header">
+                    C:\susie\home\games\doom
+                    <div class="window-buttons" aria-hidden="true">
+                        <div class="win-btn">_</div>
+                        <div class="win-btn">▢</div>
+                        <div class="win-btn">X</div>
+                    </div>
+                </div>
+                <div class="window-content gallery-window-content">
+                    <div class="doom-box">
+                        <div id="dosbox" aria-label="DOOM game"></div>
+
+                        <button
+                            class="doom-fullscreen-btn"
+                            onclick="dosbox.requestFullScreen();"
+                        >
+                            Fullscreen
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticker">
+                <div class="fast-ticker-track">
+                    <span class="ticker-text">
+                        © 2026 Susie Gurrie - insert cool message here
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <Widgets />
+    </body>
+</html>
+
+<style>
+    .doom-box {
+        position: relative;
+        background: var(--page-bg);
+        padding: 0.5em;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "doom"
+            "fullscreen";
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        /*border: 2px solid var(--header-text);*/
+    }
+
+    :global(.dosbox-container .dosbox-overlay) {
+        background: url("/games/doom-start.png") center / 100% 100% no-repeat;
+    }
+
+    :global(#dosbox .dosbox-container) {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    #dosbox {
+        width: min(100%, 1120px);
+        max-width: 1120px;
+        aspect-ratio: 8 / 5;
+        grid-area: doom;
+        justify-self: center;
+    }
+
+    .doom-box > button {
+        grid-area: fullscreen;
+        justify-self: center;
+    }
+
+    :global(#dosbox canvas),
+    :global(#dosbox .dosbox-overlay) {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        /*filter: grayscale(1) sepia(1) hue-rotate(103deg) saturate(2.5) contrast(1.0);*/
+    }
+
+    .doom-fullscreen-btn {
+        background: var(--grey-250);
+        color: var(--grey-900);
+
+        font-family: var(--font-ui);
+        font-size: 18px;
+
+        padding: 6px 18px;
+
+        border-top: 4px solid var(--grey-450);
+        border-left: 4px solid var(--grey-450);
+        border-right: 4px solid var(--grey-100);
+        border-bottom: 4px solid var(--grey-100);
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: 180px;
+
+        transition:
+            color 0.1s,
+            transform 0.1s;
+
+        text-transform: uppercase;
+    }
+
+    .doom-fullscreen-btn:hover {
+        color: var(--accent);
+    }
+
+    .doom-fullscreen-btn:active {
+        background: var(--grey-150);
+
+        border-top: 2px solid var(--grey-100);
+        border-left: 2px solid var(--grey-100);
+        border-right: 2px solid var(--grey-450);
+        border-bottom: 2px solid var(--grey-450);
+
+        transform: translate(1px, 1px);
+    }
+
+    .doom-fullscreen-btn::before {
+        content: ">";
+        color: var(--grey-900);
+    }
+</style>
+
+<script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"
+></script>
+
+<script type="text/javascript">
+    var dosbox = new Dosbox({
+        id: "dosbox",
+        onload: function (dosbox) {
+            dosbox.run("/games/DOOM-evilution.zip", "./DOOM/DOOM.EXE");
+        },
+        onrun: function (dosbox, app) {
+            console.log("App '" + app + "' is runned");
+        },
+    });
+</script>

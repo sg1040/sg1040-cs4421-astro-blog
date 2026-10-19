@@ -1,0 +1,177 @@
+---
+import type { PostCategory, PostEntry } from "../utils/posts";
+
+interface Props {
+  category: PostCategory;
+  posts: PostEntry[];
+}
+
+const { category, posts } = Astro.props as Props;
+const requestedSlug = Astro.url.searchParams.get("post");
+const selectedPost =
+  posts.find((post) => post.slug === requestedSlug) ?? posts[0];
+const directory = category === "blog" ? "blog" : "artlog";
+const SelectedPost = selectedPost?.component;
+---
+<div class = "crt-lines"></div>
+<div
+  class="post-browser"
+  data-post-browser
+  data-selected-post={selectedPost?.slug}
+>
+  <aside class="post-index text-bg" aria-label={`${category} entries`}>
+    <div class="post-directory">C:\susie\{directory}</div>
+    {posts.length > 0 ? (
+      <nav class="post-links" aria-label="Entries">
+        {posts.map((post) => (
+          <a
+            class="post-link"
+            href={post.href}
+            data-post-link
+            data-post={post.slug}
+            aria-current={selectedPost?.slug === post.slug ? "page" : undefined}
+          >
+            {post.title.toLowerCase().replaceAll(" ", "-")}.txt
+          </a>
+        ))}
+      </nav>
+    ) : (
+      <p class="post-empty-index">No entries yet.</p>
+    )}
+  </aside>
+
+  <section class="post-viewer text-bg" aria-label="Selected entry">
+    <div class="post-content" data-post-viewer aria-live="polite">
+      {SelectedPost ? <SelectedPost /> : <p>No entries yet.</p>}
+    </div>
+  </section>
+
+  {posts.map((post) => {
+    const Post = post.component;
+    return (
+      <template data-post-template={post.slug}>
+        <Post />
+      </template>
+    );
+  })}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-post-browser]").forEach((root) => {
+    const viewer = root.querySelector<HTMLElement>("[data-post-viewer]");
+    const links = Array.from(
+      root.querySelectorAll<HTMLAnchorElement>("[data-post-link]"),
+    );
+    const templates = Array.from(
+      root.querySelectorAll<HTMLTemplateElement>("[data-post-template]"),
+    );
+    const selectPost = (slug: string, updateHistory: boolean) => {
+      const template = templates.find((entry) => entry.dataset.postTemplate === slug);
+      if (!template || !viewer) return;
+
+      viewer.replaceChildren(template.content.cloneNode(true));
+      links.forEach((link) => {
+        if (link.dataset.post === slug) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+
+      const url = new URL(window.location.href);
+      if (updateHistory && url.searchParams.get("post") !== slug) {
+        url.searchParams.set("post", slug);
+        window.history.pushState({ post: slug }, "", url);
+      }
+    };
+
+    root.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest<HTMLAnchorElement>("a[data-post-link]");
+      if (
+        !link ||
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      if (link.dataset.post) selectPost(link.dataset.post, true);
+    });
+
+    window.addEventListener("popstate", () => {
+      const requestedSlug = new URL(window.location.href).searchParams.get("post");
+      const fallbackSlug = links[0]?.dataset.post;
+      const slug = links.some((link) => link.dataset.post === requestedSlug)
+        ? requestedSlug
+        : fallbackSlug;
+      if (slug) selectPost(slug, false);
+    });
+  });
+</script>
+
+<style>
+  .post-browser {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.75fr) minmax(0, 2.25fr);
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .post-index,
+  .post-viewer {
+    min-width: 0;
+    margin: 0;
+    padding: 12px;
+  }
+
+  .post-directory {
+    color: var(--accent);
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+  }
+
+  .post-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .post-link {
+    color: var(--grey-900);
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+
+  .post-link::before {
+    color: var(--grey-900);
+    content: "> ";
+  }
+
+  .post-link:hover,
+  .post-link[aria-current="page"] {
+    color: var(--grey-900);
+  }
+
+  .post-empty-index {
+    margin: 0;
+    color: var(--grey-700);
+  }
+
+  .post-content {
+    min-width: 0;
+  }
+
+  @media (max-width: 700px) {
+    .post-browser {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

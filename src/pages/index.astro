@@ -1,316 +1,366 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import Head from "../components/Head.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Navigation from "../components/Navigation.astro";
+import Widgets from "../components/Widgets.astro";
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<div class = "intro">
+<html>
+    <div class = "crt-lines"></div>
+    <head>
+        <Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Navigation />
 
-				<div class = "intro-welcome">
+        <div id="dynamic-content" class="container">
+            <div class="window">
+                <div class="window-content" style="padding:0;">
+                    <div
+                        class="popup"
+                        style="margin:0; border:none; border-top:1px solid #333636; border-left:1px solid #333636; border-right:1px solid #101212; border-bottom:1px solid #101212;"
+                    >
+                        <div class="popup-bar">localizer.exe</div>
+                        <div
+                            class="popup-content localizer-banner-layout"
+                        >
+                            <pre
+                                style="margin:0; font-size:8px; line-height:1.2; color:#c4c7c7; font-family:'Courier New',Courier,monospace; overflow-x:auto; max-width:100%;">                           
+  .oooooo..o                       o8o            o8o                .oooooo..o  o8o      .             
+ d8P'    `Y8                       `"'            `YP               d8P'    `Y8  `"'    .o8             
+ Y88bo.      oooo  oooo   .oooo.o oooo   .ooooo.   '   .oooo.o      Y88bo.      oooo  .o888oo  .ooooo.  
+  `"Y8888o.  `888  `888  d88(  "8 `888  d88' `88b     d88(  "8       `"Y8888o.  `888    888   d88' `88b 
+      `"Y88b  888   888  `"Y88b.   888  888ooo888     `"Y88b.            `"Y88b  888    888   888ooo888 
+ oo     .d8P  888   888  o.  )88b  888  888    .o     o.  )88b      oo     .d8P  888    888 . 888    .o 
+ 8""88888P'   `V88V"V8P' 8""888P' o888o `Y8bod8P'     8""888P'      8""88888P'  o888o   "888" `Y8bod8P' 
+  </pre>
+                            <img
+                                src="https://rachychel.neocities.org/gifs/vgs/dokodemoissyo/toro3d.gif"
+                                style="width:70px;height:70px; align-self:center; flex-shrink:0;"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-					<h1>Welcome!</h1>
+            <div class="ticker">
+                <div class="fast-ticker-track">
+                    <span class="ticker-text">
+                        <span style="color:var(--accent);">IN DEVELOPMENT - </span>
+                        https://d14nr7zoyjto77.cloudfront.net/
+                        <span style="color:var(--accent);"> - IN DEVELOPMENT</span>
+                    </span>
+                </div>
+            </div>
 
-				</div>
+            <div class="window">
+                <div class="window-header">INTRODUCTION</div>
+                <div class="window-content" style="padding:10px;">
+                    <div
+                        style="display:grid; grid-template-columns:1fr 2fr; gap:10px; align-items:stretch;"
+                    >
+                        <span
+                            class="text-bg"
+                            style="padding:8px 10px; display:block;"
+                        >
+                            <pre
+                                style="margin:0; font-size:10px; line-height:1.2; color:#c4c7c7; font-family:'Courier New',Courier,monospace;">                                                   
 
-				<div class = "intro-left"> 
-					<span class="ascii-corner top-left" aria-hidden="true">+</span>
-					<span class="ascii-corner top-right" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+ 
 
-					<p>
-						This is my blog that I made with <a href="https://astro.build/">Astro</a>
-					</p>
 
-				</div>
+                                :::::::::.                         
+                              :::::::::::::                        
+                            :::::%::::::::::                       
+                            ::.:%%%:::::::.:.                      
+                            ::::@@@@.::::::-:                      
+                           :::%@*:@@@:*::::::                      
+                           :.:@%##@@@@:#:::*:                      
+                           :.::@@@@@@@@@@::*:                      
+                           .:.:@@@@@@@@@@#:::                      
+                            :..+@@@@@@@@=.:.                       
+                            ::...:@@@@::. ..                       
+                             :  ........                           
+                                 ::::..:                           
+                                .:.::.::...                        
+                             ..:::..::.:-:......                   
+                         ..:::::::...::::::::...::::..             
+                     ::::::.::::::-=-.::::.:::::@%:::::            
+                    .:@@::..:::.======-::::::..::::::::            
+                    .::::.:::.==========-.::::..:::::--            
+                    .:::..::++++++++++++++-.:::::::::::.           
+                     .::..=+++++++++++---++=-:::........           
+                     ....-+++++++++++++++=++-:..:.....::           
+                    .::::--------------------:.::::::-:::          
+                    +-:-::-----------------:::::: -+===--          
+                    :::::.:.::::::::::::::.:::::  ::-:..:          
+                   :::::::::@:::::::::::#.:::::.   ::::::          
+                   .::..:::::::::::::::::.::::.    ::::..          
+                  .::..:..::::::::::::::.:::::      ::::.:         
+                  ::...:..:..:::::::::::..:::.      ::::::         
+                 .::.::...::::::::::::::::::..      .:::.:.        
+                -........:-.::::::::::::..::::       ::..:.        
+              ....:::.. :...::::::::::::.:::.:.      ...::.        
+             .:.:::::. :::.:::::.:::::::.:.::::..    :.::.::       
+            .:.::.::. .:.:.::::::::::::::.::.::::    .::.:::       
+           ...:...:  .:::.%@::::::::::::@:@@::::::   ..:....       
+          ..:::.::  ::::::..::::....::::::@@:::...    .:::::       
+         ..:.::.  :.:::::....::::::::::::::@:.::::    ..::::       
+        .:::::.  ::..::-::::::::::::::::...::::::::.   .::::       
+      ..:-::.   .....:::::::::::::.......:::.:::::::   ..::::      
+    :::...:.    .....::::::.:::::..:::::::....:.::...   .::::      
+ :.::...::..    ....:::.......::::::::::.......:::..:   .:::::     
+:::.-:....:.     .....:::..........:::......:..::::...    ..:::.   
+:.::..:.:.:.      ..:..:::............ ........:.::::..:  ..::.::  
+:.::.:... .       ....:::::..........   .......::.::::::  ....:..: 
+::::... .         ..:.:::::.........    .......:::::.:::   ..@@@%%@
+::.::::          ..::::::::........     ......:::.::::-:  ......:: 
+::.:.            ...:::::::::.....       ....:::::::=--:  .. . ... 
+..::             ...-:.::-::::::-         .:::::====+:::  .  .:.:: 
+                   :=======----:          :-=-:::::::::.     : ::  
+                   .:-::::::::.            :::::::::::::           
+                   .::.:::::::.            .:::::::::::.           
+                   .::.:::::::               :::::::::..           
+                    ::.:::::::               ...::..:::.           
+                                                                   
+</pre>
+                        </span>
+                        <span
+                            class="text-bg"
+                            style="line-height:1.8; font-size:16px; padding:14px 16px;"
+                        >
+                            <span style="color:var(--accent);"
+                                >C:\susie\home&gt;intro.txt</span
+                            ><br />
+                            <span style="color:#333636;"
+                                >────────────────────────────</span
+                            ><br /><br />
 
-				<div class = "intro-right"> 
-					<span class="ascii-corner top-left" aria-hidden="true">+</span>
-					<span class="ascii-corner top-right" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+                            <span style="color:var(--accent);"
+                                >Welcome to my website,</span
+                            ><br />
+                            I hope you enjoy looking around!<br
+                            /><br />
 
-					<p>
-						This is what I'll put on the right side
-					</p>
+                            This website is mostly a space for me to display my art and photos,
+                            and do a bit of blogging. Anything from tech / project stuff to
+                            game or movie reviews / recommendations idk.  
+                            <br /><br />
+                            I'm a big fan of the indie web, mainly geocities revivals like 
+                            neocities or nekoweb. The vibe, stamps, buttons and
+                            webrings and stuff really appeal to me, so I've incorporated them here.
+                            <br /><br />
+                            I tried going for a retro / casette futuristic look kind of 
+                            inspired by signalis or alien. I'll hopefully push it a bit further 
+                            in future updates with hand drawn graphics and stuff.
+                            <br /><br />
 
-				</div>
+                            <span style="color:#333636;"
+                                >────────────────────────────</span
+                            ><br /><br />
 
-			</div>
-			
-			<div class = "doom-outer-box">
+                            I'm <span style="color:var(--accent);">Susie Gurrie</span>
 
-				<div class = "doom-box">
+                            <br /><br />
 
-					
-					
-				
-				<div id="dosbox">
+                            I'm a software engineering student and artist. <br>
+                            This website was made for college but it's been<br>
+                            kinda fun so I might continue developing it.
+                            <br /><br />
 
-				</div>
+                            <span style="color:#333636;"
+                                >────────────────────────────</span
+                            ><br /><br />
+                            <span style="color:#333636;"
+                                >// end of file_<span
+                                    style="display:inline-block; width:8px; height:15px; background:#c4c7c7; vertical-align:text-bottom; animation:hcur 1s steps(1) infinite;"
+                                ></span></span
+                            >
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-				<br/>
+            <style>
+                @keyframes hcur {
+                    0%,
+                    100% {
+                        opacity: 1;
+                    }
+                    50% {
+                        opacity: 0;
+                    }
+                }
+            </style>
 
-				<button onclick="dosbox.requestFullScreen();">
-					<span class="ascii-corner top-left" aria-hidden="true">+</span>
-					<span class="ascii-corner top-right" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
-					Fullscreen
-				</button>
-				
-				</div>
-				
-			</div>
+            <div class="ticker">
+                <div class="medium-ticker-track">
+                    <img
+                        src="https://artwork.neocities.org/stamps/dccz9p2-542e2c6e-477f-4539-a8d6-2f9c1e2d2fba.gif"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/bw/tabletuser.png"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/bw/iheartphysicalmedia.png"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/bw/ilovemusic.gif"
+                    />
+                    <img
+                        src="https://media1.tenor.com/m/_4lk9kh8WIsAAAAd/signalis-game.gif"
+                    />
+                    <img
+                        src="https://favicons.neocities.org/images/boxes/radiodontid.png"
+                    />
+                    <img src="https://y2k.neocities.org/stamps/tumblr_inline_pbucbotQK61w0jw8b_1280.png" />
+                    <img
+                        src="https://file.garden/aC4o-8tWnhjJhdaO/j13.png"
+                    />
+                    <img src="https://y2k.neocities.org/stamps2/hill.png" />
+                    <img
+                        src="https://file.garden/Z79xk6Elunno9B45/stamps/stampeater.webp"
+                    />
+                    <img
+                        src="https://raining-starss.neocities.org/pastel%20(4).png"
+                    />
+                    <img
+                        src="https://oddityz.neocities.org/stamps/green/serialexperimentslain.gif"
+                    />
 
-			<div class = "blog-outer-box">
+                    <!--DUPES -->
 
-				<div class = "blog-header">
+                    <img
+                    src="https://artwork.neocities.org/stamps/dccz9p2-542e2c6e-477f-4539-a8d6-2f9c1e2d2fba.gif"
+                />
+                <img
+                    src="https://oddityz.neocities.org/stamps/bw/tabletuser.png"
+                />
+                <img
+                    src="https://oddityz.neocities.org/stamps/bw/iheartphysicalmedia.png"
+                />
+                <img
+                    src="https://oddityz.neocities.org/stamps/bw/ilovemusic.gif"
+                />
+                <img
+                    src="https://media1.tenor.com/m/_4lk9kh8WIsAAAAd/signalis-game.gif"
+                />
+                <img
+                    src="https://favicons.neocities.org/images/boxes/radiodontid.png"
+                />
+                <img src="https://y2k.neocities.org/stamps/tumblr_inline_pbucbotQK61w0jw8b_1280.png" />
+                <img
+                    src="https://file.garden/aC4o-8tWnhjJhdaO/j13.png"
+                />
+                <img src="https://y2k.neocities.org/stamps2/hill.png" />
+                <img
+                    src="https://file.garden/Z79xk6Elunno9B45/stamps/stampeater.webp"
+                />
+                <img
+                    src="https://raining-starss.neocities.org/pastel%20(4).png"
+                />
+                <img
+                    src="https://oddityz.neocities.org/stamps/green/serialexperimentslain.gif"
+                />
 
-					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Blog</a></h2>
-					
-					<h2>Featured Entries</h2>	
 
-				</div>
+                </div>
+            </div>
 
-				<div class = "blog-left">
-					<span class="ascii-corner top-left" aria-hidden="true">+</span>
-					<span class="ascii-corner top-right" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
+            <div class="window">
+                <div class="window-header">
+                    <span style="margin:0 auto;">TO DO LIST</span>
+                </div>
+                <div class="window-content">
+                    <div
+                        class="content-grid"
+                        style="grid-template-columns:5fr 2fr;"
+                    >
+                        <div
+                            class="project-texts"
+                            style="display:flex; flex-direction:row; gap:8px; align-items:stretch;"
+                        >
+                            <span class="text-bg" style="flex:1;">
+                                <b>Chatroom:</b><br /><br />
 
-					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Left Blog</a></h2>
+                                I'd like to try make a proper chatroom or even guestbook 
+                                feature for this website. Hopefully by the time I present this 
+                                I atleast have chatbox set up, but I want to see if hosting/deploying (?) 
+                                it myself is possible.
+                                
+                                
+                            </span>
+                            <span class="text-bg" style="flex:1;">
+                                <b>Design:</b><br /><br />
 
-					<div class = "blog-left-img">
+                                I want to make my site even more signalisy, and
+                                maybe include some custom graphics based on the 
+                                the old S.T.A.L.K.E.R. games UI? Where there's
+                                wires and rusty stuff everywhere.
+                                <br /><br />
+                                I shall see.
+                            </span>
+                        </div>
+                        <div>
+                            <img
+                                src="https://i.redd.it/mcakbmzp01v61.png"
+                                class="img-current-project"
+                                alt="stalker-meme"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-						<img src="https://file.garden/akY52Mebcxapr9RG/misc/dithered-image.jpeg" height = 100px>
+            <!--<div class="window">
+                <div class="window-header">
+                    <span style="margin:0 auto;">VISIT MY NEIGHBORS</span>
+                </div>
+                <div class="window-content">
+                    <div class="neighbours-box">
+                        <a href="https://bisq.neocities.org" target="_blank">
+                            <img
+                                src="https://bisq.neocities.org/images/sitebuttons/bisq.png"
+                                alt="bisq"
+                            />
+                        </a>
+                        <a
+                            href="https://houseofdollbones.neocities.org"
+                            target="_blank"
+                        >
+                            <img
+                                src="https://houseofdollbones.neocities.org/images/Icons/dollbonesbutton.png"
+                                alt="dollbones"
+                            />
+                        </a>
+                        <a href="https://n20mp.nekoweb.org" target="_blank">
+                            <img
+                                src="https://n20mp.nekoweb.org/imgs/d/button.gif"
+                                alt="n20mp"
+                            />
+                        </a>
+                        <a
+                            href="https://starzrqp.neocities.org"
+                            target="_blank"
+                        >
+                            <img
+                                src="https://starzrqp.neocities.org/assets/starzrqp.webp"
+                                alt="starzrqp"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div> -->
 
-					</div>
-
-				</div>
-
-				<div class = "blog-right">
-					<span class="ascii-corner top-left" aria-hidden="true">+</span>
-					<span class="ascii-corner top-right" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-left" aria-hidden="true">+</span>
-					<span class="ascii-corner bottom-right" aria-hidden="true">+</span>
-
-					<h2><a href="https://d21wy20mcqmn4f.cloudfront.net/blog/8sep26/">Right Blog</a></h2>
-
-					<div class = "blog-right-img">
-
-						<img src="https://file.garden/akY52Mebcxapr9RG/misc/dithered-image.jpeg" height = 100px>
-
-					</div>
-					
-				</div>
-
-			</div>
-
-		</main>
-		<Footer/>
-	</body>
+            <div class="ticker">
+                <div class="fast-ticker-track">
+                    <span class="ticker-text">
+                        © 2026 Susie Gurrie - insert cool message here
+                    </span>
+                </div>
+            </div>
+            </div>
+        <Widgets />
+    </body>
 </html>
-
-<style>
-
-	h1 {
-		font-family: var(--font-display);
-		font-size: 10rem;
-		color: var(--text-color);
-	}
-
-	p {
-		color: var(--text-color);
-	}
-
-	img {
-		filter: grayscale(1) sepia(1) hue-rotate(103deg) saturate(2.5) contrast(1.0);
-	}
-
-	button {
-		position: relative;
-		font-family: var(--font-ui);
-		font-size: 1.5rem;
-		color: var(--text-color);
-		background-color: var(--page-bg);
-		padding: 10px;
-		margin: 15px;
-		border: 1px dashed var(--header-text);
-
-	}
-
-	.intro {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		grid-template-areas:
-			"welcome welcome"
-			"left right";
-		gap: 2rem;
-		margin: 2em;
-		padding: 2em;
-		background: var(--page-bg);
-		border: 2px solid var(--header-text);
-	}
-	
-	.intro-welcome {
-		
-		grid-area: welcome;
-		text-align: center;
-		background: var(--page-bg);
-		padding: 0.5em;
-	}
-
-	.intro-left {
-		grid-area: left;
-		position: relative;
-		background: var(--page-bg);
-		padding: 2em;
-		border: 1px dashed var(--header-text);
-		
-	}
-
-	.intro-right {
-		grid-area: right;
-		position: relative;
-		background: var(--page-bg);
-		padding: 2em;
-		border: 1px dashed var(--header-text);
-	}
-
-	.ascii-corner {
-		position: absolute;
-		padding: 0 0.15em;
-		background: var(--page-bg);
-		color: var(--header-text);
-		font-family: monospace;
-		line-height: 1;
-	}
-
-	.ascii-corner.top-left {
-		top: -0.45em;
-		left: -0.35em;
-	}
-
-	.ascii-corner.top-right {
-		top: -0.45em;
-		right: -0.35em;
-	}
-
-	.ascii-corner.bottom-left {
-		bottom: -0.45em;
-		left: -0.35em;
-	}
-
-	.ascii-corner.bottom-right {
-		bottom: -0.45em;
-		right: -0.35em;
-	}
-
-	.doom-outer-box {
-		width: 80%;
-		box-sizing: border-box;
-		margin: 2em auto;
-		padding: 2em;
-		background: var(--page-bg);
-		border: 2px solid var(--header-text);
-		
-	}
-
-	.doom-box {
-		height: auto;
-		overflow: visible;
-		position: relative;
-		background: var(--page-bg);
-		padding: 0.5em;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		/*border: 2px solid var(--header-text);*/
-	}
-
-	
-
-    :global(.dosbox-container .dosbox-overlay) {
-  		background: url("/games/doom-start.png") center / auto no-repeat;
-	}
-	
-
-	.blog-outer-box {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		grid-template-areas:
-			"blog blog"
-			"left-blog right-blog";
-		gap: 2rem;
-		margin: 2em;
-		padding: 2em;
-		background: var(--page-bg);
-		border: 2px solid var(--header-text);
-	}
-
-	.blog-header {
-		grid-area: blog;
-		background: var(--page-bg);
-		padding: 0.5em;
-		text-align:center;
-	}
-
-	.blog-left {
-		position: relative;
-		background: var(--page-bg);
-		padding: 0.5em;
-		grid-area: left-blog;
-		text-align:center;
-		border: 1px dashed var(--header-text);
-	}
-
-
-	.blog-right {
-		position: relative;
-		background: var(--page-bg);
-		padding: 0.5em;
-		grid-area: right-blog;
-		text-align:center;
-		border: 1px dashed var(--header-text);
-		
-	}
-
-	#dosbox {
-  width: 640px;
-  height: 400px;
-}
-
-:global(#dosbox canvas),
-:global(#dosbox .dosbox-overlay) {
-	width: 640px;
-  	height: 400px;
-  	filter: grayscale(1) sepia(1) hue-rotate(103deg) saturate(2.5) contrast(1.0);
-}
-
-</style>
-
-<script type="text/javascript" src="https://js-dos.com/cdn/js-dos-api.js"></script>
-
-				<script type="text/javascript">
-
-						var dosbox = new Dosbox({
-							  id: "dosbox",
-							  onload: function (dosbox) {
-								dosbox.run("games/DOOM-evilution.zip", "./DOOM/DOOM.EXE");
-							  },
-						  onrun: function (dosbox, app) {
-								console.log("App '" + app + "' is runned");
-							  }
-						});
-						
-				</script>

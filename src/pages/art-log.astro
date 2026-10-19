@@ -1,0 +1,98 @@
+---
+import Head from "../components/Head.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Navigation from "../components/Navigation.astro";
+import Widgets from "../components/Widgets.astro";
+import PostBrowser from "../components/PostBrowser.astro";
+import { getPosts } from "../utils/posts";
+
+const posts = getPosts("artlog");
+---
+
+<!doctype html>
+<html>
+    <div class = "crt-lines"></div>
+    <head>
+        <Head title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Navigation />
+
+        <div id="dynamic-content" class="container">
+            <div class="window">
+                <div class="window-content" style="padding:0;">
+                    <div
+                        class="popup"
+                        style="margin:0; border:none; border-top:1px solid #333636; border-left:1px solid #333636; border-right:1px solid #101212; border-bottom:1px solid #101212;"
+                    >
+                        <div class="popup-bar">localizer.exe</div>
+                        <div
+                            class="popup-content"
+                            style="justify-content:center; align-items:center; padding:20px 16px; gap:20px; flex-direction:row;"
+                        >
+                            <pre
+                                style="margin:0; font-size:8px; line-height:1.2; color:#c4c7c7; font-family:'Courier New',Courier,monospace; overflow-x:auto; max-width:100%;"><br />
+      .o.       ooooooooo.   ooooooooooooo ooooo          .oooooo.     .oooooo.    
+     .888.      `888   `Y88. 8'   888   `8 `888'         d8P'  `Y8b   d8P'  `Y8b   
+    .8"888.      888   .d88'      888       888         888      888 888           
+   .8' `888.     888ooo88P'       888       888         888      888 888           
+  .88ooo8888.    888`88b.         888       888         888      888 888     ooooo 
+ .8'     `888.   888  `88b.       888       888       o `88b    d88' `88.    .88'  
+o88o     o8888o o888o  o888o     o888o     o888ooooood8  `Y8bood8P'   `Y8bood8P' 
+  </pre>
+                            <img
+                                src="https://media.tenor.com/cN7xTPSo48QAAAAj/re-typwriter-code-veronica.gif"
+                                style="width:70px;height:70px; align-self:center; flex-shrink:0;"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ticker">
+                <div class="fast-ticker-track">
+                    <span class="ticker-text">
+                        <span style="color:var(--accent);">IN DEVELOPMENT - </span>
+                        https://d14nr7zoyjto77.cloudfront.net/
+                        <span style="color:var(--accent);"> - IN DEVELOPMENT</span>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="window">
+                <div class="window-header">ARTLOG</div>
+                <div class="window-content" style="padding:10px;">
+                    <PostBrowser category="artlog" posts={posts} />
+                    <div
+                        hidden
+                        style="display:none; grid-template-columns:1fr 2fr; gap:10px; align-items:stretch;"
+                    >
+                        
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                @keyframes hcur {
+                    0%,
+                    100% {
+                        opacity: 1;
+                    }
+                    50% {
+                        opacity: 0;
+                    }
+                }
+            </style>
+
+            <div class="ticker">
+                <div class="fast-ticker-track">
+                    <span class="ticker-text">
+                        © 2026 Susie Gurrie - insert cool message here
+                    </span>
+                </div>
+            </div>
+            </div>
+        <Widgets />
+    </body>
+</html>
