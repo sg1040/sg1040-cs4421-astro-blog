@@ -8,7 +8,7 @@ RUN npm run build
 # STAGE 2: Lean Production Runner
 FROM node:24-alpine AS runner
 WORKDIR /app
-ENV NODE_ENV=production HOST=0.0.0.0 PORT=80
+ENV NODE_ENV=production HOST=0.0.0.0 PORT=4321
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
