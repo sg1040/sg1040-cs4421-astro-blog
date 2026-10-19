@@ -1,0 +1,8 @@
+#generated types
+.astro
+
+#dependencies
+node_modules/
+.git/
+dist/
+cdk/
