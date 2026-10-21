@@ -11,7 +11,6 @@ jobs:
 
     env:
       AWS_REGION: us-east-1
-      ECR_REPOSITORY: susie/astro-blog
       ECS_CLUSTER: EcsStack-EcsDefaultClusterMnL3mNNYNVpc18E0451A-HnEXwsLa23lV
       ECS_SERVICE: EcsStack-AstroService03ADA2BA-frd0FJrVOAjR
 
@@ -46,6 +45,17 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Get ECR Repository Details
+        run: |
+          REPOSITORY_URI=$(aws cloudformation describe-stacks \
+            --stack-name EcrStack \
+            --region $AWS_REGION \
+            --query 'Stacks[0].Outputs[?OutputKey==`RepositoryUri`].OutputValue' \
+            --output text)
+
+          echo "REPOSITORY_URI=$REPOSITORY_URI" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY=${REPOSITORY_URI#*/}" >> $GITHUB_ENV
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
@@ -55,12 +65,11 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-            $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker build -t $REPOSITORY_URI:$IMAGE_TAG .
+          docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:latest
 
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $REPOSITORY_URI:$IMAGE_TAG
+          docker push $REPOSITORY_URI:latest
 
       - name: Deploy to ECS
         run: |
