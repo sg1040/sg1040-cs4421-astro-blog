@@ -16,10 +16,19 @@ jobs:
       ECS_SERVICE: astro-blog-00b8
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
       - name: Install Dependencies
         run: |
+          node -v
+          npm -v
           npm ci
           npm run test:unit
 
@@ -41,18 +50,6 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-                     $ECR_REGISTRY/$ECR_REPOSITORY:latest
+            $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-
-      - name: Deploy to ECS
-
-        run: |
-          
-          aws ecs update-service \
-          
-          --cluster $ECS_CLUSTER \
-          
-          --service $ECS_SERVICE \
-          
-          --force-new-deployment
