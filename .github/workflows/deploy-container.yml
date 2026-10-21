@@ -12,8 +12,8 @@ jobs:
     env:
       AWS_REGION: us-east-1
       ECR_REPOSITORY: susie/astro-blog
-      ECS_CLUSTER: default
-      ECS_SERVICE: astro-blog-00b8
+      ECS_CLUSTER: EcsStack-EcsDefaultClusterMnL3mNNYNVpc18E0451A-HnEXwsLa23lV
+      ECS_SERVICE: EcsStack-AstroService03ADA2BA-frd0FJrVOAjR
 
     steps:
       - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install Dependencies

@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals';
+import { expect, test } from 'vitest';
 import * as cdk from 'aws-cdk-lib';
 import { Match, Template } from 'aws-cdk-lib/assertions';
 import { EcrStack, EcsStack } from '../lib/ecs-stack';
