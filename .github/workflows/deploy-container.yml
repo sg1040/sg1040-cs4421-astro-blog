@@ -16,7 +16,7 @@ jobs:
       ECS_SERVICE: EcsStack-AstroService03ADA2BA-frd0FJrVOAjR
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -25,12 +25,19 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Install Dependencies
-        run: |
-          node -v
-          npm -v
-          npm ci
-          npm run test:unit
+      - name: Install Root Dependencies
+        run: npm ci
+
+      - name: Run Astro Tests
+        run: npm run test:unit
+
+      - name: Install CDK Dependencies
+        working-directory: cdk
+        run: npm ci
+
+      - name: Run CDK Tests
+        working-directory: cdk
+        run: npm test
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -51,5 +58,13 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
             $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
+            --force-new-deployment
