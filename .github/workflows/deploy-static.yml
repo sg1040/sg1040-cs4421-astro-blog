@@ -40,5 +40,5 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy S3 and CloudFront
-        run: npx cdk deploy CdkStack --require-approval never
+        run: npx cdk deploy StaticSiteStack --require-approval never
         working-directory: cdk
