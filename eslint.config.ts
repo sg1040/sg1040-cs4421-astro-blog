@@ -1,13 +1,12 @@
-import eslintPluginAstro from "eslint-plugin-astro"
+import eslintPluginAstro from "eslint-plugin-astro";
 
 export default [
-  // add more generic rule sets here, such as:
-  // js.configs.recommended,
   ...eslintPluginAstro.configs.recommended,
   {
     rules: {
-      // override/add rules settings here, such as:
+      // Add custom rules here
       // "astro/no-set-html-directive": "error"
+      "astro/no-exports-from-components": "off",
     },
   },
-
+];
