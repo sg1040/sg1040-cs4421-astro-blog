@@ -28,7 +28,7 @@ jobs:
 
       - name: Install CDK dependencies
         run: npm ci
-        working-directory: cdk/cdk/cdk
+        working-directory: cdk/
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
