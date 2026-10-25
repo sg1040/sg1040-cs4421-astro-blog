@@ -3,24 +3,20 @@ import Head from "../../components/Head.astro";
 import Navigation from "../../components/Navigation.astro";
 import Widgets from "../../components/Widgets.astro";
 import { SITE_DESCRIPTION } from "../../consts";
-import { getPosts, type PostEntry } from "../../utils/posts";
+import { getPosts } from "../../utils/posts";
 import { db } from "../../lib/dynamodb";
 import { QueryCommand } from "@aws-sdk/lib-dynamodb";
 
-export function getStaticPaths() {
-  return getPosts("blog").map(({ slug, title, component }) => ({
-    params: { slug },
-    props: { title, component },
-  }));
-}
-
-interface Props {
-  title: string;
-  component: PostEntry["component"];
-}
-
-const { title, component: Post } = Astro.props as Props;
 const { slug } = Astro.params;
+
+const posts = getPosts("blog");
+const post = posts.find((p) => p.slug === slug);
+
+if (!post) {
+  return new Response(null, { status: 404 });
+}
+
+const { title, component: Post } = post;
 
 // Fetch comments for this post
 let comments = [];
@@ -31,7 +27,7 @@ if (slug) {
         TableName: "Comments",
         KeyConditionExpression: "postSlug = :slug",
         ExpressionAttributeValues: {
-          ":slug": `/blog/${slug}/`, // Assuming trailing slash based on typical Astro routing
+          ":slug": `/blog/${slug}/`,
         },
       })
     );

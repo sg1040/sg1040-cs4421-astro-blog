@@ -11,8 +11,8 @@ jobs:
 
     env:
       AWS_REGION: us-east-1
-      ECS_CLUSTER: EcsStack-EcsDefaultClusterMnL3mNNYNVpc18E0451A-HnEXwsLa23lV
-      ECS_SERVICE: EcsStack-AstroService03ADA2BA-frd0FJrVOAjR
+      ECR_STACK: EcrStack
+      ECS_STACK: EcsStack
 
     steps:
       - name: Checkout Code
@@ -48,13 +48,30 @@ jobs:
       - name: Get ECR Repository Details
         run: |
           REPOSITORY_URI=$(aws cloudformation describe-stacks \
-            --stack-name EcrStack \
+            --stack-name $ECR_STACK \
             --region $AWS_REGION \
             --query 'Stacks[0].Outputs[?OutputKey==`RepositoryUri`].OutputValue' \
             --output text)
 
           echo "REPOSITORY_URI=$REPOSITORY_URI" >> $GITHUB_ENV
           echo "ECR_REPOSITORY=${REPOSITORY_URI#*/}" >> $GITHUB_ENV
+
+      - name: Get ECS Details
+        run: |
+          ECS_CLUSTER=$(aws cloudformation describe-stacks \
+            --stack-name $ECS_STACK \
+            --region $AWS_REGION \
+            --query 'Stacks[0].Outputs[?OutputKey==`ClusterName`].OutputValue' \
+            --output text)
+
+          ECS_SERVICE=$(aws cloudformation describe-stacks \
+            --stack-name $ECS_STACK \
+            --region $AWS_REGION \
+            --query 'Stacks[0].Outputs[?OutputKey==`ServiceName`].OutputValue' \
+            --output text)
+
+          echo "ECS_CLUSTER=$ECS_CLUSTER" >> $GITHUB_ENV
+          echo "ECS_SERVICE=$ECS_SERVICE" >> $GITHUB_ENV
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -73,6 +90,9 @@ jobs:
 
       - name: Deploy to ECS
         run: |
+          echo "Cluster: $ECS_CLUSTER"
+          echo "Service: $ECS_SERVICE"
+
           aws ecs update-service \
             --cluster $ECS_CLUSTER \
             --service $ECS_SERVICE \

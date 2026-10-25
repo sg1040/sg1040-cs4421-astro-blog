@@ -41,7 +41,12 @@ export class EcsStack extends cdk.Stack {
     const vpc = new ec2.Vpc(this, 'Vpc', {
       maxAzs: 2,
       natGateways: 0,
-      subnetConfiguration: [{ name: 'Public', subnetType: ec2.SubnetType.PUBLIC }],
+      subnetConfiguration: [
+        {
+          name: 'Public',
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
+      ],
     });
 
     const logGroup = new logs.LogGroup(this, 'ApplicationLogs', {
@@ -50,34 +55,67 @@ export class EcsStack extends cdk.Stack {
     });
 
     const certificate = props.certificateArn
-      ? acm.Certificate.fromCertificateArn(this, 'Certificate', props.certificateArn)
+      ? acm.Certificate.fromCertificateArn(
+          this,
+          'Certificate',
+          props.certificateArn,
+        )
       : undefined;
 
-    const service = new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'AstroService', {
-      vpc,
-      assignPublicIp: true,
-      taskSubnets: { subnetType: ec2.SubnetType.PUBLIC },
-      certificate,
-      redirectHTTP: certificate !== undefined,
-      minHealthyPercent: 100,
-      circuitBreaker: { rollback: true },
-      healthCheck: {
-        command: ['CMD-SHELL', 'wget --no-verbose --tries=1 --spider http://localhost:4321/api/health/live || exit 1'],
-        timeout: cdk.Duration.seconds(3),
-        startPeriod: cdk.Duration.seconds(30),
+    const service = new ecsPatterns.ApplicationLoadBalancedFargateService(
+      this,
+      'AstroService',
+      {
+        vpc,
+        assignPublicIp: true,
+        taskSubnets: {
+          subnetType: ec2.SubnetType.PUBLIC,
+        },
+        certificate,
+        redirectHTTP: certificate !== undefined,
+        minHealthyPercent: 100,
+        circuitBreaker: {
+          rollback: true,
+        },
+        healthCheck: {
+          command: [
+            'CMD-SHELL',
+            'wget --no-verbose --tries=1 --spider http://localhost:4321/api/health/live || exit 1',
+          ],
+          timeout: cdk.Duration.seconds(3),
+          startPeriod: cdk.Duration.seconds(30),
+        },
+        taskImageOptions: {
+          image: ecs.ContainerImage.fromEcrRepository(
+            props.repository,
+            imageTag.valueAsString,
+          ),
+          containerPort: 4321,
+          environment: {
+            NODE_ENV: 'production',
+            HOST: '0.0.0.0',
+            PORT: '4321',
+          },
+          logDriver: ecs.LogDrivers.awsLogs({
+            streamPrefix: 'astro',
+            logGroup,
+          }),
+        },
       },
-      taskImageOptions: {
-        image: ecs.ContainerImage.fromEcrRepository(props.repository, imageTag.valueAsString),
-        containerPort: 4321,
-        environment: { NODE_ENV: 'production', HOST: '0.0.0.0', PORT: '4321' },
-        logDriver: ecs.LogDrivers.awsLogs({ streamPrefix: 'astro', logGroup }),
-      },
-    });
+    );
 
     service.targetGroup.configureHealthCheck({
       path: '/api/health/ready',
       healthyThresholdCount: 2,
       unhealthyThresholdCount: 3,
+    });
+
+    new cdk.CfnOutput(this, 'ClusterName', {
+      value: service.cluster.clusterName,
+    });
+
+    new cdk.CfnOutput(this, 'ServiceName', {
+      value: service.service.serviceName,
     });
 
     new cdk.CfnOutput(this, 'LoadBalancerDnsName', {
