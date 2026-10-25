@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as cdk from 'aws-cdk-lib/core';
 import { StaticSiteStack } from '../lib/cdk-stack';
-import { EcrStack, EcsStack } from '../lib/ecs-stack';
+
 
 const app = new cdk.App();
 new StaticSiteStack(app, 'StaticSiteStack', {
@@ -20,12 +20,4 @@ new StaticSiteStack(app, 'StaticSiteStack', {
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
 
-const ecrStack = new EcrStack(app, 'EcrStack', {
-  env: { account: '182313261325', region: 'us-east-1' },
-});
 
-new EcsStack(app, 'EcsStack', {
-  env: { account: '182313261325', region: 'us-east-1' },
-  repository: ecrStack.repository,
-  certificateArn: app.node.tryGetContext('certificateArn'),
-});
