@@ -1,0 +1,66 @@
+# ADR-003: Using DynamoDB for Blog Comments
+
+## Status: Accepted
+
+This decision was accepted on 2026-10-22 to provide a simple, scalable, and low-maintenance solution for storing user comments on blog posts deployed using Astro SSR on AWS.
+
+## Context
+
+The blog requires a comments feature that allows visitors to submit comments against individual posts without creating user accounts.
+
+The application is deployed on AWS using Astro running in ECS, which means server-side API routes are available for processing comment submissions. Comment data must be stored persistently and remain available across container restarts and deployments.
+
+The chosen solution should:
+
+- Support comment creation and retrieval through API routes.
+- Scale automatically with varying traffic levels.
+- Minimize operational overhead.
+- Integrate easily with existing AWS infrastructure.
+- Avoid managing database servers.
+
+## Decision
+
+Comment data will be stored in Amazon DynamoDB.
+
+Astro API routes will be responsible for:
+
+- Accepting comment submissions.
+- Validating user input.
+- Writing comments to DynamoDB.
+- Retrieving comments for display on blog posts.
+
+Each comment item will contain:
+
+- Comment ID
+- Blog Post Slug
+- User Name
+- Comment Text
+- Creation Timestamp
+
+The table will use the blog post slug as its partition key to allow efficient retrieval of all comments associated with a specific post.
+
+## Consequences
+
+- Positive:
+  - Fully managed database service with no server administration.
+  - Automatic scaling based on workload.
+  - High availability within AWS.
+  - Simple integration with ECS-hosted Astro API routes.
+  - Pay-for-use pricing aligns well with expected low comment volumes.
+  - Supports future features such as moderation, editing, or reactions.
+
+- Negative:
+  - Introduces an additional AWS service to manage.
+  - Requires IAM permissions for API access.
+  - More complex than storing comments in static files.
+  - DynamoDB query patterns must be considered when designing the data model.
+
+<br><br>
+
+## Current Implementation
+
+The blog stores comments in DynamoDB through server-side Astro API routes running in ECS.
+
+Users can submit a display name and comment text for a specific blog post. Comments are persisted in DynamoDB and retrieved dynamically when a post is viewed.
+
+This approach provides persistent comment storage while maintaining a largely serverless and low-maintenance architecture within the AWS ecosystem.
