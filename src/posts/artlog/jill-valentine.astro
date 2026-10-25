@@ -1,28 +1,70 @@
 ---
-export const title = "Jill Valentine Portrait";
-export const date = "2026-09-12";
+export const title = "Serial Experiments Lain Fanart/Study";
+export const date = "2026-10-25";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import { Image } from "astro:assets";
-import jillValentine from "../../assets/gallery/art-jillvalentine.png";
+import lain from "../../assets/gallery/art-lain.png";
+import lainsketch from "../../assets/gallery/artlog-lain-sketch.jpg";
+import lainprogress1 from "../../assets/gallery/artlog-lain-progress1.jpg";
+import lainprogress2 from "../../assets/gallery/artlog-lain-progress2.jpg";
 ---
 
-<BlogLayout
-  title={title}
-  date={date}
->
-  <p>
-    I drew this while trying to adjust to Krita. It's just different enough from Clip Studio to be a pain.
-  </p>
+<BlogLayout title={title} date={date}>
 
   <Image
-    src={jillValentine}
-    alt="Jill Valentine portrait"
-    width={600}
-    height={600}
+    src={lain}
+    alt="Serial Experiments Lain Fanart"
     style="width: 100%; max-width: 600px; height: auto;"
   />
 
   <p>
-    She is the happy smiler. Testing to see if deployment works.
+    This is actually a study of a cool piece I found on pinterest by Pablo
+    Uchida. I wanted to practice painting and freeing my characters from the
+    white void I always draw them in.
   </p>
+
+  <img
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_BJR02IcV1MFjlTgseAnH-0ladk8NbhoyYOFP44Skw6x0sCqbkgnQrIw&s=10"
+    width="600px"
+  />
+
+  <p>
+    I started off with some sketches. You can see me try and give up on coming
+    up with my own composition.
+  </p>
+
+  <Image
+    src={lainsketch}
+    alt="Serial Experiments Lain Fanart"
+    style="width: 100%; max-width: 600px; height: auto;"
+  />
+
+  <p>
+    Then to digital! I have some low quality progress pics I took on my phone.
+  </p>
+
+  <Image
+    src={lainprogress1}
+    alt="Serial Experiments Lain Fanart"
+    style="width: 100%; max-width: 600px; height: auto;"
+  />
+
+  <Image
+    src={lainprogress2}
+    alt="Serial Experiments Lain Fanart"
+    style="width: 100%; max-width: 600px; height: auto;"
+  />
+
+  <p>
+    Final piece! I was feeling kind of good about it toward the end 
+    but then I looked at my reference again and realised how much it 
+    mogs mine. I still have a long way to go...
+  </p>
+
+  <Image
+    src={lain}
+    alt="Serial Experiments Lain Fanart"
+    style="width: 100%; max-width: 600px; height: auto;"
+  />
+
 </BlogLayout>
