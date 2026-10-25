@@ -2,11 +2,13 @@ name: Deploy Static Astro Site to S3 and CloudFront
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -18,7 +20,7 @@ jobs:
           cache: npm
           cache-dependency-path: |
             package-lock.json
-            cdk/cdk/cdk/package-lock.json
+            cdk/package-lock.json
 
       - name: Install Astro dependencies
         run: npm ci
@@ -28,7 +30,7 @@ jobs:
 
       - name: Install CDK dependencies
         run: npm ci
-        working-directory: cdk/
+        working-directory: cdk
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -39,4 +41,4 @@ jobs:
 
       - name: Deploy S3 and CloudFront
         run: npx cdk deploy CdkStack --require-approval never
-        working-directory: cdk/cdk/cdk
+        working-directory: cdk
