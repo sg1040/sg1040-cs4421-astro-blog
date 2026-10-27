@@ -21,14 +21,17 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-            node-version: 24
-            cache: npm
+          node-version: 24
+          cache: npm
 
       - name: Install Root Dependencies
         run: npm ci
 
       - name: Run Astro Tests
         run: npm run test:unit
+
+      - name: Build Astro Site
+        run: npm run build
 
       - name: Install CDK Dependencies
         working-directory: cdk
@@ -79,7 +82,6 @@ jobs:
 
       - name: Build and Push Docker Image
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $REPOSITORY_URI:$IMAGE_TAG .
@@ -94,6 +96,6 @@ jobs:
           echo "Service: $ECS_SERVICE"
 
           aws ecs update-service \
-            --cluster $ECS_CLUSTER \
-            --service $ECS_SERVICE \
+            --cluster "$ECS_CLUSTER" \
+            --service "$ECS_SERVICE" \
             --force-new-deployment
