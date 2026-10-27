@@ -4,44 +4,40 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 import react from '@astrojs/react';
-import node from '@astrojs/node';
-
-
-
 
 export default defineConfig({
-  // or 'hybrid'
-  output: 'server',
+  output: 'static',
 
-  site: 'https://example.com',
-  integrations: [mdx(), sitemap(), react()],
+  site: 'https://d14nr7zoyjto77.cloudfront.net',
 
-  fonts: [
-      {
-          provider: fontProviders.local(),
-          name: 'Atkinson',
-          cssVariable: '--font-atkinson',
-          fallbacks: ['sans-serif'],
-          options: {
-              variants: [
-                  {
-                      src: ['./src/assets/fonts/atkinson-regular.woff'],
-                      weight: 400,
-                      style: 'normal',
-                      display: 'swap',
-                  },
-                  {
-                      src: ['./src/assets/fonts/atkinson-bold.woff'],
-                      weight: 700,
-                      style: 'normal',
-                      display: 'swap',
-                  },
-              ],
-          },
-      },
+  integrations: [
+    mdx(),
+    sitemap(),
+    react(),
   ],
 
-  adapter: node({
-    mode: 'standalone',
-  }),
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: 'Atkinson',
+      cssVariable: '--font-atkinson',
+      fallbacks: ['sans-serif'],
+      options: {
+        variants: [
+          {
+            src: ['./src/assets/fonts/atkinson-regular.woff'],
+            weight: 400,
+            style: 'normal',
+            display: 'swap',
+          },
+          {
+            src: ['./src/assets/fonts/atkinson-bold.woff'],
+            weight: 700,
+            style: 'normal',
+            display: 'swap',
+          },
+        ],
+      },
+    },
+  ],
 });
