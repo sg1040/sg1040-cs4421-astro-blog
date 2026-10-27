@@ -2,19 +2,24 @@
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import { defineConfig, fontProviders } from 'astro/config';
 import react from '@astrojs/react';
+import node from '@astrojs/node';
+import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
-  output: 'static',
+  output: 'server',
 
-  site: 'https://d14nr7zoyjto77.cloudfront.net',
+  adapter: node({
+    mode: 'standalone',
+  }),
 
   integrations: [
     mdx(),
     sitemap(),
     react(),
   ],
+
+  site: 'https://your-domain.com',
 
   fonts: [
     {
